@@ -67,7 +67,6 @@ public class App extends Application {
         if (option.get() == ButtonType.OK) {
             System.exit(0);
         }
-        System.exit(0);
     }
     public static void minimize() {
         stage.setIconified(true);
