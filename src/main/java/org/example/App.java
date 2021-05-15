@@ -23,7 +23,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-        Parent root = loadFXML("Login");
+        Parent root = loadFXML("TeacherDashboard");
         scene = new Scene(root);
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
