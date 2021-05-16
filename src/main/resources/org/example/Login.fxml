@@ -63,12 +63,12 @@
                   <Font name="Tahoma" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="67.0" layoutY="116.0" text="Sign in">
+            <Label layoutX="67.0" layoutY="116.0" text="Đăng nhập">
                <font>
                   <Font name="Tahoma Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="forgotLink" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="395.0" onMouseEntered="#forgotEnter" onMouseExited="#forgotExit" prefHeight="26.0" prefWidth="150.0" text="Forgot Password?" textAlignment="CENTER" textFill="#0d6895" underline="true">
+            <Label fx:id="forgotLink" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="395.0" onMouseEntered="#forgotEnter" onMouseExited="#forgotExit" prefHeight="26.0" prefWidth="150.0" text="Quên mật khẩu?" textAlignment="CENTER" textFill="#0d6895" underline="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

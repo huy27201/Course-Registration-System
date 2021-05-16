@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.concurrent.Service;
+
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import java.io.IOException;
@@ -16,7 +16,6 @@ public class LoginController {
     @FXML private TextField userField;
     @FXML private TextField passwordField;
     @FXML private Label warning;
-    Service service = new ProcessService();
     public LoginController()
     {
     }
@@ -45,24 +44,24 @@ public class LoginController {
 
     @FXML
     public void onSubmit() {
-        service.start();
         String username = userField.getText();
         String password = passwordField.getText();
         if (username.equals("gv") && password.equals("gv")) {
-            service.setOnSucceeded(e -> {
                 try {
+                    Thread.sleep(300);
                     App.changeScene("TeacherDashboard");
-                } catch (IOException ioException) {
+                } catch (IOException | InterruptedException ioException) {
                     ioException.printStackTrace();
                 }
-                service.reset();
-            });
+
         }
         else {
-            service.setOnSucceeded(e -> {
+            try {
+                Thread.sleep(300);
                 warning.setVisible(true);
-                service.reset();
-            });
+            } catch (InterruptedException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 
