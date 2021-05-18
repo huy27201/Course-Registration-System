@@ -86,7 +86,7 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="98.0" text="ĐĂNG KÍ HỌC PHẦN" textAlignment="CENTER" underline="true">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="98.0" text="QUẢN LÝ HỌC PHẦN" textAlignment="CENTER" underline="true">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>
@@ -116,7 +116,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <FontAwesomeIconView fill="#0d6895" glyphName="BOOK" layoutX="77.0" layoutY="70.0" size="50" />
+                        <FontAwesomeIconView fill="#0d6895" glyphName="PENCIL" layoutX="79.0" layoutY="70.0" size="50" />
                      </children>
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -166,7 +166,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <FontAwesomeIconView fill="#0d6895" glyphName="USER" layoutX="81.0" layoutY="70.0" size="50" />
+                        <FontAwesomeIconView fill="#0d6895" glyphName="TABLE" layoutX="77.0" layoutY="70.0" size="50" />
                      </children>
                      <GridPane.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
@@ -208,7 +208,7 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="97.0" text="TÀI KHOẢN" textAlignment="CENTER" underline="true">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="97.0" onMouseClicked="#onAccount" text="TÀI KHOẢN" textAlignment="CENTER" underline="true">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>

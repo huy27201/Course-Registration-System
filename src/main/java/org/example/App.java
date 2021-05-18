@@ -72,7 +72,7 @@ public class App extends Application {
         stage.setIconified(true);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    //public static void main(String[] args) {
+        //launch(args);
+    //}
 }

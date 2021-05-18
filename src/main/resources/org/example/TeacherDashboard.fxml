@@ -86,7 +86,7 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="98.0" text="ĐĂNG KÍ HỌC PHẦN" textAlignment="CENTER" underline="true">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="98.0" text="QUẢN LÝ HỌC PHẦN" textAlignment="CENTER" underline="true">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>
@@ -208,7 +208,7 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="97.0" text="TÀI KHOẢN" textAlignment="CENTER" underline="true">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="97.0" onMouseClicked="#onAccount" text="TÀI KHOẢN" textAlignment="CENTER" underline="true">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>
