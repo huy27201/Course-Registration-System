@@ -1,5 +1,7 @@
 package org.example;
 
+import DAO.StudentDAO;
+import POJO.Student;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 public class App extends Application {
@@ -43,6 +46,18 @@ public class App extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.show();
+        get();
+    }
+    public void get(){
+
+        List<Student> ds = StudentDAO.getStudentList();
+        for (int i = 0; i < ds.size(); i++) {
+            Student sv = ds.get(i);
+            System.out.println("MSSV: " + sv.getId());
+            System.out.println("Họ và tên: " + sv.getFirstName() + " " + sv.getLastName());
+            System.out.println("Ngày sinh: " + sv.getBirth());
+            System.out.println("Lop: " + sv.getClassName());
+        }
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -72,7 +87,7 @@ public class App extends Application {
         stage.setIconified(true);
     }
 
-    //public static void main(String[] args) {
-        //launch(args);
-    //}
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
