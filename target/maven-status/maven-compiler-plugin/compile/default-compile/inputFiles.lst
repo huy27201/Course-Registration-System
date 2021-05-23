@@ -1,10 +1,11 @@
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Main\App.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\DAO\StudentDAO.java
-D:\IntelliJ\CourseRegistrationSystem\src\main\java\org\example\StudentDashboardController.java
-D:\IntelliJ\CourseRegistrationSystem\src\main\java\org\example\App.java
-D:\IntelliJ\CourseRegistrationSystem\src\main\java\org\example\TeacherAccountController.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\UTIL\HibernateUtil.java
-D:\IntelliJ\CourseRegistrationSystem\src\main\java\org\example\LoginController.java
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\TeacherAccountController.java
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Main\HibernateMain.java
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\StudentDashboardController.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\POJO\Sinhvien.java
-D:\IntelliJ\CourseRegistrationSystem\src\main\java\org\example\TeacherSubjectController.java
-D:\IntelliJ\CourseRegistrationSystem\src\main\java\org\example\TeacherDashboardController.java
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\LoginController.java
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\TeacherSubjectController.java
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\TeacherDashboardController.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\module-info.java

@@ -1,4 +1,4 @@
-module org.main {
+module Main {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
@@ -11,7 +11,9 @@ module org.main {
     requires net.bytebuddy;
     requires com.sun.xml.bind;
     requires com.fasterxml.classmate;
-    opens org.main.Controller to javafx.fxml;
+    opens Controller to javafx.fxml;
 
-    exports org.main;
+    exports Main;
+    exports POJO;
+    opens Main to javafx.fxml;
 }
