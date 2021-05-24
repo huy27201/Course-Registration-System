@@ -2,7 +2,7 @@ D:\IntelliJ\CourseRegistrationSystem\src\main\java\Main\App.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\DAO\StudentDAO.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\UTIL\HibernateUtil.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\TeacherAccountController.java
-D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\HibernateMain.java
+D:\IntelliJ\CourseRegistrationSystem\src\main\java\Main\HibernateMain.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\StudentDashboardController.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\POJO\Sinhvien.java
 D:\IntelliJ\CourseRegistrationSystem\src\main\java\Controller\LoginController.java
