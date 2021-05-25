@@ -11,7 +11,7 @@ public class Account {
     private String password;
 
     @Id
-    @Column
+    @Column(name = "AccountID", nullable = false, length = 8)
     public String getAccountId() {
         return accountId;
     }
@@ -21,7 +21,7 @@ public class Account {
     }
 
     @Basic
-    @Column
+    @Column(name = "Password", nullable = true, length = 45)
     public String getPassword() {
         return password;
     }

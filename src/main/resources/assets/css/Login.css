@@ -1,0 +1,6 @@
+#forgot-label {
+    -fx-text-fill: #0d6895;
+}
+#forgot-label:hover {
+    -fx-text-fill: #1189C4;
+}
