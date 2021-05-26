@@ -44,12 +44,12 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <padding>
-                  <Insets left="100.0" right="100.0" top="20.0" />
+                  <Insets left="80.0" right="80.0" top="20.0" />
                </padding>
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="700.0" spacing="30.0">
                      <children>
-                        <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Thêm tài khoản" textFill="WHITE">
+                        <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onAdd" prefHeight="40.0" prefWidth="170.0" text="Thêm tài khoản" textFill="WHITE">
                            <font>
                               <Font name="Tahoma Bold" size="17.0" />
                            </font>
@@ -64,7 +64,7 @@
                               </DisplacementMap>
                            </effect>
                         </Button>
-                        <Button fx:id="delButton" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" text="Xóa tài khoản" textFill="WHITE">
+                        <Button fx:id="delButton" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onRemove" prefHeight="40.0" prefWidth="159.0" text="Xóa tài khoản" textFill="WHITE">
                            <font>
                               <Font name="Tahoma Bold" size="17.0" />
                            </font>
@@ -72,7 +72,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TextField prefHeight="40.0" prefWidth="340.0" promptText="Tìm tài khoản giáo vụ">
+                        <TextField prefHeight="40.0" prefWidth="380.0" promptText="Tìm tài khoản giáo vụ">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -87,29 +87,52 @@
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TableView prefHeight="351.0" prefWidth="700.0">
+                  <TableView fx:id="table" prefHeight="351.0" prefWidth="700.0">
                      <columns>
-                        <TableColumn prefWidth="127.0" resizable="false" style="-fx-background-color: #0D6895;">
+                        <TableColumn fx:id="col_id" prefWidth="119.0" resizable="false">
                            <graphic>
-                              <Label text="MÃ GIÁO VỤ" textFill="WHITE">
+                              <Label prefWidth="99.0" text="MÃ GIÁO VỤ" textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="15.0" />
                                  </font></Label>
                            </graphic></TableColumn>
-                        <TableColumn prefWidth="312.0" resizable="false" style="-fx-background-color: #0D6895; -fx-border-width: 0 1px; -fx-border-color: #fff;">
+                        <TableColumn fx:id="col_firstName" prefWidth="153.0" resizable="false">
                            <graphic>
-                              <Label text="TÊN GIÁO VỤ" textFill="WHITE">
+                              <Label text="HỌ" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="col_lastName" prefWidth="102.0" resizable="false">
+                           <graphic>
+                              <Label text="TÊN" textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="15.0" />
                                  </font></Label>
                            </graphic></TableColumn>
-                        <TableColumn prefWidth="260.0" resizable="false" style="-fx-background-color: #0D6895;">
+                        <TableColumn fx:id="col_gender" prefWidth="71.0" resizable="false">
                            <graphic>
-                              <Label text="TÊN TÀI KHOẢN" textFill="WHITE">
+                              <Label text="PHÁI" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="col_account" prefWidth="154.0" resizable="false">
+                           <graphic>
+                              <Label prefHeight="19.0" prefWidth="94.0" text=" TÀI KHOẢN" textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="15.0" />
                                  </font></Label>
                            </graphic></TableColumn>
+                        <TableColumn fx:id="col_password" prefWidth="139.0">
+                           <graphic>
+                              <Label styleClass="column-title" text="MẬT KHẨU" />
+                           </graphic>
+                        </TableColumn>
                      </columns>
                   </TableView>
                </children>
@@ -131,7 +154,7 @@
                         <Font name="Tahoma Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="671.0" layoutY="24.0" prefHeight="25.0" prefWidth="113.0" text="Xin chào, Huy" textFill="#837d7d">
+                  <Label alignment="CENTER_RIGHT" layoutX="671.0" layoutY="24.0" onMouseClicked="#onReturn" prefHeight="25.0" prefWidth="113.0" text="Quay lại" textFill="#837d7d" underline="true">
                      <font>
                         <Font name="Tahoma Bold" size="15.0" />
                      </font>

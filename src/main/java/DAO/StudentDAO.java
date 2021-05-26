@@ -9,7 +9,6 @@ import java.util.List;
 
 public class StudentDAO {
     private static List<Student> studentList;
-    private static List student = null;
     public static List<Student> getStudentList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -24,14 +23,29 @@ public class StudentDAO {
         }
         return studentList;
     }
-    public static List getStudent(String username) {
+    public static Student getStudentByID(String studentID) {
+        Student student = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "select st.lastName from Student as st, Account as acc " +
-                    "join st inner join acc where st.account = acc.acountID and " +
-                    " acc.accountID = " + username;
-            Query query = session.createQuery(hql);
-            student = query.list();
+            student = (Student) session.get(Student.class, studentID);
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return student;
+    }
+    public static Student getStudentByUsername(String username) {
+        Student student = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql="select st from Student st " +
+                    "left join fetch st.accountByAccount " +
+                    "where st.accountByAccount.accountId=:username";
+            Query query=session.createQuery(hql);
+            query.setString("username", username);
+            student = (Student) query.uniqueResult();
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);

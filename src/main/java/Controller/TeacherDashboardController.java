@@ -1,10 +1,14 @@
 package Controller;
+import POJO.Teacher;
 import javafx.fxml.FXML;
 import Main.App;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class TeacherDashboardController {
+    //@FXML private Label identity;
+
 
     @FXML
     public void exit() {
@@ -14,7 +18,6 @@ public class TeacherDashboardController {
     public void minimize() {
         App.minimize();
     }
-
     @FXML
     public void onSubject() {
         try {

@@ -17,5 +17,8 @@
         <property name="sex">
             <column name="Sex" sql-type="char(3)" length="3" not-null="true"/>
         </property>
+        <many-to-one name="accountByAccount" class="POJO.Account" fetch="join" lazy="false">
+            <column name="Account" not-null="true" unique="true"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

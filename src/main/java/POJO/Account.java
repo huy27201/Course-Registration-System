@@ -9,6 +9,7 @@ import javax.persistence.Id;
 public class Account {
     private String accountId;
     private String password;
+    private String role;
 
     @Id
     @Column(name = "AccountID", nullable = false, length = 8)
@@ -28,6 +29,16 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Basic
+    @Column(name = "Role", nullable = true, length = 2)
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

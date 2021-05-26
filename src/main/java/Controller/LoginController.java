@@ -4,6 +4,7 @@ import DAO.AccountDAO;
 import DAO.StudentDAO;
 import Main.App;
 import POJO.Account;
+import POJO.Student;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -17,7 +18,6 @@ public class LoginController {
     @FXML private TextField userField;
     @FXML private TextField passwordField;
     @FXML private Label warning;
-    @FXML private Label identity;
     public LoginController()
     {
     }
@@ -31,13 +31,19 @@ public class LoginController {
         for (Account acc : accList) {
             if (username.equals(acc.getAccountId()) && password.equals(acc.getPassword())) {
                 try {
-                    Thread.sleep(300);
-                    App.changeScene("TeacherDashboard");
+                    if (acc.getRole().equals("GV")) {
+                        Thread.sleep(300);
+                        App.changeScene("TeacherDashboard");
+                    }
+                    else if (acc.getRole().equals("SV")) {
+                        Thread.sleep(300);
+                        App.changeScene("StudentDashboard");
+                    }
+//                    Student st = StudentDAO.getStudentByUsername(username);
+                    //TeacherDashboardController.setIdentity(st.getLastName());
                 } catch (IOException | InterruptedException ioException) {
                     ioException.printStackTrace();
                 }
-                List name = StudentDAO.getStudent(username);
-                identity.setText("Xin chào, " + name);
                 check = true;
             }
         }

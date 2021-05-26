@@ -1,9 +1,6 @@
 package POJO;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Teacher {
@@ -11,6 +8,7 @@ public class Teacher {
     private String firstName;
     private String lastName;
     private String sex;
+    private Account accountByAccount;
 
     @Id
     @Column(name = "ID", nullable = false, length = 8)
@@ -74,5 +72,15 @@ public class Teacher {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (sex != null ? sex.hashCode() : 0);
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Account", referencedColumnName = "AccountID")
+    public Account getAccountByAccount() {
+        return accountByAccount;
+    }
+
+    public void setAccountByAccount(Account accountByAccount) {
+        this.accountByAccount = accountByAccount;
     }
 }
