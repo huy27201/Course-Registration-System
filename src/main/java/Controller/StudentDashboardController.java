@@ -1,10 +1,16 @@
 package Controller;
 
+import POJO.Student;
 import javafx.fxml.FXML;
 import Main.App;
+import javafx.scene.control.Label;
 
 public class StudentDashboardController {
+    @FXML private Label identity;
 
+    void initData(Student student) {
+        identity.setText("Xin chào, " + student.getLastName());
+    }
     public void exit()
     {
         App.exit();
@@ -14,4 +20,5 @@ public class StudentDashboardController {
     public void minimize() {
         App.minimize();
     }
+
 }

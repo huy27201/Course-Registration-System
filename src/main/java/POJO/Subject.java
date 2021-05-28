@@ -11,6 +11,16 @@ public class Subject {
     private String name;
     private Integer credits;
 
+    public Subject(String id, String name, Integer credits) {
+        this.id = id;
+        this.name = name;
+        this.credits = credits;
+    }
+
+    public Subject() {
+
+    }
+
     @Id
     @Column(name = "ID", nullable = false, length = 8)
     public String getId() {

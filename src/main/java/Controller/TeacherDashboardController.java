@@ -2,14 +2,16 @@ package Controller;
 import POJO.Teacher;
 import javafx.fxml.FXML;
 import Main.App;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+
 import java.io.IOException;
 
 public class TeacherDashboardController {
-    //@FXML private Label identity;
+    @FXML private Label identity;
 
-
+    void initData(Teacher tch) {
+        identity.setText("Xin chào, " + tch.getLastName());
+    }
     @FXML
     public void exit() {
         App.exit();
@@ -22,7 +24,7 @@ public class TeacherDashboardController {
     public void onSubject() {
         try {
             Thread.sleep(300);
-            App.changeScene("");
+            App.changeScene("TeacherSubject");
         } catch (IOException | InterruptedException ioException) {
             ioException.printStackTrace();
         }

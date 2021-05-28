@@ -130,7 +130,7 @@
                            </graphic></TableColumn>
                         <TableColumn fx:id="col_password" prefWidth="139.0">
                            <graphic>
-                              <Label styleClass="column-title" text="MẬT KHẨU" />
+                              <Label styleClass="column-title" text="MẬT KHẨU" textFill="WHITE" />
                            </graphic>
                         </TableColumn>
                      </columns>

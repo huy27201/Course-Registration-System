@@ -2,9 +2,11 @@ package DAO;
 
 
 import POJO.Subject;
+import POJO.Teacher;
 import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -24,5 +26,38 @@ public class SubjectDAO {
             session.close();
         }
         return subjectList;
+    }
+    public static Subject getSubjectByID(String subjectID) {
+        Subject sub = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            sub = (Subject) session.get(Subject.class, subjectID);
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return sub;
+    }
+    public static boolean removeSubjectByID(String subjectID) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Subject sub = getSubjectByID(subjectID);
+        if(sub == null){
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(sub);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
     }
 }

@@ -1,6 +1,6 @@
 package Controller;
+import DAO.AccountDAO;
 import DAO.TeacherDAO;
-import POJO.Account;
 import POJO.Teacher;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
@@ -9,10 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import Main.App;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
@@ -21,13 +18,11 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
 public class TeacherAccountController implements Initializable {
-    @FXML private Button addButton;
-    @FXML private Button delButton;
-
     @FXML TableView<Teacher> table;
     @FXML TableColumn<Teacher, String> col_id;
     @FXML TableColumn<Teacher, String> col_firstName;
@@ -57,7 +52,6 @@ public class TeacherAccountController implements Initializable {
                 return new ReadOnlyStringWrapper(data.getValue().getAccountByAccount().getPassword());
             }
         });
-
         table.setItems(list);
     }
 
@@ -89,6 +83,16 @@ public class TeacherAccountController implements Initializable {
     }
     @FXML
     public void onRemove() {
-
+        Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmExit.setTitle("Delete");
+        confirmExit.setContentText("Are you sure to want to delete?");
+        confirmExit.setHeaderText(null);
+        Optional<ButtonType> option = confirmExit.showAndWait();
+        if (option.get() == ButtonType.OK) {
+            Teacher selectedTch = table.getSelectionModel().getSelectedItem();
+            table.getItems().remove(selectedTch);
+            TeacherDAO.removeTeacherByID(selectedTch.getId());
+            AccountDAO.removeAccountByID(selectedTch.getAccountByAccount().getAccountId());
+        }
     }
 }
