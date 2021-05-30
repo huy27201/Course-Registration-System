@@ -50,7 +50,7 @@
                   <Font name="Tahoma Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="identity" alignment="CENTER_RIGHT" layoutX="671.0" layoutY="24.0" prefHeight="25.0" prefWidth="113.0" textFill="#837d7d">
+            <Label fx:id="identity" alignment="CENTER_RIGHT" layoutX="671.0" layoutY="24.0" prefHeight="25.0" prefWidth="113.0" text="Xin chào" textFill="#837d7d">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font>
@@ -97,7 +97,7 @@
             <Insets />
          </opaqueInsets>
          <children>
-            <AnchorPane onMouseClicked="#onCourseManagement" prefHeight="200.0" prefWidth="200.0" styleClass="tab" stylesheets="@../assets/css/TeacherAccount.css">
+            <AnchorPane onMouseClicked="#onCourseManagement" onMouseEntered="#hoverTab" onMouseExited="#unHoverTab" prefHeight="200.0" prefWidth="200.0" styleClass="tab" stylesheets="@../assets/css/TeacherAccount.css">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </GridPane.margin>
@@ -122,7 +122,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onClassName" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="1">
+            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onClassName" onMouseEntered="#hoverTab" onMouseExited="#unHoverTab" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="1">
                <effect>
                   <DropShadow color="#00000065" />
                </effect>
@@ -147,7 +147,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onSemester" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="2">
+            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onSemester" onMouseEntered="#hoverTab" onMouseExited="#unHoverTab" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="2">
                <effect>
                   <DropShadow color="#00000065" />
                </effect>
@@ -172,7 +172,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onSubject" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.rowIndex="1">
+            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onSubject" onMouseEntered="#hoverTab" onMouseExited="#unHoverTab" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.rowIndex="1">
                <effect>
                   <DropShadow color="#00000065" />
                </effect>
@@ -197,7 +197,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onCourseRegistration" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onCourseRegistration" onMouseEntered="#hoverTab" onMouseExited="#unHoverTab" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <effect>
                   <DropShadow color="#00000065" />
                </effect>
@@ -222,7 +222,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onAccount" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <AnchorPane layoutX="140.0" layoutY="90.0" onMouseClicked="#onAccount" onMouseEntered="#hoverTab" onMouseExited="#unHoverTab" prefHeight="200.0" prefWidth="200.0" styleClass="tab" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <effect>
                   <DropShadow color="#00000065" />
                </effect>
