@@ -1,0 +1,18 @@
+.class-item {
+    -fx-border-color: #ccc;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color: rgb(200, 222, 100);
+    -fx-font: Tahoma;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+}
+.class-item .class-name {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+}
+.class-item .class-number {
+    -fx-font-size: 18px;
+    -fx-text-fill: #FFF;
+}

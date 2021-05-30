@@ -1,15 +1,35 @@
 package Controller;
 import POJO.Teacher;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import Main.App;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import java.io.IOException;
 
 public class TeacherDashboardController {
     //@FXML private Label identity;
 
-
+    @FXML
+    public void hoverTab(MouseEvent event) {
+        AnchorPane ap = (AnchorPane) event.getSource();
+        ScaleTransition st = new ScaleTransition(Duration.millis(100), ap);
+        st.setFromX(1);
+        st.setFromY(1);
+        st.setToX(1.1);
+        st.setToY(1.1);
+        st.play();
+    }
+    public void unHoverTab(MouseEvent event) {
+        AnchorPane ap = (AnchorPane) event.getSource();
+        ScaleTransition st = new ScaleTransition(Duration.millis(100), ap);
+        st.setFromX(1.1);
+        st.setFromY(1.1);
+        st.setToX(1);
+        st.setToY(1);
+        st.play();
+    }
     @FXML
     public void exit() {
         App.exit();

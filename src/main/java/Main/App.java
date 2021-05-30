@@ -44,7 +44,7 @@ public class App extends Application {
         stage.setResizable(false);
         stage.show();
 
-        HibernateMain.connectHibernate();
+        //HibernateMain.connectHibernate();
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -64,7 +64,8 @@ public class App extends Application {
     public static void exit() {
         Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
         confirmExit.setTitle("Exit");
-        confirmExit.setHeaderText("Are you sure want to exit?");
+        confirmExit.setHeaderText(null);
+        confirmExit.setContentText("Are you sure want to exit?");
         Optional<ButtonType> option = confirmExit.showAndWait();
         if (option.get() == ButtonType.OK) {
             System.exit(0);
