@@ -5,6 +5,7 @@ import Main.App;
 
 public class StudentDashboardController {
 
+    @FXML
     public void exit()
     {
         App.exit();
@@ -14,4 +15,6 @@ public class StudentDashboardController {
     public void minimize() {
         App.minimize();
     }
+
+
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -19,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TeacherAccountController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../assets/css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TeacherAccountController">
    <children>
       <AnchorPane prefHeight="30.0" prefWidth="600.0" styleClass="title-bar" stylesheets="@../assets/css/style.css">
          <children>
@@ -130,7 +129,7 @@
                            </graphic></TableColumn>
                         <TableColumn fx:id="col_password" prefWidth="139.0">
                            <graphic>
-                              <Label styleClass="column-title" text="MẬT KHẨU" />
+                              <Label styleClass="column-title" text="MẬT KHẨU" textFill="WHITE" />
                            </graphic>
                         </TableColumn>
                      </columns>
@@ -175,8 +174,4 @@
          </top>
       </BorderPane>
    </children>
-   <stylesheets>
-      <URL value="@../assets/css/TeacherAccount.css" />
-      <URL value="@../assets/css/style.css" />
-   </stylesheets>
 </VBox>

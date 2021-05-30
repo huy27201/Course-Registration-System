@@ -89,7 +89,7 @@
                   </Label>
                   <TableView prefHeight="351.0" prefWidth="700.0">
                      <columns>
-                        <TableColumn prefWidth="127.0" resizable="false" style="-fx-background-color: #0D6895;">
+                        <TableColumn prefWidth="127.0" resizable="false">
                            <graphic>
                               <Label text="MÃ MÔN HỌC" textFill="WHITE">
                                  <font>
@@ -98,7 +98,7 @@
                               </Label>
                            </graphic>
                         </TableColumn>
-                        <TableColumn prefWidth="312.0" resizable="false" style="-fx-background-color: #0D6895; -fx-border-width: 0 1px; -fx-border-color: #fff;">
+                        <TableColumn prefWidth="312.0" resizable="false">
                            <graphic>
                               <Label text="TÊN MÔN HỌC" textFill="WHITE">
                                  <font>
@@ -107,7 +107,7 @@
                               </Label>
                            </graphic>
                         </TableColumn>
-                        <TableColumn prefWidth="260.0" resizable="false" style="-fx-background-color: #0D6895;">
+                        <TableColumn prefWidth="260.0" resizable="false">
                            <graphic>
                               <Label text="SỐ TÍN CHỈ" textFill="WHITE">
                                  <font>

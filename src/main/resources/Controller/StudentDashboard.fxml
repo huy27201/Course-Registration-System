@@ -98,7 +98,7 @@
             <Insets />
          </opaqueInsets>
          <children>
-            <AnchorPane onMouseClicked="#onCourseManagement" prefHeight="200.0" prefWidth="200.0" styleClass="tab" stylesheets="@../assets/css/TeacherAccount.css">
+            <AnchorPane onMouseClicked="#onCourseManagement" prefHeight="200.0" prefWidth="200.0" styleClass="tab">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </GridPane.margin>

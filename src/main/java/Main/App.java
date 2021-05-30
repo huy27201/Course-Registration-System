@@ -23,7 +23,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-        Parent root = loadFXML("Login");
+        Parent root = loadFXML("TeacherClass");
         scene = new Scene(root);
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -65,7 +65,7 @@ public class App extends Application {
         Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
         confirmExit.setTitle("Exit");
         confirmExit.setHeaderText(null);
-        confirmExit.setContentText("Are you sure want to exit?");
+        confirmExit.setContentText("Bạn có chắc chắn muốn thoát?");
         Optional<ButtonType> option = confirmExit.showAndWait();
         if (option.get() == ButtonType.OK) {
             System.exit(0);

@@ -4,7 +4,6 @@ import Main.App;
 
 public class TeacherSubjectController {
 
-
     @FXML
     public void exit() {
         App.exit();

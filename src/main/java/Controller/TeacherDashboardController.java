@@ -101,4 +101,9 @@ public class TeacherDashboardController {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
+    @FXML
+    public void onProfile() {
+
+    }
 }

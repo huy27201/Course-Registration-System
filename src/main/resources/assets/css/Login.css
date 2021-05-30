@@ -12,3 +12,10 @@
 .login-input:focused {
     -fx-border-color: #1189C4;
 }
+#btnLogin {
+    -fx-background-color: #0D6895;
+    -fx-border-color: #0D6895;
+}
+#btnLogin:hover {
+    -fx-background-color: #FFF;
+}

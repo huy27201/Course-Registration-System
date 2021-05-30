@@ -2,6 +2,7 @@ D:\IntelliJ\src\main\java\Controller\TeacherDashboardController.java
 D:\IntelliJ\src\main\java\DAO\StudentDAO.java
 D:\IntelliJ\src\main\java\Controller\StudentDashboardController.java
 D:\IntelliJ\src\main\java\POJO\CoursePK.java
+D:\IntelliJ\src\main\java\Controller\TeacherStudentController.java
 D:\IntelliJ\src\main\java\POJO\Account.java
 D:\IntelliJ\src\main\java\POJO\Courseattend.java
 D:\IntelliJ\src\main\java\POJO\Role.java
@@ -24,4 +25,5 @@ D:\IntelliJ\src\main\java\DAO\TeacherDAO.java
 D:\IntelliJ\src\main\java\Controller\TeacherSubjectController.java
 D:\IntelliJ\src\main\java\POJO\CourseRegistrationPK.java
 D:\IntelliJ\src\main\java\POJO\Teacher.java
+D:\IntelliJ\src\main\java\Controller\TeacherClassController.java
 D:\IntelliJ\src\main\java\UTIL\HibernateUtil.java

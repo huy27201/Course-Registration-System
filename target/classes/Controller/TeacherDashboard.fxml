@@ -50,7 +50,7 @@
                   <Font name="Tahoma Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="identity" alignment="CENTER_RIGHT" layoutX="671.0" layoutY="24.0" prefHeight="25.0" prefWidth="113.0" text="Xin chào" textFill="#837d7d">
+            <Label fx:id="identity" alignment="CENTER_RIGHT" layoutX="648.0" layoutY="24.0" onMouseClicked="#onProfile" prefHeight="25.0" prefWidth="136.0" text="Thông tin cá nhân" textFill="#837d7d">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font>
