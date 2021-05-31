@@ -4,3 +4,18 @@
 #forgot-label:hover {
     -fx-text-fill: #1189C4;
 }
+.login-input {
+    -fx-background-color: transparent;
+    -fx-border-color: #0D6895;
+    -fx-border-width: 0 0 2px 0;
+}
+.login-input:focused {
+    -fx-border-color: #1189C4;
+}
+#btnLogin {
+    -fx-background-color: #0D6895;
+    -fx-border-color: #0D6895;
+}
+#btnLogin:hover {
+    -fx-background-color: #FFF;
+}

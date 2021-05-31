@@ -1,5 +1,5 @@
 .title-bar {
-    -fx-background-color:  #0D6895;
+    -fx-background-color: #0D6895;
     -fx-border-color: #eee;
     -fx-border-width:  0 0 1px 0;
 }
@@ -9,9 +9,9 @@
 .button {
     -fx-text-fill: #fff;
     -fx-background-radius: 5px;
-    -fx-background-color: #0D6895;
+    -fx-background-color: #0061a8;
     -fx-border-width: 1px;
-    -fx-border-color: #0D6895;
+    -fx-border-color: #0061a8;
     -fx-border-radius: 5px;
 }
 .button:hover {
@@ -23,11 +23,6 @@
 }
 .logout:hover {
     -fx-text-fill: #1189C4;
-}
-.login-input {
-    -fx-background-color: transparent;
-    -fx-border-color:  #0D6895;
-    -fx-border-width:  0 0 2px 0;
 }
 .table-view {
     -fx-font-family: Tahoma;
@@ -41,4 +36,11 @@
     -fx-background-color: #0D6895;
     -fx-border-width: 0 1px 1px 0;
     -fx-border-color: #FFF;
+    -fx-font-size: 15px;
 }
+.scroll-pane {
+    -fx-background: #FFFFFF;
+    -fx-border-width: 0;
+    -fx-border-color: #FFF;
+}
+

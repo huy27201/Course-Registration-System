@@ -17,13 +17,13 @@ public class App extends Application {
     private static Scene scene;
     private static Stage stage;
 
-    private static double xOffset = 0;
-    private static double yOffset = 0;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-        Parent root = loadFXML("TeacherSubject");
+        Parent root = loadFXML("TeacherClass");
         scene = new Scene(root);
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -44,7 +44,7 @@ public class App extends Application {
         stage.setResizable(false);
         stage.show();
 
-        HibernateMain.connectHibernate();
+        //HibernateMain.connectHibernate();
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -57,30 +57,15 @@ public class App extends Application {
     }
 
     public static void changeScene(String fxml) throws IOException {
-        Parent root = loadFXML(fxml);
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                xOffset = mouseEvent.getSceneX();
-                yOffset = mouseEvent.getSceneY();
-            }
-        });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getScreenX() - xOffset);
-                stage.setY(mouseEvent.getScreenY() - yOffset);
-            }
-        });
-        scene = new Scene(root);
+        scene = new Scene(loadFXML(fxml));
         stage.setScene(scene);
     }
 
     public static void exit() {
         Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
         confirmExit.setTitle("Exit");
-        confirmExit.setContentText("Are you sure to want to exit?");
         confirmExit.setHeaderText(null);
+        confirmExit.setContentText("Bạn có chắc chắn muốn thoát?");
         Optional<ButtonType> option = confirmExit.showAndWait();
         if (option.get() == ButtonType.OK) {
             System.exit(0);
