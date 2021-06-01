@@ -71,7 +71,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <TextField prefHeight="40.0" prefWidth="380.0" promptText="Tìm tài khoản giáo vụ">
+                        <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="40.0" prefWidth="380.0" promptText="Tìm giáo vụ theo mã, họ, tên và tài khoản">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -86,7 +86,7 @@
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="table" prefHeight="351.0" prefWidth="700.0">
+                  <TableView fx:id="table" editable="true" onMouseClicked="#onUpdate" prefHeight="351.0" prefWidth="700.0">
                      <columns>
                         <TableColumn fx:id="col_id" prefWidth="119.0" resizable="false">
                            <graphic>

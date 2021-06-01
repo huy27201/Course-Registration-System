@@ -8,6 +8,11 @@ public class SemesterPK implements Serializable {
     private int id;
     private int year;
 
+    public SemesterPK() {};
+    public SemesterPK(int id, int year) {
+        this.id = id;
+        this.year = year;
+    }
     @Column(name = "ID", nullable = false)
     @Id
     public int getId() {

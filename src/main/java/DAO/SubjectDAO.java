@@ -1,8 +1,6 @@
 package DAO;
 
-
 import POJO.Subject;
-import POJO.Teacher;
 import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -31,7 +29,7 @@ public class SubjectDAO {
         Subject sub = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            sub = (Subject) session.get(Subject.class, subjectID);
+            sub = session.get(Subject.class, subjectID);
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);
@@ -50,6 +48,45 @@ public class SubjectDAO {
         try {
             transaction = session.beginTransaction();
             session.delete(sub);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+
+    public static boolean addSubject(Subject sub) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (getSubjectByID(sub.getId()) != null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(sub);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+    public static boolean updateSubject(Subject sub) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (getSubjectByID(sub.getId()) == null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(sub);
             transaction.commit();
         } catch (HibernateException ex) {
             //Log the exception

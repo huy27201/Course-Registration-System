@@ -42,7 +42,7 @@ public class TeacherDashboardController {
     public void onSubject() {
         try {
             Thread.sleep(300);
-            App.changeScene("");
+            App.changeScene("TeacherSubject");
         } catch (IOException | InterruptedException ioException) {
             ioException.printStackTrace();
         }
@@ -91,7 +91,7 @@ public class TeacherDashboardController {
     public void onSemester() {
         try {
             Thread.sleep(300);
-            App.changeScene("TeacherAccount");
+            App.changeScene("TeacherSemester");
         } catch (IOException | InterruptedException ioException) {
             ioException.printStackTrace();
         }

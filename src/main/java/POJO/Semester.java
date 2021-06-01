@@ -6,29 +6,44 @@ import java.sql.Date;
 @Entity
 @IdClass(SemesterPK.class)
 public class Semester {
-    private int id;
-    private int year;
+    private SemesterPK semesterId;
     private Date dateStart;
     private Date dateEnd;
 
-    @Id
-    @Column(name = "ID", nullable = false)
-    public int getId() {
-        return id;
+    public Semester(int id, int year, Date dateStart, Date dateEnd) {
+        semesterId = new SemesterPK(id, year);
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Semester() {
 
-    @Id
-    @Column(name = "Year", nullable = false)
-    public int getYear() {
-        return year;
     }
+    @Id
+    public SemesterPK getSemesterId() {
+        return semesterId;
+    }
+    public void setSemesterId(SemesterPK semesterId) {
+        this.semesterId = semesterId;
+    }
+//    @Id
+//    @Column(name = "ID", nullable = false)
+//    public int getId() {
+//        return semesterId.getId();
+//    }
+//
+//    public void setId(int id) {
+//        //this.semesterId.setId(id);
+//    }
+//
+//    @Id
+//    @Column(name = "Year", nullable = false)
+//    public int getYear() {
+//        return semesterId.getYear();
+//    }
 
     public void setYear(int year) {
-        this.year = year;
+        //this.semesterId.setYear(year);
     }
 
     @Basic
@@ -58,8 +73,8 @@ public class Semester {
 
         Semester semester = (Semester) o;
 
-        if (id != semester.id) return false;
-        if (year != semester.year) return false;
+        //if (semesterId.getId() != semester.getId()) return false;
+        //if (semesterId.getYear() != semester.getYear()) return false;
         if (dateStart != null ? !dateStart.equals(semester.dateStart) : semester.dateStart != null) return false;
         if (dateEnd != null ? !dateEnd.equals(semester.dateEnd) : semester.dateEnd != null) return false;
 
@@ -68,8 +83,8 @@ public class Semester {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + year;
+        int result = semesterId.getId();
+        result = 31 * result + semesterId.getYear();
         result = 31 * result + (dateStart != null ? dateStart.hashCode() : 0);
         result = 31 * result + (dateEnd != null ? dateEnd.hashCode() : 0);
         return result;

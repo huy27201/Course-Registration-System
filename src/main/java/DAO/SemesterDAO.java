@@ -1,6 +1,10 @@
 package DAO;
 
-import POJO.Account;
+
+import POJO.Semester;
+import POJO.SemesterPK;
+import POJO.Subject;
+
 import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,46 +13,65 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class AccountDAO {
-    private static List<Account> accountList;
-    public static List<Account> getAccountList() {
+public class SemesterDAO {
+    private static List<Semester> semesterList;
+    public static List<Semester> getSemesterList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "from Account";
+            String hql = "from Semester";
             Query query = session.createQuery(hql);
-            accountList = query.list();
+            semesterList = query.list();
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);
         } finally {
             session.close();
         }
-        return accountList;
+        return semesterList;
+    }
+    public static Semester getSemesterByID(SemesterPK semID) {
+        Semester sem = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            sem = session.get(Semester.class, semID);
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return sem;
+    }
+    public static boolean removeSemesterByID(SemesterPK semID) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Semester sem = getSemesterByID(semID);
+        if(sem == null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.delete(sem);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
     }
 
-    public static Account getAccountByID(String accountID) {
-        Account acc = null;
+    public static boolean addSemester(Semester sem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            acc = (Account) session.get(Account.class, accountID);
-        } catch (HibernateException ex) {
-            //Log the exception
-            System.err.println(ex);
-        } finally {
-            session.close();
-        }
-        return acc;
-    }
-    public static boolean removeAccountByID(String accountID) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Account acc = getAccountByID(accountID);
-        if(acc == null) {
+        if (getSemesterByID(sem.getSemesterId()) != null) {
             return false;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.delete(acc);
+            session.save(sem);
             transaction.commit();
         } catch (HibernateException ex) {
             //Log the exception
@@ -59,34 +82,15 @@ public class AccountDAO {
         }
         return true;
     }
-    public static boolean addAccount(Account acc) {
+    public static boolean updateSemester(Semester sem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (getAccountByID(acc.getAccountId()) != null) {
+        if (getSemesterByID(sem.getSemesterId()) == null) {
             return false;
         }
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.save(acc);
-            transaction.commit();
-        } catch (HibernateException ex) {
-            //Log the exception
-            transaction.rollback();
-            System.err.println(ex);
-        } finally {
-            session.close();
-        }
-        return true;
-    }
-    public static boolean updateAccount(Account acc) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        if (getAccountByID(acc.getAccountId()) == null) {
-            return false;
-        }
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.update(acc);
+            session.update(sem);
             transaction.commit();
         } catch (HibernateException ex) {
             //Log the exception

@@ -57,4 +57,42 @@ public class TeacherDAO {
         }
         return true;
     }
+    public static boolean addTeacher(Teacher tch) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (getTeacherByID(tch.getId()) != null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(tch);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+    public static boolean updateTeacher(Teacher tch) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (getTeacherByID(tch.getId()) == null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(tch);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
 }

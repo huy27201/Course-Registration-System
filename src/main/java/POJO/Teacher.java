@@ -10,6 +10,18 @@ public class Teacher {
     private String sex;
     private Account accountByAccount;
 
+    public Teacher() {
+    }
+
+    public Teacher(String id, String firstName, String lastName, String sex, Account acc) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sex = sex;
+        this.accountByAccount = acc;
+        this.accountByAccount.setRole("GV");
+    }
+
     @Id
     @Column(name = "ID", nullable = false, length = 8)
     public String getId() {

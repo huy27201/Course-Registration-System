@@ -16,42 +16,35 @@ import java.util.Optional;
 public class App extends Application {
     private static Scene scene;
     private static Stage stage;
-
     private double xOffset = 0;
     private double yOffset = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-        Parent root = loadFXML("TeacherClass");
+        Parent root = loadFXML("TeacherSubject");
         scene = new Scene(root);
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                xOffset = mouseEvent.getSceneX();
-                yOffset = mouseEvent.getSceneY();
-            }
+        root.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
         });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setX(mouseEvent.getScreenX() - xOffset);
-                stage.setY(mouseEvent.getScreenY() - yOffset);
-            }
+        root.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
         });
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.show();
 
-        //HibernateMain.connectHibernate();
+        HibernateMain.connectHibernate();
     }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }

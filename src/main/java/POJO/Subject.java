@@ -17,9 +17,7 @@ public class Subject {
         this.credits = credits;
     }
 
-    public Subject() {
-
-    }
+    public Subject() { }
 
     @Id
     @Column(name = "ID", nullable = false, length = 8)

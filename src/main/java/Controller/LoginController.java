@@ -23,7 +23,6 @@ public class LoginController {
     @FXML private TextField userField;
     @FXML private TextField passwordField;
     @FXML private Label warning;
-    @FXML private Stage stage;
     public LoginController()
     {
     }

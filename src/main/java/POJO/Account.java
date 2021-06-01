@@ -11,6 +11,15 @@ public class Account {
     private String password;
     private String role;
 
+    public Account(String accountId, String password, String role) {
+        this.accountId = accountId;
+        this.password = password;
+        this.role = role;
+    }
+    public Account() {
+
+    }
+
     @Id
     @Column(name = "AccountID", nullable = false, length = 8)
     public String getAccountId() {
