@@ -95,4 +95,21 @@ public class TeacherDAO {
         }
         return true;
     }
+
+    public static Teacher getTeacherByUsername(String username) {
+        Teacher teacher = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "from Teacher tc where tc.accountByAccount.accountId=:username";
+            Query query = session.createQuery(hql);
+            query.setParameter("username", username);
+            teacher = (Teacher) query.getSingleResult();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return teacher;
+    }
 }

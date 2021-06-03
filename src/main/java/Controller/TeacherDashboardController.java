@@ -1,16 +1,31 @@
 package Controller;
 import POJO.Teacher;
 import javafx.animation.ScaleTransition;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import Main.App;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
 
-public class TeacherDashboardController {
-    //@FXML private Label identity;
+public class TeacherDashboardController  {
+    @FXML private Label identity;
+    @FXML private Label currentSemester;
+    private Teacher currentTeacher;
 
+    public void setCurrentTeacher(Teacher tch) {
+        currentTeacher = tch;
+        identity.setText("Xin chào, " + currentTeacher.getLastName());
+    }
     @FXML
     public void hoverTab(MouseEvent event) {
         AnchorPane ap = (AnchorPane) event.getSource();
@@ -101,9 +116,19 @@ public class TeacherDashboardController {
         Thread.sleep(300);
         App.changeScene("Login");
     }
-
     @FXML
-    public void onProfile() {
-
+    public void onProfile(Event event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/Profile.fxml"));
+        Parent root = fxmlLoader.load();
+        ProfileController pc = fxmlLoader.getController();
+        pc.setUser(currentTeacher);
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Profile");
+        stage.initOwner(((Node)event.getSource()).getScene().getWindow());
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
     }
 }

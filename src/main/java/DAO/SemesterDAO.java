@@ -3,8 +3,6 @@ package DAO;
 
 import POJO.Semester;
 import POJO.SemesterPK;
-import POJO.Subject;
-
 import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -29,10 +27,11 @@ public class SemesterDAO {
         }
         return semesterList;
     }
-    public static Semester getSemesterByID(SemesterPK semID) {
+    public static Semester getSemesterByID(int year, int id) {
         Semester sem = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
+            SemesterPK semID = new SemesterPK(year, id);
             sem = session.get(Semester.class, semID);
         } catch (HibernateException ex) {
             //Log the exception
@@ -42,9 +41,9 @@ public class SemesterDAO {
         }
         return sem;
     }
-    public static boolean removeSemesterByID(SemesterPK semID) {
+    public static boolean removeSemesterByID(int year, int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Semester sem = getSemesterByID(semID);
+        Semester sem = getSemesterByID(year, id);
         if(sem == null) {
             return false;
         }
@@ -65,7 +64,7 @@ public class SemesterDAO {
 
     public static boolean addSemester(Semester sem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (getSemesterByID(sem.getSemesterId()) != null) {
+        if (getSemesterByID(sem.getYear(), sem.getId()) != null) {
             return false;
         }
         Transaction transaction = null;
@@ -84,7 +83,7 @@ public class SemesterDAO {
     }
     public static boolean updateSemester(Semester sem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if (getSemesterByID(sem.getSemesterId()) == null) {
+        if (getSemesterByID(sem.getYear(), sem.getId()) == null) {
             return false;
         }
         Transaction transaction = null;

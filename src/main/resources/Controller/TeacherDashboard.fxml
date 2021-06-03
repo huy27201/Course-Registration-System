@@ -45,12 +45,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
+            <Label layoutX="129.0" layoutY="24.0" styleClass="current-semester" text="HỌC KỲ HIỆN TẠI:" textFill="#0d6895">
+               <font>
+                  <Font name="Tahoma Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentSemester" layoutX="321.0" layoutY="24.0" styleClass="current-semester" />
             <Label layoutX="791.0" layoutY="24.0" prefHeight="25.0" prefWidth="4.0" text="|" textFill="#837d7d">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="identity" alignment="CENTER_RIGHT" layoutX="648.0" layoutY="24.0" onMouseClicked="#onProfile" prefHeight="25.0" prefWidth="136.0" text="Thông tin cá nhân" textFill="#837d7d">
+            <Label alignment="CENTER_RIGHT" layoutX="648.0" layoutY="24.0" onMouseClicked="#onProfile" prefHeight="25.0" prefWidth="136.0" text="Thông tin cá nhân" textFill="#837d7d" underline="true">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font>
@@ -65,6 +71,19 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+            </Label>
+            <Label fx:id="identity" alignment="CENTER_RIGHT" layoutX="486.0" layoutY="24.0" onMouseClicked="#onProfile" prefHeight="25.0" prefWidth="136.0" text="Xin chào" textFill="#837d7d">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Label>
+            <Label layoutX="631.0" layoutY="24.0" prefHeight="25.0" prefWidth="4.0" text="|" textFill="#837d7d">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
             </Label>
          </children>
       </AnchorPane>

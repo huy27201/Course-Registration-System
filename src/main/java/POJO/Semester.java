@@ -6,44 +6,38 @@ import java.sql.Date;
 @Entity
 @IdClass(SemesterPK.class)
 public class Semester {
-    private SemesterPK semesterId;
+    private int id;
+    private int year;
     private Date dateStart;
     private Date dateEnd;
 
     public Semester(int id, int year, Date dateStart, Date dateEnd) {
-        semesterId = new SemesterPK(id, year);
+        this.id = id;
+        this.year = year;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
     }
 
     public Semester() {
-
     }
     @Id
-    public SemesterPK getSemesterId() {
-        return semesterId;
+    @Column(name = "ID", nullable = false)
+    public int getId() {
+        return id;
     }
-    public void setSemesterId(SemesterPK semesterId) {
-        this.semesterId = semesterId;
+
+    public void setId(int id) {
+        this.id = id;
     }
-//    @Id
-//    @Column(name = "ID", nullable = false)
-//    public int getId() {
-//        return semesterId.getId();
-//    }
-//
-//    public void setId(int id) {
-//        //this.semesterId.setId(id);
-//    }
-//
-//    @Id
-//    @Column(name = "Year", nullable = false)
-//    public int getYear() {
-//        return semesterId.getYear();
-//    }
+
+    @Id
+    @Column(name = "Year", nullable = false)
+    public int getYear() {
+        return year;
+    }
 
     public void setYear(int year) {
-        //this.semesterId.setYear(year);
+        this.year = year;
     }
 
     @Basic
@@ -73,8 +67,8 @@ public class Semester {
 
         Semester semester = (Semester) o;
 
-        //if (semesterId.getId() != semester.getId()) return false;
-        //if (semesterId.getYear() != semester.getYear()) return false;
+        if (id != semester.getId()) return false;
+        if (year != semester.getYear()) return false;
         if (dateStart != null ? !dateStart.equals(semester.dateStart) : semester.dateStart != null) return false;
         if (dateEnd != null ? !dateEnd.equals(semester.dateEnd) : semester.dateEnd != null) return false;
 
@@ -83,8 +77,8 @@ public class Semester {
 
     @Override
     public int hashCode() {
-        int result = semesterId.getId();
-        result = 31 * result + semesterId.getYear();
+        int result = id;
+        result = 31 * result + year;
         result = 31 * result + (dateStart != null ? dateStart.hashCode() : 0);
         result = 31 * result + (dateEnd != null ? dateEnd.hashCode() : 0);
         return result;

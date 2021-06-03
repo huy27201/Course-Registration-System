@@ -9,7 +9,7 @@ public class SemesterPK implements Serializable {
     private int year;
 
     public SemesterPK() {};
-    public SemesterPK(int id, int year) {
+    public SemesterPK(int year, int id) {
         this.id = id;
         this.year = year;
     }

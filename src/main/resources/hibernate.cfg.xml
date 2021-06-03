@@ -6,9 +6,9 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/schoolmanagement</property>
     <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">password</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">password</property>
     <mapping class="POJO.Subject"/>
     <mapping class="POJO.Student"/>
     <mapping class="POJO.Account"/>
