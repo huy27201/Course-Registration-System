@@ -13,6 +13,7 @@ import java.util.List;
 
 public class CourseRegistrationDAO {
     private static List<CourseRegistration> courseRegistrationList;
+
     public static List<CourseRegistration> getCourseRegistrationList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -27,6 +28,7 @@ public class CourseRegistrationDAO {
         }
         return courseRegistrationList;
     }
+
     public static CourseRegistration getCourseRegistrationByID(int id, int semesterId, int year) {
         CourseRegistration res = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -41,10 +43,11 @@ public class CourseRegistrationDAO {
         }
         return res;
     }
+
     public static boolean removeCourseRegistrationByID(int id, int semesterId, int year) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         CourseRegistration res = getCourseRegistrationByID(id, semesterId, year);
-        if(res == null) {
+        if (res == null) {
             return false;
         }
         Transaction transaction = null;

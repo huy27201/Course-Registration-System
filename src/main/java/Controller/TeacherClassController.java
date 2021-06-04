@@ -14,33 +14,40 @@ public class TeacherClassController {
     public void exit() {
         App.exit();
     }
+
     @FXML
     public void minimize() {
         App.minimize();
     }
+
     @FXML
     public void onAdd() {
         App.minimize();
     }
+
     @FXML
     public void onDashboard() throws IOException {
         App.changeScene("TeacherDashboard");
     }
+
     @FXML
     public void logoutClicked() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
     @FXML
     public void onReturn() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("TeacherDashboard");
     }
+
     @FXML
     public void onStudentClass() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("TeacherStudent");
     }
+
     @FXML
     public void onRemove() {
         Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);

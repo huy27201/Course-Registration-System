@@ -1,6 +1,7 @@
 package DAO;
 
 import POJO.Course;
+import POJO.CoursePK;
 import POJO.Currentsemester;
 import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class CourseDAO {
     private static List<Course> courseList;
+
     public static List<Course> getCourseListBySemester(Currentsemester sem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -28,7 +30,8 @@ public class CourseDAO {
         }
         return courseList;
     }
-    public static Course getCourseByID(int id) {
+
+    public static Course getCourseByID(CoursePK id) {
         Course res = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -41,10 +44,11 @@ public class CourseDAO {
         }
         return res;
     }
-    public static boolean removeCourseByID(int id) {
+
+    public static boolean removeCourseByID(CoursePK id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Course res = getCourseByID(id);
-        if(res == null) {
+        if (res == null) {
             return false;
         }
         Transaction transaction = null;

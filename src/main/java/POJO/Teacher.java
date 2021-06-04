@@ -52,6 +52,13 @@ public class Teacher {
         this.lastName = lastName;
     }
 
+    public void setFullName(String fullName) {
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     @Basic
     @Column(name = "Sex", nullable = true, length = 3)
     public String getSex() {
@@ -95,4 +102,6 @@ public class Teacher {
     public void setAccountByAccount(Account accountByAccount) {
         this.accountByAccount = accountByAccount;
     }
+
+
 }

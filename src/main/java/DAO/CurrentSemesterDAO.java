@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 
 public class CurrentSemesterDAO {
     private static Currentsemester currentSemester;
+
     public static Currentsemester getCurrentSemester() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -23,6 +24,7 @@ public class CurrentSemesterDAO {
         }
         return currentSemester;
     }
+
     public static boolean addCurrrentSemester(Currentsemester sem) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -39,6 +41,7 @@ public class CurrentSemesterDAO {
         }
         return true;
     }
+
     public static boolean removeCurrrentSemester() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Currentsemester sem = getCurrentSemester();

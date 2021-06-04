@@ -11,9 +11,11 @@ public class Currentsemester {
     private int id;
     private int year;
 
-    public Currentsemester() {}
+    public Currentsemester() {
+    }
+
     public Currentsemester(int id, int year) {
-        this.id =id;
+        this.id = id;
         this.year = year;
     }
 

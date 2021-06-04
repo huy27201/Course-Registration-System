@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -23,16 +24,24 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TeacherAccountController implements Initializable {
-    @FXML private TextField searchBar;
-    @FXML TableView<Teacher> table;
-    @FXML TableColumn<Teacher, String> col_id;
-    @FXML TableColumn<Teacher, String> col_firstName;
-    @FXML TableColumn<Teacher, String> col_lastName;
-    @FXML TableColumn<Teacher, String> col_gender;
-    @FXML TableColumn<Teacher, String> col_account;
-    @FXML TableColumn<Teacher, String> col_password;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    TableView<Teacher> table;
+    @FXML
+    TableColumn<Teacher, String> col_id;
+    @FXML
+    TableColumn<Teacher, String> col_firstName;
+    @FXML
+    TableColumn<Teacher, String> col_lastName;
+    @FXML
+    TableColumn<Teacher, String> col_gender;
+    @FXML
+    TableColumn<Teacher, String> col_account;
+    @FXML
+    TableColumn<Teacher, String> col_password;
     ObservableList<Teacher> list = FXCollections.observableArrayList();
-    FilteredList<Teacher> filterList= new FilteredList<>(list);
+    FilteredList<Teacher> filterList = new FilteredList<>(list);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,35 +61,41 @@ public class TeacherAccountController implements Initializable {
     public void exit() {
         App.exit();
     }
+
     @FXML
     public void minimize() {
         App.minimize();
     }
+
     @FXML
     public void onDashboard() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("TeacherDashboard");
     }
+
     @FXML
     public void logoutClicked() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
     @FXML
     public void onReturn() throws IOException, InterruptedException {
         onDashboard();
     }
+
     @FXML
     public void onAdd() throws IOException {
         Dialog<Teacher> dialog = newDialog(null);
         Optional<Teacher> result = dialog.showAndWait();
         if (result.isPresent()) {
-            if(AccountDAO.addAccount(result.get().getAccountByAccount()))
-                if(TeacherDAO.addTeacher(result.get()))
+            if (AccountDAO.addAccount(result.get().getAccountByAccount()))
+                if (TeacherDAO.addTeacher(result.get()))
                     table.getItems().add(result.get());
                 else AccountDAO.removeAccountByID(result.get().getAccountByAccount().getAccountId());
         }
     }
+
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
@@ -95,8 +110,7 @@ public class TeacherAccountController implements Initializable {
                 TeacherDAO.removeTeacherByID(selectedTch.getId());
                 AccountDAO.removeAccountByID(selectedTch.getAccountByAccount().getAccountId());
             }
-        }
-        else {
+        } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
             confirmExit.setTitle("Warning");
             confirmExit.setContentText("Vui lòng chọn tài khoản cần xóa!!");
@@ -104,6 +118,7 @@ public class TeacherAccountController implements Initializable {
             confirmExit.showAndWait();
         }
     }
+
     @FXML
     public void onSearch() {
         String data = searchBar.getText().toLowerCase();
@@ -114,26 +129,29 @@ public class TeacherAccountController implements Initializable {
                     if (teacher.getFirstName().toLowerCase().contains(data)) return true;
                     if (teacher.getLastName().toLowerCase().contains(data)) return true;
                     if (teacher.getAccountByAccount().getAccountId().toLowerCase().contains(data)) return true;
-                    if ((teacher.getFirstName().toLowerCase() + " " + teacher.getLastName().toLowerCase()).contains(data)) return true;
+                    if ((teacher.getFullName().toLowerCase()).contains(data)) return true;
                     return false;
                 }
         );
         table.setItems(filterList);
     }
-    @FXML void onUpdate(MouseEvent event) throws IOException {
+
+    @FXML
+    void onUpdate(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Teacher tch = table.getSelectionModel().getSelectedItem();
             Dialog<Teacher> dialog = newDialog(tch);
             Optional<Teacher> result = dialog.showAndWait();
             if (result.isPresent()) {
                 tch = result.get();
-                if(AccountDAO.updateAccount(tch.getAccountByAccount())) {
+                if (AccountDAO.updateAccount(tch.getAccountByAccount())) {
                     TeacherDAO.updateTeacher(tch);
                     table.refresh();
                 }
             }
         }
     }
+
     public Dialog<Teacher> newDialog(Teacher tch) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/AccountDialog.fxml"));
         DialogPane content = fxmlLoader.load();
@@ -147,7 +165,7 @@ public class TeacherAccountController implements Initializable {
         }
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {
-            if (adc.getId() == null || adc.getLastName() == null || adc.getGender() == null || adc.getAccount().equals("")  || adc.getPassword().equals("")) {
+            if (adc.getId() == null || adc.getLastName() == null || adc.getGender() == null || adc.getAccount().equals("") || adc.getPassword().equals("")) {
                 Alert warning = new Alert(Alert.AlertType.WARNING);
                 warning.setTitle("Warning");
                 warning.setContentText("Vui lòng nhập hết thông tin!");

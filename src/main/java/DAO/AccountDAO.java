@@ -11,6 +11,7 @@ import java.util.List;
 
 public class AccountDAO {
     private static List<Account> accountList;
+
     public static List<Account> getAccountList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -39,10 +40,11 @@ public class AccountDAO {
         }
         return acc;
     }
+
     public static boolean removeAccountByID(String accountID) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Account acc = getAccountByID(accountID);
-        if(acc == null) {
+        if (acc == null) {
             return false;
         }
         Transaction transaction = null;
@@ -59,6 +61,7 @@ public class AccountDAO {
         }
         return true;
     }
+
     public static boolean addAccount(Account acc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (getAccountByID(acc.getAccountId()) != null) {
@@ -78,6 +81,7 @@ public class AccountDAO {
         }
         return true;
     }
+
     public static boolean updateAccount(Account acc) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (getAccountByID(acc.getAccountId()) == null) {

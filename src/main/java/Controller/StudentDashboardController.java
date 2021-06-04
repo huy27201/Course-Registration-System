@@ -1,4 +1,5 @@
 package Controller;
+
 import DAO.CurrentSemesterDAO;
 import POJO.Currentsemester;
 import POJO.Student;
@@ -17,13 +18,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class StudentDashboardController implements Initializable  {
-    @FXML private Label identity;
-    @FXML private Label currentSemesterLabel;
+public class StudentDashboardController implements Initializable {
+    @FXML
+    private Label identity;
+    @FXML
+    private Label currentSemesterLabel;
     //    private Teacher currentTeacher;
     private CurrentUser currentUser = CurrentUser.getInstance();
     private Currentsemester curSem;
@@ -34,11 +38,13 @@ public class StudentDashboardController implements Initializable  {
         curSem = CurrentSemesterDAO.getCurrentSemester();
         currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
     }
+
     public void setCurrentStudent(Student stu, FXMLLoader fxmlLoader) {
         currentUser.setCurrentStudent(stu);
         this.fxmlLoader = fxmlLoader;
         identity.setText("Xin chào, " + currentUser.getCurrentStudent().getLastName());
     }
+
     @FXML
     public void hoverTab(MouseEvent event) {
         AnchorPane ap = (AnchorPane) event.getSource();
@@ -49,6 +55,7 @@ public class StudentDashboardController implements Initializable  {
         st.setToY(1.1);
         st.play();
     }
+
     public void unHoverTab(MouseEvent event) {
         AnchorPane ap = (AnchorPane) event.getSource();
         ScaleTransition st = new ScaleTransition(Duration.millis(100), ap);
@@ -58,14 +65,17 @@ public class StudentDashboardController implements Initializable  {
         st.setToY(1);
         st.play();
     }
+
     @FXML
     public void exit() {
         App.exit();
     }
+
     @FXML
     public void minimize() {
         App.minimize();
     }
+
     @FXML
     public void onCourseResult() {
 //        try {
@@ -75,6 +85,7 @@ public class StudentDashboardController implements Initializable  {
 //            ioException.printStackTrace();
 //        }
     }
+
     @FXML
     public void onCourseAttend() {
 //        try {
@@ -84,11 +95,13 @@ public class StudentDashboardController implements Initializable  {
 //            ioException.printStackTrace();
 //        }
     }
+
     @FXML
     public void logoutClicked() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
     @FXML
     public void onProfile(Event event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/Profile.fxml"));
@@ -100,7 +113,7 @@ public class StudentDashboardController implements Initializable  {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Profile");
-        stage.initOwner(((Node)event.getSource()).getScene().getWindow());
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }

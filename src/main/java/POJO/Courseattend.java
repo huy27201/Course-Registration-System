@@ -11,7 +11,17 @@ public class Courseattend {
     private int semesterId;
     private int year;
     private Timestamp dateRegisterd;
-    private Course course;
+
+    public Courseattend() {
+    }
+
+    public Courseattend(String studentId, int courseId, int semesterId, int year, String subjectId, Timestamp dateRegisterd) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.semesterId = semesterId;
+        this.year = year;
+        this.dateRegisterd = dateRegisterd;
+    }
 
     @Id
     @Column(name = "StudentID", nullable = false, length = 8)
@@ -90,13 +100,4 @@ public class Courseattend {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumns({@JoinColumn(name = "CourseID", referencedColumnName = "ID", nullable = false), @JoinColumn(name = "SemesterID", referencedColumnName = "SemesterID", nullable = false), @JoinColumn(name = "Year", referencedColumnName = "Year", nullable = false)})
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
 }

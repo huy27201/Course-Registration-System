@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -21,11 +22,16 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TeacherSubjectController implements Initializable {
-    @FXML private TextField searchBar;
-    @FXML TableView<Subject> table;
-    @FXML TableColumn<Subject, String> col_id;
-    @FXML TableColumn<Subject, String> col_name;
-    @FXML TableColumn<Subject, Integer> col_credits;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    TableView<Subject> table;
+    @FXML
+    TableColumn<Subject, String> col_id;
+    @FXML
+    TableColumn<Subject, String> col_name;
+    @FXML
+    TableColumn<Subject, Integer> col_credits;
     ObservableList<Subject> list = FXCollections.observableArrayList();
     FilteredList<Subject> filterList = new FilteredList<>(list);
 
@@ -39,37 +45,44 @@ public class TeacherSubjectController implements Initializable {
         col_credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
         table.setItems(list);
     }
+
     @FXML
     public void exit() {
         App.exit();
     }
+
     @FXML
     public void minimize() {
         App.minimize();
     }
+
     @FXML
     public void onDashboard() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("TeacherDashboard");
     }
+
     @FXML
     public void logoutClicked() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
     @FXML
     public void onReturn() throws IOException, InterruptedException {
         onDashboard();
     }
+
     @FXML
     public void onAdd() throws IOException {
         Dialog<Subject> dialog = newDialog(null);
         Optional<Subject> result = dialog.showAndWait();
         if (result.isPresent()) {
-            if(SubjectDAO.addSubject(result.get()))
+            if (SubjectDAO.addSubject(result.get()))
                 table.getItems().add(result.get());
         }
     }
+
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
@@ -83,8 +96,7 @@ public class TeacherSubjectController implements Initializable {
                 table.getItems().remove(selectedSub);
                 SubjectDAO.removeSubjectByID(selectedSub.getId());
             }
-        }
-        else {
+        } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
             confirmExit.setTitle("Warning");
             confirmExit.setContentText("Vui lòng chọn môn học cần xóa!!");
@@ -92,6 +104,7 @@ public class TeacherSubjectController implements Initializable {
             confirmExit.showAndWait();
         }
     }
+
     @FXML
     public void onSearch() {
         String data = searchBar.getText().toLowerCase();
@@ -105,7 +118,9 @@ public class TeacherSubjectController implements Initializable {
         );
         table.setItems(filterList);
     }
-    @FXML void onUpdate(MouseEvent event) throws IOException {
+
+    @FXML
+    void onUpdate(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Subject sub = table.getSelectionModel().getSelectedItem();
             Dialog<Subject> dialog = newDialog(sub);
@@ -117,6 +132,7 @@ public class TeacherSubjectController implements Initializable {
             }
         }
     }
+
     public Dialog<Subject> newDialog(Subject sub) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/SubjectDialog.fxml"));
         DialogPane content = fxmlLoader.load();

@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -24,13 +25,20 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TeacherSemesterController implements Initializable {
-    @FXML private TextField searchBar;
-    @FXML TableView<Semester> table;
-    @FXML TableColumn<Semester, Integer> col_id;
-    @FXML TableColumn<Semester, Integer> col_year;
-    @FXML TableColumn<Semester, Date> col_dateStart;
-    @FXML TableColumn<Semester, Date> col_dateEnd;
-    @FXML Label currentSemesterLabel;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    TableView<Semester> table;
+    @FXML
+    TableColumn<Semester, Integer> col_id;
+    @FXML
+    TableColumn<Semester, Integer> col_year;
+    @FXML
+    TableColumn<Semester, Date> col_dateStart;
+    @FXML
+    TableColumn<Semester, Date> col_dateEnd;
+    @FXML
+    Label currentSemesterLabel;
     ObservableList<Semester> list = FXCollections.observableArrayList();
     FilteredList<Semester> filterList = new FilteredList<>(list);
     private Currentsemester curSem;
@@ -48,28 +56,34 @@ public class TeacherSemesterController implements Initializable {
         curSem = CurrentSemesterDAO.getCurrentSemester();
         currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
     }
+
     @FXML
     public void exit() {
         App.exit();
     }
+
     @FXML
     public void minimize() {
         App.minimize();
     }
+
     @FXML
     public void onDashboard() throws IOException {
         App.changeScene("TeacherDashboard");
     }
+
     @FXML
     public void logoutClicked() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
     @FXML
     public void onReturn() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("TeacherDashboard");
     }
+
     @FXML
     public void onSearch() {
         String data = searchBar.getText().toLowerCase();
@@ -84,15 +98,17 @@ public class TeacherSemesterController implements Initializable {
         );
         table.setItems(filterList);
     }
+
     @FXML
     public void onAdd(Event event) throws IOException {
         Dialog<Semester> dialog = newDialog();
         Optional<Semester> result = dialog.showAndWait();
         if (result.isPresent()) {
-            if(SemesterDAO.addSemester(result.get()))
+            if (SemesterDAO.addSemester(result.get()))
                 table.getItems().add(result.get());
         }
     }
+
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
@@ -106,8 +122,7 @@ public class TeacherSemesterController implements Initializable {
                 table.getItems().remove(selectedSem);
                 SemesterDAO.removeSemesterByID(selectedSem.getYear(), selectedSem.getId());
             }
-        }
-        else {
+        } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
             confirmExit.setTitle("Warning");
             confirmExit.setContentText("Vui lòng chọn học kỳ cần xóa!!");
@@ -115,6 +130,7 @@ public class TeacherSemesterController implements Initializable {
             confirmExit.showAndWait();
         }
     }
+
     @FXML
     void setCurrent(MouseEvent event) {
         if (event.getClickCount() == 2) {
@@ -125,6 +141,7 @@ public class TeacherSemesterController implements Initializable {
             currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
         }
     }
+
     public Dialog<Semester> newDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/SemesterDialog.fxml"));
         DialogPane content = fxmlLoader.load();

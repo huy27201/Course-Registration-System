@@ -11,6 +11,7 @@ import java.util.List;
 
 public class SubjectDAO {
     private static List<Subject> subjectList;
+
     public static List<Subject> getSubjectList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -25,6 +26,7 @@ public class SubjectDAO {
         }
         return subjectList;
     }
+
     public static Subject getSubjectByID(String subjectID) {
         Subject sub = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -38,10 +40,11 @@ public class SubjectDAO {
         }
         return sub;
     }
+
     public static boolean removeSubjectByID(String subjectID) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Subject sub = getSubjectByID(subjectID);
-        if(sub == null){
+        if (sub == null) {
             return false;
         }
         Transaction transaction = null;
@@ -78,6 +81,7 @@ public class SubjectDAO {
         }
         return true;
     }
+
     public static boolean updateSubject(Subject sub) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (getSubjectByID(sub.getId()) == null) {

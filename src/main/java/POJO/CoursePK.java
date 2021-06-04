@@ -9,6 +9,15 @@ public class CoursePK implements Serializable {
     private int semesterId;
     private int year;
 
+    public CoursePK() {
+    }
+
+    public CoursePK(int id, int semesterId, int year) {
+        this.id = id;
+        this.semesterId = semesterId;
+        this.year = year;
+    }
+
     @Column(name = "ID", nullable = false)
     @Id
     public int getId() {

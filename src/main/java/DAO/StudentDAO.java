@@ -6,10 +6,12 @@ import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
 import java.util.List;
 
 public class StudentDAO {
     private static List<Student> studentList;
+
     public static List<Student> getStudentList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -17,13 +19,14 @@ public class StudentDAO {
             Query query = session.createQuery(hql);
             studentList = query.list();
         } catch (HibernateException ex) {
-        //Log the exception
+            //Log the exception
             System.err.println(ex);
         } finally {
             session.close();
         }
         return studentList;
     }
+
     public static Student getStudentByID(String studentID) {
         Student student = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -37,6 +40,7 @@ public class StudentDAO {
         }
         return student;
     }
+
     public static Student getStudentByUsername(String username) {
         Student student = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

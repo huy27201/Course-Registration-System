@@ -3,22 +3,23 @@
         "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost:3306/schoolmanagement</property>
-    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password">password</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="POJO.Subject"/>
-    <mapping class="POJO.Student"/>
-    <mapping class="POJO.Account"/>
-    <mapping class="POJO.Classname"/>
-    <mapping class="POJO.Course"/>
-    <mapping class="POJO.CourseRegistration"/>
-    <mapping class="POJO.Courseattend"/>
-    <mapping class="POJO.Role"/>
-    <mapping class="POJO.Semester"/>
-    <mapping class="POJO.Teacher"/>
-    <mapping class="POJO.Currentsemester"/>
-  </session-factory>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/schoolmanagement</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">password</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping class="POJO.Subject"/>
+        <mapping class="POJO.Student"/>
+        <mapping class="POJO.Account"/>
+        <mapping class="POJO.Classname"/>
+        <mapping class="POJO.Course"/>
+        <mapping class="POJO.CourseRegistration"/>
+        <mapping class="POJO.Courseattend"/>
+        <mapping class="POJO.Role"/>
+        <mapping class="POJO.Semester"/>
+        <mapping class="POJO.Teacher"/>
+        <mapping class="POJO.Currentsemester"/>
+
+    </session-factory>
 </hibernate-configuration>

@@ -11,16 +11,26 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class ProfileController {
-    @FXML private TextField id;
-    @FXML private TextField firstName;
-    @FXML private TextField lastName;
-    @FXML private DatePicker dateOfBirth;
-    @FXML ToggleGroup gender;
-    @FXML RadioButton male;
-    @FXML RadioButton female;
-    @FXML ComboBox classLists;
-    @FXML private TextField account;
-    @FXML private TextField password;
+    @FXML
+    private TextField id;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private DatePicker dateOfBirth;
+    @FXML
+    ToggleGroup gender;
+    @FXML
+    RadioButton male;
+    @FXML
+    RadioButton female;
+    @FXML
+    ComboBox classLists;
+    @FXML
+    private TextField account;
+    @FXML
+    private TextField password;
 
     public void setUser(Teacher tch) {
         id.setDisable(true);
@@ -34,6 +44,7 @@ public class ProfileController {
         account.setText(tch.getAccountByAccount().getAccountId());
         password.setText(tch.getAccountByAccount().getPassword());
     }
+
     public void setUser(Student tch) {
         id.setDisable(true);
         id.setText(tch.getId());
@@ -44,11 +55,13 @@ public class ProfileController {
         account.setText(tch.getAccountByAccount().getAccountId());
         password.setText(tch.getAccountByAccount().getPassword());
     }
+
     @FXML
     public void onSaveProfile(Event event) {
-        Stage dialog = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage dialog = (Stage) ((Node) event.getSource()).getScene().getWindow();
         dialog.close();
     }
+
     @FXML
     public void onKeySave(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)) {

@@ -16,7 +16,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(String id, String firstName, String lastName, Date dateOfBirth, String sex, Classname className , Account acc) {
+    public Student(String id, String firstName, String lastName, Date dateOfBirth, String sex, Classname className, Account acc) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,6 +26,7 @@ public class Student {
         this.accountByAccount = acc;
         this.accountByAccount.setRole("GV");
     }
+
     @Id
     @Column(name = "ID", nullable = false, length = 8)
     public String getId() {

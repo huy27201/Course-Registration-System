@@ -15,84 +15,100 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
-   <left>
-      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #0D6895;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="241.0" fitWidth="212.0" layoutX="70.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/img/schoolLogo.jpg" />
-               </image>
-            </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="83.0" layoutY="316.0" text="HCMUS PORTAL" textFill="WHITE">
-               <font>
-                  <Font name="Tahoma" size="26.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="400.0" prefWidth="350.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="userField" layoutX="67.0" layoutY="178.0" onKeyPressed="#submitKeyPressed" promptText="Username" styleClass="login-input">
-               <font>
-                  <Font name="Tahoma" size="18.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </TextField>
-            <PasswordField fx:id="passwordField" layoutX="67.0" layoutY="250.0" onKeyPressed="#submitKeyPressed" promptText="Password" styleClass="login-input">
-               <font>
-                  <Font name="Tahoma" size="18.0" />
-               </font>
-            </PasswordField>
-            <Button fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#onSubmit" prefWidth="217.0" stylesheets="@../assets/css/style.css" text="Login" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Tahoma" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow color="#00000092" height="15.0" radius="7.0" width="15.0" />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="301.0" text="Incorrrect login, please try again." textFill="RED" visible="false">
-               <font>
-                  <Font name="Tahoma" size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="67.0" layoutY="116.0" text="Đăng nhập">
-               <font>
-                  <Font name="Tahoma Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label id="forgot-label" fx:id="forgotLink" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="395.0" prefHeight="26.0" prefWidth="150.0" text="Quên mật khẩu?" textAlignment="CENTER" textFill="#0d6895" underline="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Tahoma" size="16.0" />
-               </font>
-            </Label>
-            <FontAwesomeIconView glyphName="CLOSE" layoutX="327.0" layoutY="20.0" onMouseClicked="#exit" size="16" wrappingWidth="18.85714340209961">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></FontAwesomeIconView>
-            <FontAwesomeIconView glyphName="MINUS" layoutX="302.0" layoutY="20.0" onMouseClicked="#minimize" size="16">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></FontAwesomeIconView>
-         </children>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </AnchorPane>
-   </right>
-   <stylesheets>
-      <URL value="@../assets/css/style.css" />
-      <URL value="@../assets/css/Login.css" />
-   </stylesheets>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+            prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.LoginController">
+    <left>
+        <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #0D6895;"
+                    BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="241.0" fitWidth="212.0" layoutX="70.0" layoutY="104.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/img/schoolLogo.jpg"/>
+                    </image>
+                </ImageView>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="83.0" layoutY="316.0" text="HCMUS PORTAL"
+                       textFill="WHITE">
+                    <font>
+                        <Font name="Tahoma" size="26.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </left>
+    <right>
+        <AnchorPane prefHeight="400.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextField fx:id="userField" layoutX="67.0" layoutY="178.0" onKeyPressed="#submitKeyPressed"
+                           promptText="Username" styleClass="login-input">
+                    <font>
+                        <Font name="Tahoma" size="18.0"/>
+                    </font>
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                </TextField>
+                <PasswordField fx:id="passwordField" layoutX="67.0" layoutY="250.0" onKeyPressed="#submitKeyPressed"
+                               promptText="Password" styleClass="login-input">
+                    <font>
+                        <Font name="Tahoma" size="18.0"/>
+                    </font>
+                </PasswordField>
+                <Button fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="334.0"
+                        mnemonicParsing="false" onMouseClicked="#onSubmit" prefWidth="217.0"
+                        stylesheets="@../assets/css/style.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Tahoma" size="18.0"/>
+                    </font>
+                    <effect>
+                        <DropShadow color="#00000092" height="15.0" radius="7.0" width="15.0"/>
+                    </effect>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Label fx:id="warning" alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="301.0"
+                       text="Incorrrect login, please try again." textFill="RED" visible="false">
+                    <font>
+                        <Font name="Tahoma" size="15.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="67.0" layoutY="116.0" text="Đăng nhập">
+                    <font>
+                        <Font name="Tahoma Bold" size="24.0"/>
+                    </font>
+                </Label>
+                <Label id="forgot-label" fx:id="forgotLink" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0"
+                       layoutY="395.0" prefHeight="26.0" prefWidth="150.0" text="Quên mật khẩu?" textAlignment="CENTER"
+                       textFill="#0d6895" underline="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <font>
+                        <Font name="Tahoma" size="16.0"/>
+                    </font>
+                </Label>
+                <FontAwesomeIconView glyphName="CLOSE" layoutX="327.0" layoutY="20.0" onMouseClicked="#exit" size="16"
+                                     wrappingWidth="18.85714340209961">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </FontAwesomeIconView>
+                <FontAwesomeIconView glyphName="MINUS" layoutX="302.0" layoutY="20.0" onMouseClicked="#minimize"
+                                     size="16">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </FontAwesomeIconView>
+            </children>
+            <cursor>
+                <Cursor fx:constant="DEFAULT"/>
+            </cursor>
+        </AnchorPane>
+    </right>
+    <stylesheets>
+        <URL value="@../assets/css/style.css"/>
+        <URL value="@../assets/css/Login.css"/>
+    </stylesheets>
 </BorderPane>

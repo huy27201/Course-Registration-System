@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -23,14 +24,22 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CourseRegistrationController implements Initializable {
-    @FXML private TextField searchBar;
-    @FXML TableView<CourseRegistration> table;
-    @FXML TableColumn<CourseRegistration, Integer> col_id;
-    @FXML TableColumn<CourseRegistration, Integer> col_semesterId;
-    @FXML TableColumn<CourseRegistration, Integer> col_year;
-    @FXML TableColumn<CourseRegistration, Date> col_dateStart;
-    @FXML TableColumn<CourseRegistration, Date> col_dateEnd;
-    @FXML Label currentSemesterLabel;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    TableView<CourseRegistration> table;
+    @FXML
+    TableColumn<CourseRegistration, Integer> col_id;
+    @FXML
+    TableColumn<CourseRegistration, Integer> col_semesterId;
+    @FXML
+    TableColumn<CourseRegistration, Integer> col_year;
+    @FXML
+    TableColumn<CourseRegistration, Date> col_dateStart;
+    @FXML
+    TableColumn<CourseRegistration, Date> col_dateEnd;
+    @FXML
+    Label currentSemesterLabel;
     ObservableList<CourseRegistration> list = FXCollections.observableArrayList();
     FilteredList<CourseRegistration> filterList = new FilteredList<>(list);
     private Currentsemester curSem;
@@ -49,29 +58,36 @@ public class CourseRegistrationController implements Initializable {
         curSem = CurrentSemesterDAO.getCurrentSemester();
         currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
     }
+
     @FXML
     public void exit() {
         App.exit();
     }
+
     @FXML
     public void minimize() {
         App.minimize();
     }
+
     @FXML
     public void onDashboard() throws IOException {
         App.changeScene("TeacherDashboard");
     }
+
     @FXML
     public void logoutClicked() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
     @FXML
     public void onReturn() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("TeacherDashboard");
     }
-    @FXML public void onSearch() {
+
+    @FXML
+    public void onSearch() {
         String data = searchBar.getText().toLowerCase();
         filterList.setPredicate(
                 res -> {
@@ -85,15 +101,17 @@ public class CourseRegistrationController implements Initializable {
         );
         table.setItems(filterList);
     }
+
     @FXML
     public void onAdd(Event event) throws IOException {
         Dialog<CourseRegistration> dialog = newDialog();
         Optional<CourseRegistration> result = dialog.showAndWait();
         if (result.isPresent()) {
-            if(CourseRegistrationDAO.addCourseRegistration(result.get()))
+            if (CourseRegistrationDAO.addCourseRegistration(result.get()))
                 table.getItems().add(result.get());
         }
     }
+
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
@@ -107,8 +125,7 @@ public class CourseRegistrationController implements Initializable {
                 table.getItems().remove(selectedItem);
                 CourseRegistrationDAO.removeCourseRegistrationByID(selectedItem.getId(), selectedItem.getSemesterId(), selectedItem.getYear());
             }
-        }
-        else {
+        } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
             confirmExit.setTitle("Warning");
             confirmExit.setContentText("Vui lòng chọn kỳ ĐKHP cần xóa!!");
@@ -116,6 +133,7 @@ public class CourseRegistrationController implements Initializable {
             confirmExit.showAndWait();
         }
     }
+
     public Dialog<CourseRegistration> newDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/CourseRegistrationDialog.fxml"));
         DialogPane content = fxmlLoader.load();

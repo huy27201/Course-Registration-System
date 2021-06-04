@@ -20,6 +20,7 @@ public class Semester {
 
     public Semester() {
     }
+
     @Id
     @Column(name = "ID", nullable = false)
     public int getId() {

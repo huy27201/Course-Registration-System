@@ -6,10 +6,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
 import java.util.List;
 
 public class TeacherDAO {
     private static List<Teacher> teacherList;
+
     public static List<Teacher> getTeacherList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -24,6 +26,7 @@ public class TeacherDAO {
         }
         return teacherList;
     }
+
     public static Teacher getTeacherByID(String teacherID) {
         Teacher teacher = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -37,10 +40,11 @@ public class TeacherDAO {
         }
         return teacher;
     }
+
     public static boolean removeTeacherByID(String teacherID) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Teacher tch = getTeacherByID(teacherID);
-        if(tch == null){
+        if (tch == null) {
             return false;
         }
         Transaction transaction = null;
@@ -57,6 +61,7 @@ public class TeacherDAO {
         }
         return true;
     }
+
     public static boolean addTeacher(Teacher tch) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (getTeacherByID(tch.getId()) != null) {
@@ -76,6 +81,7 @@ public class TeacherDAO {
         }
         return true;
     }
+
     public static boolean updateTeacher(Teacher tch) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         if (getTeacherByID(tch.getId()) == null) {

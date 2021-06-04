@@ -13,6 +13,7 @@ import java.util.List;
 
 public class SemesterDAO {
     private static List<Semester> semesterList;
+
     public static List<Semester> getSemesterList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -27,6 +28,7 @@ public class SemesterDAO {
         }
         return semesterList;
     }
+
     public static Semester getSemesterByID(int year, int id) {
         Semester sem = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -41,10 +43,11 @@ public class SemesterDAO {
         }
         return sem;
     }
+
     public static boolean removeSemesterByID(int year, int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Semester sem = getSemesterByID(year, id);
-        if(sem == null) {
+        if (sem == null) {
             return false;
         }
         Transaction transaction = null;

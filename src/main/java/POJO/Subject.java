@@ -16,7 +16,9 @@ public class Subject {
         this.name = name;
         this.credits = credits;
     }
-    public Subject() { }
+
+    public Subject() {
+    }
 
     @Id
     @Column(name = "ID", nullable = false, length = 8)

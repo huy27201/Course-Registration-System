@@ -1,5 +1,8 @@
 package Main;
 
+import Controller.CurrentUser;
+import POJO.Student;
+import POJO.Teacher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +19,7 @@ public class App extends Application {
     private static Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
-
+    private static CurrentUser currentUser = CurrentUser.getInstance();
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
@@ -62,11 +65,25 @@ public class App extends Application {
             System.exit(0);
         }
     }
+
     public static void minimize() {
         stage.setIconified(true);
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void setUser(Teacher tch) {
+        currentUser.setCurrentTeacher(tch);
+    }
+    public static Teacher getCurrentTeacher() {
+        return currentUser.getCurrentTeacher();
+    }
+    public static void setUser(Student stu) {
+        currentUser.setCurrentStudent(stu);
+    }
+    public static Student getCurrentStudent() {
+        return currentUser.getCurrentStudent();
     }
 }

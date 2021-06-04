@@ -1,15 +1,18 @@
 .dialog-pane {
     font-family: Tahoma;
 }
+
 .dialog-title {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-text-fill: #595758;
 }
-.dialog-label, .text-field {
+
+.dialog-label, .text-field, .combo-box {
     -fx-font-size: 16px;
     -fx-text-fill: #595758;
 }
+
 .button {
     -fx-cursor: Hand;
     -fx-font-size: 15px;

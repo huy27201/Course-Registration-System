@@ -7,23 +7,29 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class SubjectDialogController {
-    @FXML private TextField id;
-    @FXML private TextField name;
-    @FXML private TextField credits;
+    @FXML
+    private TextField id;
+    @FXML
+    private TextField name;
+    @FXML
+    private TextField credits;
 
     public void setInfo(Subject sub) {
         this.id.setText(sub.getId());
         this.name.setText(sub.getName());
         this.credits.setText(sub.getCredits().toString());
     }
+
     @FXML
     public String getId() {
         return id.getText();
     }
+
     @FXML
     public String getName() {
         return name.getText();
     }
+
     @FXML
     public Integer getCredits() {
         try {
@@ -34,6 +40,7 @@ public class SubjectDialogController {
         }
 
     }
+
     @FXML
     public void setDisable(boolean b) {
         id.setDisable(true);

@@ -17,13 +17,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.List;
 
 public class LoginController {
-    @FXML private TextField userField;
-    @FXML private TextField passwordField;
-    @FXML private Label warning;
+    @FXML
+    private TextField userField;
+    @FXML
+    private TextField passwordField;
+    @FXML
+    private Label warning;
     private FXMLLoader fxmlLoader;
     private Scene scene;
     private Stage stage;
@@ -44,15 +48,14 @@ public class LoginController {
                         root = fxmlLoader.load();
                         TeacherDashboardController dashboardController = fxmlLoader.getController();
                         dashboardController.setCurrentTeacher(TeacherDAO.getTeacherByUsername(username), fxmlLoader);
-                    }
-                    else if (acc.getRole().equals("SV")) {
+                    } else if (acc.getRole().equals("SV")) {
                         fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/StudentDashboard.fxml"));
                         root = fxmlLoader.load();
                         StudentDashboardController dashboardController = fxmlLoader.getController();
                         dashboardController.setCurrentStudent(StudentDAO.getStudentByUsername(username), fxmlLoader);
                     }
                     scene = new Scene(root);
-                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException | InterruptedException ioException) {
@@ -70,14 +73,15 @@ public class LoginController {
             }
         }
     }
+
     @FXML
     public void submitKeyPressed(KeyEvent k) {
         if (k.getCode().equals(KeyCode.ENTER))
             onSubmit(k);
     }
+
     @FXML
-    public void exit()
-    {
+    public void exit() {
         App.exit();
     }
 

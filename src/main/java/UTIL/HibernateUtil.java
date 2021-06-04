@@ -15,6 +15,7 @@ public class HibernateUtil {
             throw new ExceptionInInitializerError(th);
         }
     }
+
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

@@ -1,4 +1,5 @@
 package Controller;
+
 import DAO.CurrentSemesterDAO;
 import POJO.Currentsemester;
 import POJO.Teacher;
@@ -17,28 +18,32 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TeacherDashboardController implements Initializable  {
-    @FXML private Label identity;
-    @FXML private Label currentSemesterLabel;
-//    private Teacher currentTeacher;
-    private CurrentUser currentUser = CurrentUser.getInstance();
+public class TeacherDashboardController implements Initializable {
+    @FXML
+    private Label identity;
+    @FXML
+    private Label currentSemesterLabel;
     private Currentsemester curSem;
     FXMLLoader fxmlLoader = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        identity.setText("Xin chào, " + App.getCurrentTeacher().getLastName());
         curSem = CurrentSemesterDAO.getCurrentSemester();
         currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
     }
+
     public void setCurrentTeacher(Teacher tch, FXMLLoader fxmlLoader) {
-        currentUser.setCurrentTeacher(tch);
+        App.setUser(tch);
         this.fxmlLoader = fxmlLoader;
-        identity.setText("Xin chào, " + currentUser.getCurrentTeacher().getLastName());
+        identity.setText("Xin chào, " + App.getCurrentTeacher().getLastName());
     }
+
     @FXML
     public void hoverTab(MouseEvent event) {
         AnchorPane ap = (AnchorPane) event.getSource();
@@ -49,6 +54,7 @@ public class TeacherDashboardController implements Initializable  {
         st.setToY(1.1);
         st.play();
     }
+
     public void unHoverTab(MouseEvent event) {
         AnchorPane ap = (AnchorPane) event.getSource();
         ScaleTransition st = new ScaleTransition(Duration.millis(100), ap);
@@ -58,14 +64,17 @@ public class TeacherDashboardController implements Initializable  {
         st.setToY(1);
         st.play();
     }
+
     @FXML
     public void exit() {
         App.exit();
     }
+
     @FXML
     public void minimize() {
         App.minimize();
     }
+
     @FXML
     public void onSubject() {
         try {
@@ -75,6 +84,7 @@ public class TeacherDashboardController implements Initializable  {
             ioException.printStackTrace();
         }
     }
+
     @FXML
     public void onAccount() {
         try {
@@ -124,23 +134,25 @@ public class TeacherDashboardController implements Initializable  {
             ioException.printStackTrace();
         }
     }
+
     @FXML
     public void logoutClicked() throws IOException, InterruptedException {
         Thread.sleep(300);
         App.changeScene("Login");
     }
+
     @FXML
     public void onProfile(Event event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/Profile.fxml"));
         Parent root = fxmlLoader.load();
         ProfileController pc = fxmlLoader.getController();
-        pc.setUser(currentUser.getCurrentTeacher());
+        pc.setUser(App.getCurrentTeacher());
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Profile");
-        stage.initOwner(((Node)event.getSource()).getScene().getWindow());
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }

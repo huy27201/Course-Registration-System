@@ -13,7 +13,9 @@ public class CourseRegistration {
     private Date dateStart;
     private Date dateEnd;
 
-    public CourseRegistration() {}
+    public CourseRegistration() {
+    }
+
     public CourseRegistration(int id, int semesterId, int year, Date dateStart, Date dateEnd) {
         this.id = id;
         this.semesterId = semesterId;
