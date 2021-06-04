@@ -10,7 +10,7 @@
                 <column name="StudentID" sql-type="char(8)" length="8"/>
             </key-property>
             <key-property name="courseId">
-                <column name="CourseID" sql-type="char(8)" length="8"/>
+                <column name="CourseID" sql-type="int"/>
             </key-property>
             <key-property name="semesterId">
                 <column name="SemesterID" sql-type="int"/>

@@ -19,5 +19,6 @@
     <mapping class="POJO.Role"/>
     <mapping class="POJO.Semester"/>
     <mapping class="POJO.Teacher"/>
+    <mapping class="POJO.Currentsemester"/>
   </session-factory>
 </hibernate-configuration>

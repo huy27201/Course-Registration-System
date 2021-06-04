@@ -1,4 +1,6 @@
 package Controller;
+import DAO.CurrentSemesterDAO;
+import POJO.Currentsemester;
 import POJO.Teacher;
 import javafx.animation.ScaleTransition;
 import javafx.event.Event;
@@ -16,15 +18,26 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TeacherDashboardController  {
+public class TeacherDashboardController implements Initializable  {
     @FXML private Label identity;
-    @FXML private Label currentSemester;
-    private Teacher currentTeacher;
+    @FXML private Label currentSemesterLabel;
+//    private Teacher currentTeacher;
+    private CurrentUser currentUser = CurrentUser.getInstance();
+    private Currentsemester curSem;
+    FXMLLoader fxmlLoader = null;
 
-    public void setCurrentTeacher(Teacher tch) {
-        currentTeacher = tch;
-        identity.setText("Xin chào, " + currentTeacher.getLastName());
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        curSem = CurrentSemesterDAO.getCurrentSemester();
+        currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
+    }
+    public void setCurrentTeacher(Teacher tch, FXMLLoader fxmlLoader) {
+        currentUser.setCurrentTeacher(tch);
+        this.fxmlLoader = fxmlLoader;
+        identity.setText("Xin chào, " + currentUser.getCurrentTeacher().getLastName());
     }
     @FXML
     public void hoverTab(MouseEvent event) {
@@ -86,7 +99,7 @@ public class TeacherDashboardController  {
     public void onCourseManagement() {
         try {
             Thread.sleep(300);
-            App.changeScene("TeacherAccount");
+            App.changeScene("Course");
         } catch (IOException | InterruptedException ioException) {
             ioException.printStackTrace();
         }
@@ -96,7 +109,7 @@ public class TeacherDashboardController  {
     public void onCourseRegistration() {
         try {
             Thread.sleep(300);
-            App.changeScene("TeacherAccount");
+            App.changeScene("CourseRegistration");
         } catch (IOException | InterruptedException ioException) {
             ioException.printStackTrace();
         }
@@ -121,7 +134,7 @@ public class TeacherDashboardController  {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/Profile.fxml"));
         Parent root = fxmlLoader.load();
         ProfileController pc = fxmlLoader.getController();
-        pc.setUser(currentTeacher);
+        pc.setUser(currentUser.getCurrentTeacher());
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);

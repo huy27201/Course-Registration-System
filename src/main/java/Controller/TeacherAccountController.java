@@ -16,8 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
-import javafx.util.Callback;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;

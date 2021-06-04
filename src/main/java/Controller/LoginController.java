@@ -1,9 +1,11 @@
 package Controller;
 
 import DAO.AccountDAO;
+import DAO.StudentDAO;
 import DAO.TeacherDAO;
 import Main.App;
 import POJO.Account;
+import POJO.Student;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +24,11 @@ public class LoginController {
     @FXML private TextField userField;
     @FXML private TextField passwordField;
     @FXML private Label warning;
-    FXMLLoader fxmlLoader;
+    private FXMLLoader fxmlLoader;
+    private Scene scene;
+    private Stage stage;
+    private Parent root;
+
     @FXML
     public void onSubmit(Event event) {
         boolean check = false;
@@ -33,15 +39,20 @@ public class LoginController {
             if (username.equals(acc.getAccountId()) && password.equals(acc.getPassword())) {
                 try {
                     Thread.sleep(300);
-                    if (acc.getRole().equals("GV"))
+                    if (acc.getRole().equals("GV")) {
                         fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/TeacherDashboard.fxml"));
-                    else if (acc.getRole().equals("SV"))
+                        root = fxmlLoader.load();
+                        TeacherDashboardController dashboardController = fxmlLoader.getController();
+                        dashboardController.setCurrentTeacher(TeacherDAO.getTeacherByUsername(username), fxmlLoader);
+                    }
+                    else if (acc.getRole().equals("SV")) {
                         fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/StudentDashboard.fxml"));
-                    Parent root = fxmlLoader.load();
-                    TeacherDashboardController dashboardController = fxmlLoader.getController();
-                    dashboardController.setCurrentTeacher(TeacherDAO.getTeacherByUsername(username));
-                    Scene scene = new Scene(root);
-                    Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                        root = fxmlLoader.load();
+                        StudentDashboardController dashboardController = fxmlLoader.getController();
+                        dashboardController.setCurrentStudent(StudentDAO.getStudentByUsername(username), fxmlLoader);
+                    }
+                    scene = new Scene(root);
+                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException | InterruptedException ioException) {

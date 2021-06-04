@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DisplacementMap?>
 <?import javafx.scene.effect.FloatMap?>
 <?import javafx.scene.image.Image?>
@@ -71,11 +72,11 @@
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </Button>
-                                <Label text="HỌC KỲ HIỆN TẠI:" textFill="#0d6895">
-                                    <font>
-                                        <Font name="Tahoma Bold" size="20.0" />
-                                    </font>
-                                </Label>
+                        <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="40.0" prefWidth="380.0" promptText="Tìm học phần">
+                           <font>
+                              <Font name="Tahoma" size="17.0" />
+                           </font>
+                        </TextField>
                             </children>
                         </HBox>
                         <Label prefHeight="21.0" prefWidth="239.0" text="Danh sách học phần" textFill="#666666">
@@ -85,16 +86,16 @@
                         </Label>
                         <TableView fx:id="table" prefHeight="351.0" prefWidth="700.0">
                             <columns>
-                                <TableColumn fx:id="col_id" prefWidth="109.22219848632812" resizable="false">
+                                <TableColumn fx:id="col_id" prefWidth="102.0" resizable="false">
                                     <graphic>
-                                        <Label prefHeight="19.0" prefWidth="120.0" text="MÃ" textFill="WHITE">
+                                        <Label prefHeight="19.0" prefWidth="51.0" text="MÃ" textFill="WHITE">
                                             <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                             </font>
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_firstName" prefWidth="189.888916015625" resizable="false">
+                                <TableColumn prefWidth="198.0" resizable="false">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="146.0" text="TÊN HỌC PHẦN" textFill="WHITE">
                                             <font>
@@ -112,7 +113,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_lastName1" prefWidth="154.88882446289062" resizable="false">
+                                <TableColumn fx:id="col_semesterId" prefWidth="154.88882446289062" resizable="false">
                                     <graphic>
                                         <Label text="GV LÝ THUYẾT" textFill="WHITE">
                                             <font>
@@ -121,7 +122,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                        <TableColumn fx:id="col_lastName11" prefWidth="77.0" resizable="false">
+                        <TableColumn fx:id="col_room" prefWidth="70.0" resizable="false">
                            <graphic>
                               <Label text="PHÒNG" textFill="WHITE">
                                  <font>
@@ -130,7 +131,7 @@
                               </Label>
                            </graphic>
                         </TableColumn>
-                        <TableColumn fx:id="col_lastName111" prefWidth="58.0" resizable="false">
+                        <TableColumn fx:id="col_day" prefWidth="56.0" resizable="false">
                            <graphic>
                               <Label text="THỨ" textFill="WHITE">
                                  <font>
@@ -139,7 +140,7 @@
                               </Label>
                            </graphic>
                         </TableColumn>
-                        <TableColumn fx:id="col_lastName1111" prefWidth="40.77783203125" resizable="false">
+                        <TableColumn fx:id="col_period" prefWidth="53.0" resizable="false">
                            <graphic>
                               <Label text="CA" textFill="WHITE">
                                  <font>
@@ -148,9 +149,9 @@
                               </Label>
                            </graphic>
                         </TableColumn>
-                        <TableColumn fx:id="col_lastName11111" prefWidth="57.0" resizable="false">
+                        <TableColumn fx:id="col_maxSlot" prefWidth="54.0" resizable="false">
                            <graphic>
-                              <Label text="SĨ SỐ" textFill="WHITE">
+                              <Label prefHeight="19.0" prefWidth="44.0" text="SĨ SỐ" textFill="WHITE">
                                  <font>
                                     <Font name="Tahoma Bold" size="15.0" />
                                  </font>
@@ -194,6 +195,11 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Label>
+                          <Label layoutX="129.0" layoutY="24.0" text="HỌC KỲ HIỆN TẠI:" textFill="#0d6895">
+                              <font>
+                                  <Font name="Tahoma Bold" size="20.0" />
+                              </font>
+                          </Label>
                     </children>
                 </AnchorPane>
             </top>

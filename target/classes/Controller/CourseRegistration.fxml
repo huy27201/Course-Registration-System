@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DisplacementMap?>
 <?import javafx.scene.effect.FloatMap?>
 <?import javafx.scene.image.Image?>
@@ -71,11 +72,11 @@
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </Button>
-                                <Label text="HỌC KỲ HIỆN TẠI:" textFill="#0d6895">
-                                    <font>
-                                        <Font name="Tahoma Bold" size="20.0" />
-                                    </font>
-                                </Label>
+                        <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="40.0" prefWidth="383.0" promptText="Tìm 1 kỳ ĐKHP theo Đợt - Tên học kỳ - Năm">
+                           <font>
+                              <Font name="Tahoma" size="17.0" />
+                           </font>
+                        </TextField>
                             </children>
                         </HBox>
                         <Label prefHeight="21.0" prefWidth="239.0" text="Danh sách kỳ ĐKHP" textFill="#666666">
@@ -85,24 +86,51 @@
                         </Label>
                         <TableView fx:id="table" prefHeight="351.0" prefWidth="700.0">
                             <columns>
-                                <TableColumn fx:id="col_lastName" prefWidth="355.111083984375" resizable="false">
+                                <TableColumn fx:id="col_id" prefWidth="102.0" resizable="false">
                                     <graphic>
-                                        <Label text="NGÀY BẮT ĐẦU" textFill="WHITE">
+                                        <Label text="ĐỢT" textFill="WHITE">
                                             <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                             </font>
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_lastName1" prefWidth="382.888916015625" resizable="false">
+                                <TableColumn fx:id="col_semesterId" prefWidth="122.0" resizable="false">
                                     <graphic>
-                                        <Label text="NGÀY KẾT THÚC" textFill="WHITE">
+                                        <Label text="HỌC KỲ" textFill="WHITE">
                                             <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                             </font>
                                         </Label>
                                     </graphic>
                                 </TableColumn>
+                        <TableColumn fx:id="col_year" prefWidth="149.0" resizable="false">
+                           <graphic>
+                              <Label text="NĂM HỌC KỲ" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="col_dateStart" prefWidth="196.0" resizable="false">
+                           <graphic>
+                              <Label text="NGÀY BẮT ĐẦU" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="col_dateEnd" prefWidth="169.0" resizable="false">
+                           <graphic>
+                              <Label text="NGÀY KẾT THÚC" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </TableColumn>
                             </columns>
                         </TableView>
                     </children>
@@ -140,6 +168,12 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Label>
+                  <Label layoutX="129.0" layoutY="24.0" styleClass="current-semester" text="HỌC KỲ HIỆN TẠI:" textFill="#0d6895">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentSemesterLabel" layoutX="321.0" layoutY="24.0" styleClass="current-semester" />
                     </children>
                 </AnchorPane>
             </top>

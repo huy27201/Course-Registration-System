@@ -81,23 +81,4 @@ public class SemesterDAO {
         }
         return true;
     }
-    public static boolean updateSemester(Semester sem) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        if (getSemesterByID(sem.getYear(), sem.getId()) == null) {
-            return false;
-        }
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.update(sem);
-            transaction.commit();
-        } catch (HibernateException ex) {
-            //Log the exception
-            transaction.rollback();
-            System.err.println(ex);
-        } finally {
-            session.close();
-        }
-        return true;
-    }
 }

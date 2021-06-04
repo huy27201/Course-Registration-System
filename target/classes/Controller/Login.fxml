@@ -48,7 +48,7 @@
                   <Font name="Tahoma" size="18.0" />
                </font>
             </PasswordField>
-            <Button fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="334.0" mnemonicParsing="false" onKeyPressed="#submitKeyPressed" onMouseClicked="#onSubmit" prefWidth="217.0" stylesheets="@../assets/css/style.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#onSubmit" prefWidth="217.0" stylesheets="@../assets/css/style.css" text="Login" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Tahoma" size="18.0" />
                </font>

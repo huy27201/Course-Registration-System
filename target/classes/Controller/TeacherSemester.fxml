@@ -164,7 +164,7 @@
                         <Font name="Tahoma Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="currentSemester" layoutX="321.0" layoutY="24.0" styleClass="current-semester" />
+                  <Label fx:id="currentSemesterLabel" layoutX="321.0" layoutY="24.0" styleClass="current-semester" />
                     </children>
                 </AnchorPane>
             </top>

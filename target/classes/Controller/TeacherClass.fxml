@@ -65,7 +65,22 @@
                               </DisplacementMap>
                            </effect>
                         </Button>
-                        <TextField prefHeight="40.0" prefWidth="545.0" promptText="Tìm lớp học">
+                        <Button fx:id="delButton" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onAdd" prefHeight="40.0" prefWidth="170.0" text="Xóa lớp học" textFill="WHITE">
+                           <font>
+                              <Font name="Tahoma Bold" size="17.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <DisplacementMap>
+                                 <mapData>
+                                    <FloatMap />
+                                 </mapData>
+                              </DisplacementMap>
+                           </effect>
+                        </Button>
+                        <TextField fx:id="searchBar" prefHeight="40.0" prefWidth="343.0" promptText="Tìm lớp học">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

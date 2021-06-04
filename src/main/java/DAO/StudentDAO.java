@@ -1,6 +1,7 @@
 package DAO;
 
 import POJO.Student;
+import POJO.Teacher;
 import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -40,12 +41,10 @@ public class StudentDAO {
         Student student = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql="select st from Student st " +
-                    "left join fetch st.accountByAccount " +
-                    "where st.accountByAccount.accountId=:username";
-            Query query=session.createQuery(hql);
-            query.setString("username", username);
-            student = (Student) query.uniqueResult();
+            String hql = "from Student st where st.accountByAccount.accountId=:username";
+            Query query = session.createQuery(hql);
+            query.setParameter("username", username);
+            student = (Student) query.getSingleResult();
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);

@@ -1,7 +1,9 @@
 package Controller;
 
+import DAO.CurrentSemesterDAO;
 import DAO.SemesterDAO;
 import Main.App;
+import POJO.Currentsemester;
 import POJO.Semester;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,14 +13,9 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -33,9 +30,10 @@ public class TeacherSemesterController implements Initializable {
     @FXML TableColumn<Semester, Integer> col_year;
     @FXML TableColumn<Semester, Date> col_dateStart;
     @FXML TableColumn<Semester, Date> col_dateEnd;
-    @FXML Label currentSemester;
+    @FXML Label currentSemesterLabel;
     ObservableList<Semester> list = FXCollections.observableArrayList();
     FilteredList<Semester> filterList = new FilteredList<>(list);
+    private Currentsemester curSem;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +45,8 @@ public class TeacherSemesterController implements Initializable {
         col_dateStart.setCellValueFactory(new PropertyValueFactory<>("dateStart"));
         col_dateEnd.setCellValueFactory(new PropertyValueFactory<>("dateEnd"));
         table.setItems(list);
+        curSem = CurrentSemesterDAO.getCurrentSemester();
+        currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
     }
     @FXML
     public void exit() {
@@ -110,7 +110,7 @@ public class TeacherSemesterController implements Initializable {
         else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
             confirmExit.setTitle("Warning");
-            confirmExit.setContentText("Vui lòng chọn môn học cần xóa!!");
+            confirmExit.setContentText("Vui lòng chọn học kỳ cần xóa!!");
             confirmExit.setHeaderText(null);
             confirmExit.showAndWait();
         }
@@ -119,7 +119,10 @@ public class TeacherSemesterController implements Initializable {
     void setCurrent(MouseEvent event) {
         if (event.getClickCount() == 2) {
             Semester sem = table.getSelectionModel().getSelectedItem();
-            currentSemester.setText(sem.getId() + "/" + sem.getYear() + "-" + (sem.getYear() + 1));
+            curSem = new Currentsemester(sem.getId(), sem.getYear());
+            CurrentSemesterDAO.removeCurrrentSemester();
+            CurrentSemesterDAO.addCurrrentSemester(curSem);
+            currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
         }
     }
     public Dialog<Semester> newDialog() throws IOException {

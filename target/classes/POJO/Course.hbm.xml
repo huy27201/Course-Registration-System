@@ -7,7 +7,7 @@
     <class name="POJO.Course" table="course" schema="schoolmanagement">
         <composite-id mapped="true" class="POJO.CoursePK">
             <key-property name="id">
-                <column name="ID" sql-type="char(8)" length="8"/>
+                <column name="ID" sql-type="int"/>
             </key-property>
             <key-property name="semesterId">
                 <column name="SemesterID" sql-type="int"/>

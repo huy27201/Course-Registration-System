@@ -1,5 +1,6 @@
 package Controller;
 
+import POJO.Student;
 import POJO.Teacher;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -22,8 +23,19 @@ public class ProfileController {
     @FXML private TextField password;
 
     public void setUser(Teacher tch) {
+        id.setDisable(true);
         classLists.setDisable(true);
         dateOfBirth.setDisable(true);
+        id.setText(tch.getId());
+        firstName.setText(tch.getFirstName());
+        lastName.setText(tch.getLastName());
+        if (tch.getSex().equals("Nam")) male.setSelected(true);
+        else female.setSelected(true);
+        account.setText(tch.getAccountByAccount().getAccountId());
+        password.setText(tch.getAccountByAccount().getPassword());
+    }
+    public void setUser(Student tch) {
+        id.setDisable(true);
         id.setText(tch.getId());
         firstName.setText(tch.getFirstName());
         lastName.setText(tch.getLastName());

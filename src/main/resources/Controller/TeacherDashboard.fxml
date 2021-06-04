@@ -50,7 +50,7 @@
                   <Font name="Tahoma Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="currentSemester" layoutX="321.0" layoutY="24.0" styleClass="current-semester" />
+            <Label fx:id="currentSemesterLabel" layoutX="321.0" layoutY="24.0" styleClass="current-semester" />
             <Label layoutX="791.0" layoutY="24.0" prefHeight="25.0" prefWidth="4.0" text="|" textFill="#837d7d">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
