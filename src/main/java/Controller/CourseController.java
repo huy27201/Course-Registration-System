@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -149,6 +151,8 @@ public class CourseController implements Initializable {
         Dialog<Course> dialog = new Dialog<>();
         dialog.setTitle("Thông tin học phần");
         dialog.setDialogPane(content);
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
         CourseDialogController cdc = fxmlLoader.getController();
         cdc.setSemesterId(curSem.getId());
         cdc.setYear(curSem.getYear());

@@ -2,9 +2,11 @@ package Controller;
 
 import DAO.CourseRegistrationDAO;
 import DAO.CurrentSemesterDAO;
+import DAO.SemesterDAO;
 import Main.App;
 import POJO.CourseRegistration;
 import POJO.Currentsemester;
+import POJO.Semester;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,6 +17,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -139,18 +144,42 @@ public class CourseRegistrationController implements Initializable {
         Dialog<CourseRegistration> dialog = new Dialog<>();
         dialog.setTitle("Thông tin kỳ ĐKHP");
         dialog.setDialogPane(content);
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
         CourseRegistrationDialogController sdc = fxmlLoader.getController();
         sdc.setYear(curSem.getYear());
         sdc.setSemesterId(curSem.getId());
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Warning");
+            warning.setHeaderText(null);
             if (sdc.getDateStart() == null || sdc.getDateEnd() == null) {
-                Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setTitle("Warning");
                 warning.setContentText("Vui lòng nhập hết thông tin!");
-                warning.setHeaderText(null);
                 warning.showAndWait();
                 event.consume();
+            }
+            else if (CourseRegistrationDAO.getCourseRegistrationByID(sdc.getId(), sdc.getSemesterId(), sdc.getYear()) != null) {
+                warning.setContentText("Kỳ ĐKHP đã tồn tại!");
+                warning.showAndWait();
+                event.consume();
+            }
+            else if (sdc.getDateStart().toLocalDate().isAfter(sdc.getDateEnd().toLocalDate())) {
+                warning.setContentText("Ngày kết thúc phải sau ngày bắt đầu!");
+                warning.showAndWait();
+                event.consume();
+            }
+            else {
+                List<CourseRegistration> crList = CourseRegistrationDAO.getCourseRegistrationList();
+                for (CourseRegistration item : crList)
+                    if (!sdc.getDateStart().toLocalDate().isAfter(item.getDateEnd().toLocalDate())) {
+                        if (!sdc.getDateEnd().toLocalDate().isBefore(item.getDateStart().toLocalDate())) {
+                            warning.setContentText("Thời gian của kỳ ĐKHP không được trùng với thời gian của kỳ ĐKHP khác!");
+                            warning.showAndWait();
+                            event.consume();
+                            break;
+                        }
+                    }
             }
         });
         dialog.setResultConverter(button -> {

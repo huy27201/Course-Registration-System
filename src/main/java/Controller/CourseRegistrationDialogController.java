@@ -25,7 +25,7 @@ public class CourseRegistrationDialogController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5, 1);
         id.setValueFactory(value);
-        value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2021, 2021);
+        value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2025, 2021);
         year.setValueFactory(value);
         value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 3, 1);
         semesterId.setValueFactory(value);
@@ -66,7 +66,7 @@ public class CourseRegistrationDialogController implements Initializable {
 
     @FXML
     public void setYear(int year) {
-        SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2021, year);
+        SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2025, year);
         this.year.setValueFactory(value);
     }
 

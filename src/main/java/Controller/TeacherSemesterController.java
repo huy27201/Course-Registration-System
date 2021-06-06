@@ -18,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -164,13 +163,30 @@ public class TeacherSemesterController implements Initializable {
         SemesterDialogController sdc = fxmlLoader.getController();
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Warning");
+            warning.setHeaderText(null);
             if (sdc.getDateStart() == null || sdc.getDateEnd() == null) {
-                Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setTitle("Warning");
                 warning.setContentText("Vui lòng nhập hết thông tin!");
-                warning.setHeaderText(null);
                 warning.showAndWait();
                 event.consume();
+            }
+            else if (sdc.getDateStart().toLocalDate().isAfter(sdc.getDateEnd().toLocalDate())) {
+                warning.setContentText("Ngày kết thúc phải sau ngày bắt đầu!");
+                warning.showAndWait();
+                event.consume();
+            }
+            else {
+                List<Semester> semesterList = SemesterDAO.getSemesterList();
+                for (Semester sem : semesterList)
+                    if (!sdc.getDateStart().toLocalDate().isAfter(sem.getDateEnd().toLocalDate())) {
+                       if (!sdc.getDateEnd().toLocalDate().isBefore(sem.getDateStart().toLocalDate())) {
+                           warning.setContentText("Thời gian của học kỳ không được trùng với thời gian của học kỳ khác!");
+                           warning.showAndWait();
+                           event.consume();
+                           break;
+                       }
+                    }
             }
         });
         dialog.setResultConverter(button -> {

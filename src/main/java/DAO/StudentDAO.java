@@ -46,10 +46,10 @@ public class StudentDAO {
         Student student = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "from Student st where st.accountByAccount.accountId=:username";
+            String hql = "from Student st where st.accountByAccount.id=:username";
             Query query = session.createQuery(hql);
             query.setParameter("username", username);
-            student = (Student) query.getSingleResult();
+            student = (Student) query.uniqueResult();
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);

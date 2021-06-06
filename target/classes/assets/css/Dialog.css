@@ -19,3 +19,6 @@
     -fx-min-width: 100px;
     -fx-max-width: 100px;
 }
+.dialog-pane > .button-bar > .container > .details-button {
+    -fx-opacity: 0;
+}

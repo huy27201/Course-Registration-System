@@ -170,11 +170,11 @@ public class TeacherAccountController implements Initializable {
             Teacher tch = table.getSelectionModel().getSelectedItem();
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("Reset mật khẩu");
-            confirm.setContentText("Reset mật khẩu cho tài khoản này? Mật khẩu mặc định sẽ là 12345678");
+            confirm.setContentText("Reset mật khẩu cho tài khoản này?");
             confirm.setHeaderText(null);
             Optional<ButtonType> option = confirm.showAndWait();
             if (option.get() == ButtonType.OK) {
-                tch.getAccountByAccount().setPassword("12345678");
+                tch.getAccountByAccount().setPassword(tch.getAccountByAccount().getAccountId());
                 if (AccountDAO.updateAccount(tch.getAccountByAccount())) {
                     TeacherDAO.updateTeacher(tch);
                     table.refresh();
@@ -198,13 +198,25 @@ public class TeacherAccountController implements Initializable {
         }
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Warning");
+            warning.setHeaderText(null);
             if (adc.getId() == null || adc.getLastName() == null || adc.getGender() == null || adc.getAccount().equals("") || adc.getPassword().equals("")) {
-                Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setTitle("Warning");
                 warning.setContentText("Vui lòng nhập hết thông tin!");
-                warning.setHeaderText(null);
                 warning.showAndWait();
                 event.consume();
+            }
+            else if (tch == null) {
+                if (TeacherDAO.getTeacherByID(adc.getId()) != null) {
+                    warning.setContentText("Mã giáo vụ đã tồn tại!");
+                    warning.showAndWait();
+                    event.consume();
+                }
+                else if (TeacherDAO.getTeacherByUsername(adc.getAccount()) != null) {
+                    warning.setContentText("Tài khoản giáo vụ đã tồn tại!");
+                    warning.showAndWait();
+                    event.consume();
+                }
             }
         });
         dialog.setResultConverter(button -> {
@@ -215,7 +227,6 @@ public class TeacherAccountController implements Initializable {
                     tch.setFirstName(adc.getFirstName());
                     tch.setLastName(adc.getLastName());
                     tch.setSex(adc.getGender());
-                    tch.getAccountByAccount().setAccountId(adc.getAccount());
                     tch.getAccountByAccount().setPassword(adc.getPassword());
                     return tch;
                 }

@@ -11,57 +11,52 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<DialogPane prefHeight="340.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SubjectDialogController">
+<DialogPane prefHeight="340.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SubjectDialogController">
     <buttonTypes>
-        <ButtonType fx:constant="APPLY"/>
-        <ButtonType fx:constant="CANCEL"/>
+        <ButtonType fx:constant="APPLY" />
+        <ButtonType fx:constant="CANCEL" />
     </buttonTypes>
     <graphic>
         <VBox prefHeight="200.0" prefWidth="517.0">
             <children>
-                <Label alignment="CENTER" prefHeight="21.0" prefWidth="554.0" styleClass="dialog-title"
-                       text="THÔNG TIN MÔN HỌC">
+                <Label alignment="CENTER" prefHeight="21.0" prefWidth="554.0" styleClass="dialog-title" text="THÔNG TIN MÔN HỌC">
                     <padding>
-                        <Insets bottom="20.0" top="20.0"/>
+                        <Insets bottom="20.0" top="20.0" />
                     </padding>
                 </Label>
                 <GridPane alignment="CENTER" hgap="20.0" prefHeight="280.0" prefWidth="500.0" vgap="50.0">
                     <columnConstraints>
-                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="0.0"
-                                           prefWidth="0.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="0.0" prefWidth="0.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="76.0" styleClass="dialog-label"
-                               text="Mã"/>
-                        <Label prefWidth="76.0" styleClass="dialog-label" text="Tên" GridPane.rowIndex="1"/>
-                        <Label styleClass="dialog-label" text="Số tín chỉ" GridPane.rowIndex="2"/>
-                        <TextField fx:id="id" promptText="Mã" GridPane.columnIndex="1"/>
-                        <TextField fx:id="name" promptText="Tên" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                        <TextField fx:id="credits" prefHeight="31.0" prefWidth="305.0" promptText="Số tín chỉ"
-                                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="76.0" styleClass="dialog-label" text="Mã:" />
+                        <Label prefWidth="76.0" styleClass="dialog-label" text="Tên:" GridPane.rowIndex="1" />
+                        <Label prefHeight="25.0" prefWidth="106.0" styleClass="dialog-label" text="Số tín chỉ:" GridPane.rowIndex="2" />
+                        <TextField fx:id="id" promptText="Mã" GridPane.columnIndex="1" />
+                        <TextField fx:id="name" promptText="Tên" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="credits" prefHeight="31.0" prefWidth="305.0" promptText="Số tín chỉ" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     </children>
                     <padding>
-                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0"/>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
                     </padding>
                 </GridPane>
             </children>
             <padding>
-                <Insets bottom="10.0" left="40.0" right="50.0" top="10.0"/>
+                <Insets bottom="10.0" left="40.0" right="50.0" top="10.0" />
             </padding>
         </VBox>
     </graphic>
     <stylesheets>
-        <URL value="@../assets/css/style.css"/>
-        <URL value="@../assets/css/Dialog.css"/>
+        <URL value="@../assets/css/style.css" />
+        <URL value="@../assets/css/Dialog.css" />
     </stylesheets>
     <padding>
-        <Insets bottom="10.0" right="30.0"/>
+        <Insets bottom="10.0" right="30.0" />
     </padding>
 </DialogPane>

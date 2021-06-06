@@ -39,7 +39,7 @@
                     <children>
                         <Label contentDisplay="CENTER" prefHeight="25.0" prefWidth="101.0" styleClass="dialog-label" text="Năm bắt đầu" />
                         <Label prefHeight="25.0" prefWidth="89.0" styleClass="dialog-label" text="Tên học kỳ" GridPane.rowIndex="1" />
-                        <Label styleClass="dialog-label" text="Ngày bắt đầu" GridPane.rowIndex="2" />
+                        <Label prefHeight="25.0" prefWidth="111.0" styleClass="dialog-label" text="Ngày bắt đầu" GridPane.rowIndex="2" />
                         <Label layoutX="20.0" layoutY="143.0" styleClass="dialog-label" text="Ngày kết thúc" GridPane.rowIndex="3" />
                         <Spinner fx:id="year" layoutX="140.0" layoutY="77.0" prefHeight="37.0" prefWidth="293.0" GridPane.columnIndex="1" />
                         <Spinner fx:id="id" prefHeight="37.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />

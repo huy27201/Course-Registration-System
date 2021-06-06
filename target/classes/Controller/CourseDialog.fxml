@@ -42,14 +42,14 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="76.0" styleClass="dialog-label" text="Năm" />
-                        <Label prefHeight="25.0" prefWidth="89.0" styleClass="dialog-label" text="Tên học kỳ" GridPane.rowIndex="1" />
-                        <Label layoutX="20.0" layoutY="83.0" prefHeight="25.0" prefWidth="100.0" styleClass="dialog-label" text="Tên môn học" GridPane.rowIndex="2" />
-                        <Label layoutX="20.0" layoutY="323.0" styleClass="dialog-label" text="Tên giáo viên" GridPane.rowIndex="3" />
-                        <Label layoutX="20.0" layoutY="23.0" styleClass="dialog-label" text="Thứ" GridPane.rowIndex="4" />
-                        <Label styleClass="dialog-label" text="Ca" GridPane.rowIndex="5" />
-                        <Label layoutX="20.0" layoutY="143.0" styleClass="dialog-label" text="Phòng" GridPane.rowIndex="6" />
-                        <Label layoutX="20.0" layoutY="383.0" styleClass="dialog-label" text="Sĩ số " GridPane.rowIndex="7" />
+                        <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="76.0" styleClass="dialog-label" text="Năm:" />
+                        <Label prefHeight="25.0" prefWidth="89.0" styleClass="dialog-label" text="Tên học kỳ:" GridPane.rowIndex="1" />
+                        <Label layoutX="20.0" layoutY="83.0" prefHeight="25.0" prefWidth="100.0" styleClass="dialog-label" text="Tên môn học:" GridPane.rowIndex="2" />
+                        <Label layoutX="20.0" layoutY="323.0" prefHeight="25.0" prefWidth="108.0" styleClass="dialog-label" text="Tên giáo viên:" GridPane.rowIndex="3" />
+                        <Label layoutX="20.0" layoutY="23.0" prefHeight="25.0" prefWidth="50.0" styleClass="dialog-label" text="Thứ:" GridPane.rowIndex="4" />
+                        <Label styleClass="dialog-label" text="Ca:" GridPane.rowIndex="5" />
+                        <Label layoutX="20.0" layoutY="143.0" styleClass="dialog-label" text="Phòng:" GridPane.rowIndex="6" />
+                        <Label layoutX="20.0" layoutY="383.0" styleClass="dialog-label" text="Sĩ số: " GridPane.rowIndex="7" />
                         <Spinner fx:id="year" disable="true" layoutX="140.0" layoutY="77.0" prefHeight="37.0" prefWidth="293.0" GridPane.columnIndex="1" />
                         <Spinner fx:id="semesterId" disable="true" prefHeight="37.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <ComboBox fx:id="subjectName" layoutX="140.0" layoutY="155.0" prefHeight="31.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

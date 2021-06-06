@@ -3,6 +3,7 @@ package Controller;
 import DAO.AccountDAO;
 import DAO.ClassDAO;
 import DAO.StudentDAO;
+import DAO.TeacherDAO;
 import Main.App;
 import POJO.Account;
 import POJO.Classname;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -177,11 +179,13 @@ public class TeacherStudentController implements Initializable {
             Student st = table.getSelectionModel().getSelectedItem();
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("Reset mật khẩu");
-            confirm.setContentText("Reset mật khẩu cho sinh viên này? Mật khẩu mặc định sẽ là 12345678");
+            confirm.setContentText("Reset mật khẩu cho sinh viên này? Mật khẩu mặc định sẽ là mã số sinh viên");
             confirm.setHeaderText(null);
+            Stage stage = (Stage) confirm.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
             Optional<ButtonType> option = confirm.showAndWait();
             if (option.get() == ButtonType.OK) {
-                st.getAccountByAccount().setPassword("12345678");
+                st.getAccountByAccount().setPassword(st.getAccountByAccount().getAccountId());
                 if (AccountDAO.updateAccount(st.getAccountByAccount())) {
                     StudentDAO.updateStudent(st);
                     table.refresh();
@@ -205,19 +209,34 @@ public class TeacherStudentController implements Initializable {
         }
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Warning");
+            warning.setHeaderText(null);
             if (adc.getId().equals("") || adc.getFirstName().equals("") || adc.getLastName().equals("") || adc.getGender() == null || adc.getAccount().equals("") || adc.getPassword().equals("")) {
-                Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setTitle("Warning");
                 warning.setContentText("Vui lòng nhập hết thông tin!");
-                warning.setHeaderText(null);
                 warning.showAndWait();
                 event.consume();
+            }
+            else if (st == null) {
+                if (StudentDAO.getStudentByID(adc.getId()) != null) {
+                    warning.setContentText("Mã sinh viên đã tồn tại!");
+                    warning.showAndWait();
+                    event.consume();
+                }
+                else if (LocalDate.now().getYear() - adc.getDateOfBirth().toLocalDate().getYear() < 18) {
+                    warning.setContentText("Sinh viên phải lớn hơn 18 tuổi!");
+                    warning.showAndWait();
+                    event.consume();
+                }
+                else if (StudentDAO.getStudentByUsername(adc.getAccount()) != null) {
+                    warning.setContentText("Tài khoản sinh viên đã tồn tại!");
+                    warning.showAndWait();
+                    event.consume();
+                }
             }
         });
         dialog.setResultConverter(button -> {
             if (button == ButtonType.APPLY) {
-                System.out.println(adc.getLastName());
-                System.out.println(adc.getDateOfBirth());
                 if (st == null)
                     return new Student(adc.getId(), adc.getFirstName(), adc.getLastName(), adc.getDateOfBirth(), adc.getGender(), currentClass, new Account(adc.getAccount(), adc.getPassword(), "SV"));
                 else {

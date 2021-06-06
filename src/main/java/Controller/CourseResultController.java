@@ -40,6 +40,8 @@ public class CourseResultController implements Initializable {
     TableColumn<Courseattend, String> col_period;
     ObservableList<Courseattend> list = FXCollections.observableArrayList();
     FilteredList<Courseattend> filterList = new FilteredList<>(list);
+    @FXML
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        List<Courseattend> list = CourseDAO.getCourseListBySemester(curSem);
@@ -68,7 +70,7 @@ public class CourseResultController implements Initializable {
 
     @FXML
     public void onDashboard() throws IOException {
-        App.changeScene("TeacherDashboard");
+        App.changeScene("StudentDashboard");
     }
 
     @FXML
@@ -80,7 +82,7 @@ public class CourseResultController implements Initializable {
     @FXML
     public void onReturn() throws IOException, InterruptedException {
         Thread.sleep(300);
-        App.changeScene("TeacherDashboard");
+        App.changeScene("StudentDashboard");
     }
 
 }

@@ -23,7 +23,7 @@ public class SemesterDialogController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 3, 1);
         id.setValueFactory(value);
-        value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2021, 2021);
+        value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2025, 2021);
         year.setValueFactory(value);
     }
 

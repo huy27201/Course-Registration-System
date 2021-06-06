@@ -2,6 +2,7 @@ package Controller;
 
 
 import DAO.SubjectDAO;
+import DAO.TeacherDAO;
 import POJO.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -150,13 +151,25 @@ public class TeacherSubjectController implements Initializable {
         }
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {
-            if (sdc.getId().equals("") || sdc.getName().equals("") || sdc.getCredits() == null) {
-                Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setTitle("Warning");
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Warning");
+            warning.setHeaderText(null);
+            if (sdc.getId().equals("") || sdc.getName().equals("")) {
                 warning.setContentText("Vui lòng nhập hết thông tin!");
-                warning.setHeaderText(null);
                 warning.showAndWait();
                 event.consume();
+            }
+            else if (sub == null) {
+                if (SubjectDAO.getSubjectByID(sdc.getId()) != null) {
+                    warning.setContentText("Mã môn học đã tồn tại!");
+                    warning.showAndWait();
+                    event.consume();
+                }
+                else if (sdc.getCredits() == null) {
+                    warning.setContentText("Số tín chỉ không hợp lệ!");
+                    warning.showAndWait();
+                    event.consume();
+                }
             }
         });
         dialog.setResultConverter(button -> {

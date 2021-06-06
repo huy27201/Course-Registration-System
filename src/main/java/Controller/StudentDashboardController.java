@@ -22,6 +22,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class StudentDashboardController implements Initializable {
@@ -32,13 +33,14 @@ public class StudentDashboardController implements Initializable {
     private CurrentUser currentUser = CurrentUser.getInstance();
     private Currentsemester curSem;
     FXMLLoader fxmlLoader = null;
+    private LocalDate currentDate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         curSem = CurrentSemesterDAO.getCurrentSemester();
         currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
-
         identity.setText("Xin chào, " + currentUser.getCurrentStudent().getLastName());
+
     }
 
     public void setCurrentStudent(Student stu, FXMLLoader fxmlLoader) {
