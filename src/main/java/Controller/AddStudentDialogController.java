@@ -1,18 +1,23 @@
 package Controller;
 
-import POJO.Teacher;
+import POJO.Student;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import java.sql.Date;
+import java.time.LocalDate;
 
-public class AccountDialogController {
+public class AddStudentDialogController {
     @FXML
     private TextField id;
     @FXML
     private TextField firstName;
     @FXML
     private TextField lastName;
+    @FXML
+    private DatePicker dateOfBirth;
     @FXML
     ToggleGroup gender;
     @FXML
@@ -24,14 +29,15 @@ public class AccountDialogController {
     @FXML
     private TextField password;
 
-    public void setInfo(Teacher tch) {
-        this.id.setText(tch.getId());
-        this.firstName.setText(tch.getFirstName());
-        this.lastName.setText(tch.getLastName());
-        if (tch.getSex().equals("Nam")) male.setSelected(true);
+    public void setInfo(Student st) {
+        this.id.setText(st.getId());
+        this.firstName.setText(st.getFirstName());
+        this.lastName.setText(st.getLastName());
+        this.dateOfBirth.setValue(st.getDateOfBirth().toLocalDate());
+        if (st.getSex().equals("Nam")) male.setSelected(true);
         else female.setSelected(true);
-        this.account.setText(tch.getAccountByAccount().getAccountId());
-        this.password.setText(tch.getAccountByAccount().getPassword());
+        this.account.setText(st.getAccountByAccount().getAccountId());
+        this.password.setText(st.getAccountByAccount().getPassword());
     }
 
     @FXML
@@ -49,6 +55,11 @@ public class AccountDialogController {
         return lastName.getText();
     }
 
+    @FXML
+    public Date getDateOfBirth() {
+        if (dateOfBirth.getValue() == null) return null;
+        return Date.valueOf(dateOfBirth.getValue());
+    }
     @FXML
     public String getGender() {
         RadioButton selectedRadioButton = (RadioButton) gender.getSelectedToggle();
@@ -68,9 +79,9 @@ public class AccountDialogController {
 
     @FXML
     public void setEditable(boolean b) {
+        account.setEditable(false);
+        id.setEditable(false);
         id.getStyleClass().add("non-editable");
         account.getStyleClass().add("non-editable");
-        id.setEditable(b);
-        account.setEditable(b);
     }
 }

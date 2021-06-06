@@ -15,7 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -112,15 +114,24 @@ public class TeacherSemesterController implements Initializable {
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
-            Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmExit.setTitle("Delete");
-            confirmExit.setContentText("Bạn có chắc chắn muốn xóa học kỳ này không? Các học phần và kì ĐKHP chứa môn học này có thể bị xóa theo!!");
-            confirmExit.setHeaderText(null);
-            Optional<ButtonType> option = confirmExit.showAndWait();
-            if (option.get() == ButtonType.OK) {
-                Semester selectedSem = table.getSelectionModel().getSelectedItem();
-                table.getItems().remove(selectedSem);
-                SemesterDAO.removeSemesterByID(selectedSem.getYear(), selectedSem.getId());
+            Semester selectedSem = table.getSelectionModel().getSelectedItem();
+            if (selectedSem.getYear() == curSem.getYear() && selectedSem.getId() == curSem.getId()) {
+                Alert warning = new Alert(Alert.AlertType.WARNING);
+                warning.setTitle("Wảning");
+                warning.setContentText("Bạn không thể xóa học kì hiện tại!!");
+                warning.setHeaderText(null);
+                warning.showAndWait();
+            }
+            else {
+                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                confirm.setTitle("Delete");
+                confirm.setContentText("Bạn có chắc chắn muốn xóa học kỳ này không? Các học phần và kì ĐKHP chứa môn học này có thể bị xóa theo!!");
+                confirm.setHeaderText(null);
+                Optional<ButtonType> option = confirm.showAndWait();
+                if (option.get() == ButtonType.OK) {
+                    if (SemesterDAO.removeSemesterByID(selectedSem.getYear(), selectedSem.getId()))
+                    table.getItems().remove(selectedSem);
+                }
             }
         } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
@@ -148,6 +159,8 @@ public class TeacherSemesterController implements Initializable {
         Dialog<Semester> dialog = new Dialog<>();
         dialog.setTitle("Thông tin học kỳ");
         dialog.setDialogPane(content);
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
         SemesterDialogController sdc = fxmlLoader.getController();
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {

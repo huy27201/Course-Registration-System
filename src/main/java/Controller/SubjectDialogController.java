@@ -42,7 +42,8 @@ public class SubjectDialogController {
     }
 
     @FXML
-    public void setDisable(boolean b) {
-        id.setDisable(true);
+    public void setEditable(boolean b) {
+        id.getStyleClass().add("non-editable");
+        id.setEditable(b);
     }
 }

@@ -13,12 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -99,7 +99,7 @@ public class TeacherDashboardController implements Initializable {
     public void onClassName() {
         try {
             Thread.sleep(300);
-            App.changeScene("TeacherAccount");
+            App.changeScene("TeacherClass");
         } catch (IOException | InterruptedException ioException) {
             ioException.printStackTrace();
         }
@@ -149,6 +149,7 @@ public class TeacherDashboardController implements Initializable {
         pc.setUser(App.getCurrentTeacher());
         Scene scene = new Scene(root);
         Stage stage = new Stage();
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Profile");

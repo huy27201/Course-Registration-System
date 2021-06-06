@@ -13,7 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -93,8 +95,8 @@ public class TeacherSubjectController implements Initializable {
             Optional<ButtonType> option = confirmExit.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Subject selectedSub = table.getSelectionModel().getSelectedItem();
-                table.getItems().remove(selectedSub);
-                SubjectDAO.removeSubjectByID(selectedSub.getId());
+                if (SubjectDAO.removeSubjectByID(selectedSub.getId()))
+                    table.getItems().remove(selectedSub);
             }
         } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
@@ -120,7 +122,7 @@ public class TeacherSubjectController implements Initializable {
     }
 
     @FXML
-    void onUpdate(MouseEvent event) throws IOException {
+    public void onUpdate(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Subject sub = table.getSelectionModel().getSelectedItem();
             Dialog<Subject> dialog = newDialog(sub);
@@ -139,10 +141,12 @@ public class TeacherSubjectController implements Initializable {
         Dialog<Subject> dialog = new Dialog<>();
         dialog.setTitle("Thông tin môn học");
         dialog.setDialogPane(content);
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
         SubjectDialogController sdc = fxmlLoader.getController();
         if (sub != null) {
             sdc.setInfo(sub);
-            sdc.setDisable(true);
+            sdc.setEditable(false);
         }
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {

@@ -23,11 +23,13 @@ import java.util.ResourceBundle;
 
 public class CourseController implements Initializable {
     @FXML
+    private Label curSemLabel;
+    @FXML
     private TextField searchBar;
     @FXML
     TableView<Course> table;
     @FXML
-    TableColumn<Course, Integer> col_id;
+    TableColumn<Course, String> col_id;
     @FXML
     TableColumn<Course, String> col_courseName;
     @FXML
@@ -45,14 +47,14 @@ public class CourseController implements Initializable {
     ObservableList<Course> list = FXCollections.observableArrayList();
     FilteredList<Course> filterList = new FilteredList<>(list);
     private Currentsemester curSem;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         curSem = CurrentSemesterDAO.getCurrentSemester();
+        curSemLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
         List<Course> courseList = CourseDAO.getCourseListBySemester(curSem);
         for (Course element : courseList)
             list.add(element);
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_id.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSubjectBySubjectId().getId()));
         col_courseName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSubjectBySubjectId().getName()));
         col_credits.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getSubjectBySubjectId().getCredits()).asObject());
         col_headTeacher.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getTeacherName()));
@@ -61,6 +63,7 @@ public class CourseController implements Initializable {
         col_period.setCellValueFactory(new PropertyValueFactory<>("period"));
         col_maxSlot.setCellValueFactory(new PropertyValueFactory<>("maxSlot"));
         table.setItems(list);
+
     }
 
     @FXML
@@ -110,8 +113,8 @@ public class CourseController implements Initializable {
             Optional<ButtonType> option = confirmExit.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Course selectedItem = table.getSelectionModel().getSelectedItem();
-                table.getItems().remove(selectedItem);
-                CourseDAO.removeCourseByID(new CoursePK(selectedItem.getId(), selectedItem.getSemesterId(), selectedItem.getYear()));
+                if (CourseDAO.removeCourseByID(new CoursePK(selectedItem.getId(), selectedItem.getSemesterId(), selectedItem.getYear())))
+                    table.getItems().remove(selectedItem);
             }
         } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
@@ -132,6 +135,7 @@ public class CourseController implements Initializable {
                     if (course.getDay().toLowerCase().contains(data)) return true;
                     if (course.getPeriod().toLowerCase().contains(data)) return true;
                     if (course.getRoom().toLowerCase().contains(data)) return true;
+                    if (course.getSubjectBySubjectId().getId().toLowerCase().contains(data)) return true;
                     if ((course.getSubjectBySubjectId().getName().toLowerCase()).contains(data)) return true;
                     return false;
                 }
@@ -146,9 +150,11 @@ public class CourseController implements Initializable {
         dialog.setTitle("Thông tin học phần");
         dialog.setDialogPane(content);
         CourseDialogController cdc = fxmlLoader.getController();
+        cdc.setSemesterId(curSem.getId());
+        cdc.setYear(curSem.getYear());
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {
-            if (cdc == null || cdc.getRoom().equals("") == true || cdc.getHeadTeacher().equals("") == true || cdc.getMaxSlot() == null) {
+            if (cdc == null || cdc.getSubjectName() == null || cdc.getRoom().equals("") == true || cdc.getHeadTeacher().equals("") == true || cdc.getMaxSlot() == null) {
                 Alert warning = new Alert(Alert.AlertType.WARNING);
                 warning.setTitle("Warning");
                 warning.setContentText("Vui lòng nhập hết thông tin!");
@@ -159,7 +165,7 @@ public class CourseController implements Initializable {
         });
         dialog.setResultConverter(button -> {
             if (button == ButtonType.APPLY)
-                return new Course(cdc.getSemesterId(), cdc.getYear(), cdc.getHeadTeacher(), cdc.getSubjectName(), cdc.getDay(), cdc.getPeriod(), cdc.getRoom(), cdc.getMaxSlot());
+                return new Course(cdc.getSemesterId(), cdc.getYear(), cdc.getHeadTeacher(), cdc.getSubjectName(), cdc.getRoom(), cdc.getDay(), cdc.getPeriod(), cdc.getMaxSlot());
             return null;
         });
         return dialog;

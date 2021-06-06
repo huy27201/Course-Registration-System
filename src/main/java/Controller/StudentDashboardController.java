@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -28,7 +29,6 @@ public class StudentDashboardController implements Initializable {
     private Label identity;
     @FXML
     private Label currentSemesterLabel;
-    //    private Teacher currentTeacher;
     private CurrentUser currentUser = CurrentUser.getInstance();
     private Currentsemester curSem;
     FXMLLoader fxmlLoader = null;
@@ -37,10 +37,12 @@ public class StudentDashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         curSem = CurrentSemesterDAO.getCurrentSemester();
         currentSemesterLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
+
+        identity.setText("Xin chào, " + currentUser.getCurrentStudent().getLastName());
     }
 
     public void setCurrentStudent(Student stu, FXMLLoader fxmlLoader) {
-        currentUser.setCurrentStudent(stu);
+        App.setUser(stu);
         this.fxmlLoader = fxmlLoader;
         identity.setText("Xin chào, " + currentUser.getCurrentStudent().getLastName());
     }
@@ -78,12 +80,12 @@ public class StudentDashboardController implements Initializable {
 
     @FXML
     public void onCourseResult() {
-//        try {
-//            Thread.sleep(300);
-//            App.changeScene("TeacherAccount");
-//        } catch (IOException | InterruptedException ioException) {
-//            ioException.printStackTrace();
-//        }
+        try {
+            Thread.sleep(300);
+            App.changeScene("CourseResult");
+        } catch (IOException | InterruptedException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
     @FXML
@@ -111,6 +113,7 @@ public class StudentDashboardController implements Initializable {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
         stage.setResizable(false);
         stage.setTitle("Profile");
         stage.initOwner(((Node) event.getSource()).getScene().getWindow());

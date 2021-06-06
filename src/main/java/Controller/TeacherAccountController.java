@@ -14,8 +14,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -99,16 +102,27 @@ public class TeacherAccountController implements Initializable {
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
-            Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmExit.setTitle("Delete");
-            confirmExit.setContentText("Bạn có chắc chắn muốn xóa tài khoản này không?");
-            confirmExit.setHeaderText(null);
-            Optional<ButtonType> option = confirmExit.showAndWait();
-            if (option.get() == ButtonType.OK) {
-                Teacher selectedTch = table.getSelectionModel().getSelectedItem();
-                table.getItems().remove(selectedTch);
-                TeacherDAO.removeTeacherByID(selectedTch.getId());
-                AccountDAO.removeAccountByID(selectedTch.getAccountByAccount().getAccountId());
+            Teacher selectedTch = table.getSelectionModel().getSelectedItem();
+            if (App.getCurrentTeacher().getId().equals(selectedTch.getId())) {
+                Alert confirm = new Alert(Alert.AlertType.WARNING);
+                confirm.setTitle("Warning");
+                confirm.setContentText("Bạn không thể xóa tài khoản của chính mình!!");
+                confirm.setHeaderText(null);
+                confirm.showAndWait();
+            }
+            else {
+                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                confirm.setTitle("Delete");
+                confirm.setContentText("Bạn có chắc chắn muốn xóa tài khoản này không?");
+                confirm.setHeaderText(null);
+                Optional<ButtonType> option = confirm.showAndWait();
+                if (option.get() == ButtonType.OK) {
+                    if (TeacherDAO.removeTeacherByID(selectedTch.getId())) {
+                        if (AccountDAO.removeAccountByID(selectedTch.getAccountByAccount().getAccountId()))
+                            table.getItems().remove(selectedTch);
+                        else TeacherDAO.addTeacher(selectedTch);
+                    }
+                }
             }
         } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);
@@ -129,7 +143,7 @@ public class TeacherAccountController implements Initializable {
                     if (teacher.getFirstName().toLowerCase().contains(data)) return true;
                     if (teacher.getLastName().toLowerCase().contains(data)) return true;
                     if (teacher.getAccountByAccount().getAccountId().toLowerCase().contains(data)) return true;
-                    if ((teacher.getFullName().toLowerCase()).contains(data)) return true;
+                    if (((teacher.getFirstName() + " " + teacher.getLastName()).toLowerCase()).contains(data)) return true;
                     return false;
                 }
         );
@@ -140,10 +154,27 @@ public class TeacherAccountController implements Initializable {
     void onUpdate(MouseEvent event) throws IOException {
         if (event.getClickCount() == 2) {
             Teacher tch = table.getSelectionModel().getSelectedItem();
-            Dialog<Teacher> dialog = newDialog(tch);
-            Optional<Teacher> result = dialog.showAndWait();
-            if (result.isPresent()) {
-                tch = result.get();
+            if (tch != null) {
+                Dialog<Teacher> dialog = newDialog(tch);
+                Optional<Teacher> result = dialog.showAndWait();
+                if (result.isPresent()) {
+                    tch = result.get();
+                    if (AccountDAO.updateAccount(tch.getAccountByAccount())) {
+                        TeacherDAO.updateTeacher(tch);
+                        table.refresh();
+                    }
+                }
+            }
+        }
+        else if (event.getButton() == MouseButton.SECONDARY) {
+            Teacher tch = table.getSelectionModel().getSelectedItem();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Reset mật khẩu");
+            confirm.setContentText("Reset mật khẩu cho tài khoản này? Mật khẩu mặc định sẽ là 12345678");
+            confirm.setHeaderText(null);
+            Optional<ButtonType> option = confirm.showAndWait();
+            if (option.get() == ButtonType.OK) {
+                tch.getAccountByAccount().setPassword("12345678");
                 if (AccountDAO.updateAccount(tch.getAccountByAccount())) {
                     TeacherDAO.updateTeacher(tch);
                     table.refresh();
@@ -158,10 +189,12 @@ public class TeacherAccountController implements Initializable {
         Dialog<Teacher> dialog = new Dialog<>();
         dialog.setTitle("Thông tin giáo vụ");
         dialog.setDialogPane(content);
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
         AccountDialogController adc = fxmlLoader.getController();
         if (tch != null) {
             adc.setInfo(tch);
-            adc.setDisable(true);
+            adc.setEditable(false);
         }
         Button btn = (Button) dialog.getDialogPane().lookupButton(ButtonType.APPLY);
         btn.addEventFilter(ActionEvent.ACTION, event -> {

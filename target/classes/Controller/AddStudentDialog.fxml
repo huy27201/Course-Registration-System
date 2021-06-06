@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddStudentDialogController">
+    <expandableContent>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+   <stylesheets>
+      <URL value="@../assets/css/style.css" />
+      <URL value="@../assets/css/Dialog.css" />
+   </stylesheets>
+   <graphic>
+      <VBox prefHeight="200.0" prefWidth="517.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="554.0" styleClass="dialog-title" text="THÔNG TIN SINH VIÊN">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding>
+            </Label>
+            <GridPane alignment="CENTER" hgap="20.0" prefHeight="280.0" prefWidth="500.0" vgap="40.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="100.0" minWidth="0.0" prefWidth="0.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="27.0" prefWidth="76.0" styleClass="dialog-label" text="Mã" />
+                  <Label prefWidth="76.0" styleClass="dialog-label" text="Họ" GridPane.rowIndex="1" />
+                  <Label styleClass="dialog-label" text="Tên" GridPane.rowIndex="2" />
+                  <Label styleClass="dialog-label" text="Ngày sinh" GridPane.rowIndex="3" />
+                  <Label styleClass="dialog-label" text="Phái" GridPane.rowIndex="4" />
+                  <Label styleClass="dialog-label" text="Tài khoản" GridPane.rowIndex="5" />
+                  <Label styleClass="dialog-label" text="Mật khẩu" GridPane.rowIndex="6" />
+                  <TextField fx:id="id" promptText="Mã" GridPane.columnIndex="1" />
+                  <TextField fx:id="firstName" promptText="Họ" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="lastName" prefHeight="31.0" prefWidth="305.0" promptText="Tên" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="dateOfBirth" prefHeight="37.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <RadioButton fx:id="male" mnemonicParsing="false" text="Nam">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="gender" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="female" mnemonicParsing="false" text="Nữ" toggleGroup="$gender">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="account" promptText="Tài khoản" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="password" promptText="Mật khẩu" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+               </padding>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="40.0" right="50.0" top="10.0" />
+         </padding>
+         <stylesheets>
+            <URL value="@../assets/css/Dialog.css" />
+            <URL value="@../assets/css/style.css" />
+         </stylesheets>
+      </VBox>
+   </graphic>
+   <buttonTypes>
+      <ButtonType fx:constant="CANCEL" />
+      <ButtonType fx:constant="APPLY" />
+   </buttonTypes>
+</DialogPane>

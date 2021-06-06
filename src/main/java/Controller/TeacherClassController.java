@@ -1,15 +1,56 @@
 package Controller;
 
+import DAO.ClassDAO;
 import Main.App;
+import POJO.Classname;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class TeacherClassController {
+public class TeacherClassController implements Initializable {
+    @FXML
+    private TextField searchBar;
+    @FXML
+    TableView<Classname> table;
+    @FXML
+    TableColumn<Classname, String> col_id;
+    @FXML
+    TableColumn<Classname, Integer> col_total;
+    @FXML
+    TableColumn<Classname, Integer> col_male;
+    @FXML
+    TableColumn<Classname, Integer> col_female;
+    ObservableList<Classname> list = FXCollections.observableArrayList();
+    FilteredList<Classname> filterList = new FilteredList<>(list);
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        List<Classname> classList = ClassDAO.getClassList();
+        for (Classname item : classList)
+            list.add(item);
+        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        col_male.setCellValueFactory(new PropertyValueFactory<>("maleCount"));
+        col_female.setCellValueFactory(new PropertyValueFactory<>("femaleCount"));
+        table.setItems(list);
+    }
+
     @FXML
     public void exit() {
         App.exit();
@@ -17,11 +58,6 @@ public class TeacherClassController {
 
     @FXML
     public void minimize() {
-        App.minimize();
-    }
-
-    @FXML
-    public void onAdd() {
         App.minimize();
     }
 
@@ -43,20 +79,69 @@ public class TeacherClassController {
     }
 
     @FXML
-    public void onStudentClass() throws IOException, InterruptedException {
-        Thread.sleep(300);
-        App.changeScene("TeacherStudent");
+    public void onStudentClass(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 2) {
+            Classname item = table.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/TeacherStudent.fxml"));
+            Parent root = fxmlLoader.load();
+            TeacherStudentController controller = fxmlLoader.getController();
+            controller.setCurrentClass(item);
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     @FXML
     public void onRemove() {
-        Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmExit.setTitle("Xóa lớp");
-        confirmExit.setHeaderText(null);
-        confirmExit.setContentText("Bạn có chắc chắc muốn xóa không? Mọi sinh viên trong lớp của bạn sẽ bị xóa hết!");
-        Optional<ButtonType> option = confirmExit.showAndWait();
-        if (option.get() == ButtonType.OK) {
-
+        if (table.getSelectionModel().getSelectedItem() != null) {
+            Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmExit.setTitle("Delete");
+            confirmExit.setContentText("Bạn có chắc chắn muốn xóa lớp này không? Mọi sinh viên trong lớp của bạn sẽ bị xóa hết!!!");
+            confirmExit.setHeaderText(null);
+            Optional<ButtonType> option = confirmExit.showAndWait();
+            if (option.get() == ButtonType.OK) {
+                Classname selectedItem = table.getSelectionModel().getSelectedItem();
+                table.getItems().remove(selectedItem);
+                ClassDAO.removeClassByID(selectedItem.getId());
+            }
+        }
+        else {
+            Alert confirmExit = new Alert(Alert.AlertType.WARNING);
+            confirmExit.setTitle("Warning");
+            confirmExit.setContentText("Vui lòng chọn lớp học cần xóa!!");
+            confirmExit.setHeaderText(null);
+            confirmExit.showAndWait();
+        }
+    }
+    @FXML
+    public void onSearch() {
+        String data = searchBar.getText().toLowerCase();
+        filterList.setPredicate(
+                item -> {
+                    if (data == null || data.isEmpty()) return true;
+                    if (item.getId().toLowerCase().contains(data)) return true;
+                    return false;
+                }
+        );
+        table.setItems(filterList);
+    }
+    @FXML
+    public void onAdd() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setHeaderText(null);
+        dialog.setTitle("Class");
+        dialog.setContentText("Nhập tên lớp học");
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(this.getClass().getResource("/assets/img/SchoolLogo.png").toString()));
+        Optional<String> result = dialog.showAndWait();
+        String id;
+        if (result.isPresent()) {
+            id = result.get();
+            Classname newClass = new Classname(id);
+            if (ClassDAO.addClass(newClass))
+                table.getItems().add(newClass);
         }
     }
 }

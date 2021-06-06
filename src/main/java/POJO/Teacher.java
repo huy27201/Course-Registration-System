@@ -52,12 +52,6 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public void setFullName(String fullName) {
-    }
-
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
 
     @Basic
     @Column(name = "Sex", nullable = true, length = 3)

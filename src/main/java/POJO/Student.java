@@ -24,7 +24,7 @@ public class Student {
         this.sex = sex;
         this.classnameByClassName = className;
         this.accountByAccount = acc;
-        this.accountByAccount.setRole("GV");
+        this.accountByAccount.setRole("SV");
     }
 
     @Id

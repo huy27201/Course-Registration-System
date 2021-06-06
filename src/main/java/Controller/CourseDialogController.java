@@ -2,17 +2,19 @@ package Controller;
 
 import DAO.SubjectDAO;
 import POJO.Subject;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.util.StringConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import java.net.URL;
-import java.sql.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CourseDialogController implements Initializable {
     @FXML
-    private ComboBox<String> subjectName;
+    private ComboBox<Subject> subjectName;
     @FXML
     private TextField headTeacher;
     @FXML
@@ -29,18 +31,39 @@ public class CourseDialogController implements Initializable {
     private Spinner<Integer> semesterId;
 
     public void initialize(URL location, ResourceBundle resources) {
-//        SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5, 1);
-//        id.setValueFactory(value);
-//        value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2021, 2021);
-//        year.setValueFactory(value);
-//        value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 3, 1);
-//        semesterId.setValueFactory(value);
+        SpinnerValueFactory<Integer> value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 3, 1);
+        semesterId.setValueFactory(value);
+        value = new SpinnerValueFactory.IntegerSpinnerValueFactory(1990, 2021, 2021);
+        year.setValueFactory(value);
+        day.getItems().addAll("Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật");
+        day.setValue("Thứ 2");
+        period.getItems().addAll("7:30 - 9:30", "9:30 - 11:30", "13:30 - 15:30", "15:30 - 17:30");
+        period.setValue("7:30 - 9:30");
+        ObservableList<Subject> list = FXCollections.observableArrayList();
+        List<Subject> subList = SubjectDAO.getSubjectList();
+        for (Subject sub : subList)
+            list.add(sub);
+        subjectName.setItems(list);
+        subjectName.setConverter(new StringConverter<Subject>() {
+            @Override
+            public String toString(Subject sub) {
+                if (sub != null)
+                    return sub.getName();
+                return "";
+            }
+            @Override
+            public Subject fromString(String string) {
+                return subjectName.getItems().stream().filter(ap ->
+                        ap.getName().equals(string)).findFirst().orElse(null);
+            }
+        });
     }
 
     @FXML
     public Subject getSubjectName() {
-        Subject sub = SubjectDAO.getSubjectByID(subjectName.getValue());
-        return sub;
+        if (subjectName.getValue() != null)
+            return SubjectDAO.getSubjectByID(subjectName.getValue().getId());
+        return null;
     }
 
     @FXML

@@ -15,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -122,8 +121,8 @@ public class CourseRegistrationController implements Initializable {
             Optional<ButtonType> option = confirmExit.showAndWait();
             if (option.get() == ButtonType.OK) {
                 CourseRegistration selectedItem = table.getSelectionModel().getSelectedItem();
-                table.getItems().remove(selectedItem);
-                CourseRegistrationDAO.removeCourseRegistrationByID(selectedItem.getId(), selectedItem.getSemesterId(), selectedItem.getYear());
+                if (CourseRegistrationDAO.removeCourseRegistrationByID(selectedItem.getId(), selectedItem.getSemesterId(), selectedItem.getYear()))
+                    table.getItems().remove(selectedItem);
             }
         } else {
             Alert confirmExit = new Alert(Alert.AlertType.WARNING);

@@ -34,9 +34,11 @@
     -fx-font-family: Tahoma;
     -fx-border-width: 1px;
     -fx-border-color: #000;
-    -fx-font-size: 16px;
+    -fx-font-size: 15px;
 }
-
+#course-table {
+    -fx-font-size: 12px;
+}
 .table-row-cell:selected {
     -fx-background-color: #1F81D7;
 }
@@ -47,14 +49,16 @@
     -fx-border-color: #FFF;
     -fx-font-size: 15px;
 }
-
+#course-table .column-header .label{
+    -fx-font-size: 13px;
+}
 .scroll-pane {
     -fx-background: #FFFFFF;
     -fx-border-width: 0;
     -fx-border-color: #FFF;
 }
 
-.current-semester {
+.current-semester, .current-class {
     -fx-font-family: Tahoma;
     -fx-font-size: 20px;
     -fx-text-fill: #0d6895;
@@ -73,4 +77,14 @@
 
 .table-column {
     -fx-alignment: center;
+}
+.combo-box {
+    -fx-background-color: #FFF;
+    -fx-border-color: #CCC;
+    -fx-border-width: 1px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+.non-editable {
+    -fx-background-color: transparent;
 }

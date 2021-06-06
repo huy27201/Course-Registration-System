@@ -1,6 +1,7 @@
 package POJO;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @IdClass(CoursePK.class)
@@ -12,6 +13,32 @@ public class Course {
     private String day;
     private String period;
     private Integer maxSlot;
+    private Subject subjectBySubjectId;
+    private String teacherName;
+
+    public Course() {
+    }
+
+    public Course(int semesterId, int year, String teacherName, Subject subject, String room, String day, String period, Integer maxSlot) {
+        this.semesterId = semesterId;
+        this.year = year;
+        this.teacherName = teacherName;
+        this.room = room;
+        this.day = day;
+        this.period = period;
+        this.maxSlot = maxSlot;
+        this.subjectBySubjectId = subject;
+    }
+
+    @Id
+    @Column(name = "teacherName", nullable = false)
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -112,4 +139,16 @@ public class Course {
         result = 31 * result + (maxSlot != null ? maxSlot.hashCode() : 0);
         return result;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "SubjectID", referencedColumnName = "ID")
+    public Subject getSubjectBySubjectId() {
+        return subjectBySubjectId;
+    }
+
+    public void setSubjectBySubjectId(Subject subjectBySubjectId) {
+        this.subjectBySubjectId = subjectBySubjectId;
+    }
+
+
 }
