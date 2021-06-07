@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="POJO.Courseattend" table="courseattend" schema="schoolmanagement">
@@ -12,15 +12,15 @@
             <key-property name="courseId">
                 <column name="CourseID" sql-type="int"/>
             </key-property>
-            <key-property name="semesterId">
-                <column name="SemesterID" sql-type="int"/>
-            </key-property>
-            <key-property name="year">
-                <column name="Year" sql-type="int"/>
-            </key-property>
         </composite-id>
         <property name="dateRegisterd">
             <column name="DateRegisterd" sql-type="datetime" not-null="true"/>
         </property>
+        <many-to-one name="studentByStudentId" class="POJO.Student">
+            <column name="StudentID"/>
+        </many-to-one>
+        <many-to-one name="courseByCourseId" class="POJO.Course">
+            <column name="CourseID"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

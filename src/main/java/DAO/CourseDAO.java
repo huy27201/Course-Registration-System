@@ -1,17 +1,16 @@
 package DAO;
 
 import POJO.Course;
-import POJO.CoursePK;
 import POJO.Currentsemester;
 import UTIL.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
+import java.io.Serializable;
 import java.util.List;
 
-public class CourseDAO {
+public class CourseDAO implements Serializable {
     private static List<Course> courseList;
 
     public static List<Course> getCourseListBySemester(Currentsemester sem) {
@@ -31,7 +30,7 @@ public class CourseDAO {
         return courseList;
     }
 
-    public static Course getCourseByID(CoursePK id) {
+    public static Course getCourseByID(int id) {
         Course res = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -44,8 +43,7 @@ public class CourseDAO {
         }
         return res;
     }
-
-    public static boolean removeCourseByID(CoursePK id) {
+    public static boolean removeCourseByID(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Course res = getCourseByID(id);
         if (res == null) {

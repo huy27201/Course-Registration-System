@@ -1,10 +1,10 @@
 package POJO;
 
+import javafx.scene.control.CheckBox;
+
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
-@IdClass(CoursePK.class)
 public class Course {
     private int id;
     private int semesterId;
@@ -15,6 +15,7 @@ public class Course {
     private Integer maxSlot;
     private Subject subjectBySubjectId;
     private String teacherName;
+    //    private CheckBox select;
 
     public Course() {
     }
@@ -28,10 +29,10 @@ public class Course {
         this.period = period;
         this.maxSlot = maxSlot;
         this.subjectBySubjectId = subject;
+//        this.select = new CheckBox();
     }
-
-    @Id
-    @Column(name = "teacherName", nullable = false)
+    @Basic
+    @Column(name = "TeacherName", nullable = true, length = 50)
     public String getTeacherName() {
         return teacherName;
     }
@@ -42,6 +43,7 @@ public class Course {
 
     @Id
     @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -50,7 +52,7 @@ public class Course {
         this.id = id;
     }
 
-    @Id
+    @Basic
     @Column(name = "SemesterID", nullable = false)
     public int getSemesterId() {
         return semesterId;
@@ -60,7 +62,7 @@ public class Course {
         this.semesterId = semesterId;
     }
 
-    @Id
+    @Basic
     @Column(name = "Year", nullable = false)
     public int getYear() {
         return year;
@@ -149,6 +151,5 @@ public class Course {
     public void setSubjectBySubjectId(Subject subjectBySubjectId) {
         this.subjectBySubjectId = subjectBySubjectId;
     }
-
 
 }

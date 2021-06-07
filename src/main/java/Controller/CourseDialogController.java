@@ -102,7 +102,7 @@ public class CourseDialogController implements Initializable {
             int res = Integer.parseInt(maxSlot.getText());
             return res;
         } catch (NumberFormatException e) {
-            return null;
+            return 0;
         }
     }
 

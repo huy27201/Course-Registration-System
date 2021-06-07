@@ -1,7 +1,6 @@
 package Controller;
 
-import DAO.CourseDAO;
-import DAO.CurrentSemesterDAO;
+import DAO.*;
 import Main.App;
 import POJO.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -14,11 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.StringConverter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CourseResultController implements Initializable {
@@ -38,24 +36,61 @@ public class CourseResultController implements Initializable {
     TableColumn<Courseattend, String> col_day;
     @FXML
     TableColumn<Courseattend, String> col_period;
-    ObservableList<Courseattend> list = FXCollections.observableArrayList();
-    FilteredList<Courseattend> filterList = new FilteredList<>(list);
+    ObservableList<Courseattend> courseattendObservablelist = FXCollections.observableArrayList();
     @FXML
-    
+    private ComboBox<Semester> semesterList;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        List<Courseattend> list = CourseDAO.getCourseListBySemester(curSem);
-//        for (Course element : courseList)
-//            list.add(element);
-//        col_id.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSubjectBySubjectId().getId()));
-//        col_courseName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSubjectBySubjectId().getName()));
-//        col_credits.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getSubjectBySubjectId().getCredits()).asObject());
-//        col_headTeacher.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getTeacherName()));
-//        col_room.setCellValueFactory(new PropertyValueFactory<>("room"));
-//        col_day.setCellValueFactory(new PropertyValueFactory<>("day"));
-//        col_period.setCellValueFactory(new PropertyValueFactory<>("period"));
-//        table.setItems(list);
+        ObservableList<Semester> semList = FXCollections.observableArrayList();
+        List<Semester> list = SemesterDAO.getSemesterList();
+        for (Semester sem : list)
+            semList.add(sem);
+        semesterList.setItems(semList);
+        semesterList.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Semester sem) {
+                if (sem != null)
+                    return (sem.getId() + "/" + sem.getYear() % 100 + "-" + (sem.getYear() + 1) % 100);
+                return "";
+            }
 
+            @Override
+            public Semester fromString(String string) {
+                return semesterList.getItems().stream().filter(ap ->
+                        (ap.getId() + "/" + ap.getYear() % 100 + "-" + (ap.getYear() + 1) % 100).equals(string)).findFirst().orElse(null);
+            }
+        });
+        if (list.size() > 0) {
+            semesterList.setValue(list.get(0));
+            List<Courseattend> courseAttendList = CourseattendDAO.getCourseattendList(App.getCurrentStudent().getId(), semesterList.getValue());
+            for (Courseattend element : courseAttendList)
+                courseattendObservablelist.add(element);
+            col_id.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getSubjectBySubjectId().getId()));
+            col_courseName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getSubjectBySubjectId().getName()));
+            col_credits.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getCourseByCourseId().getSubjectBySubjectId().getCredits()).asObject());
+            col_headTeacher.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getTeacherName()));
+            col_room.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getRoom()));
+            col_day.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getDay()));
+            col_period.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getPeriod()));
+            table.setItems(courseattendObservablelist);
+            semesterList.setOnAction(e -> {
+                getCourseResult(semesterList.getValue());
+            });
+        }
+    }
+    public void getCourseResult(Semester sem) {
+        table.getItems().clear();
+        List<Courseattend> courseAttendList = CourseattendDAO.getCourseattendList(App.getCurrentStudent().getId(), sem);
+        for (Courseattend item : courseAttendList)
+            courseattendObservablelist.add(item);
+        col_id.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getSubjectBySubjectId().getId()));
+        col_courseName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getSubjectBySubjectId().getName()));
+        col_credits.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getCourseByCourseId().getSubjectBySubjectId().getCredits()).asObject());
+        col_headTeacher.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getTeacherName()));
+        col_room.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getRoom()));
+        col_day.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getDay()));
+        col_period.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getCourseByCourseId().getPeriod()));
+        table.setItems(courseattendObservablelist);
     }
 
     @FXML

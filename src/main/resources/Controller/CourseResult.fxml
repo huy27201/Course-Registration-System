@@ -56,7 +56,7 @@
                               <Font name="Tahoma Bold" size="16.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="semesterList" prefWidth="150.0" />
                             </children>
                         </HBox>
                         <TableView id="course-table" fx:id="table" prefHeight="402.0" prefWidth="820.0">

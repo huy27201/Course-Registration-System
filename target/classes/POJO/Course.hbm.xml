@@ -1,21 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="POJO.Course" table="course" schema="schoolmanagement">
-        <composite-id mapped="true" class="POJO.CoursePK">
-            <key-property name="id">
-                <column name="ID" sql-type="int"/>
-            </key-property>
-            <key-property name="semesterId">
-                <column name="SemesterID" sql-type="int"/>
-            </key-property>
-            <key-property name="year">
-                <column name="Year" sql-type="int"/>
-            </key-property>
-        </composite-id>
+        <id name="id">
+            <column name="ID" sql-type="int"/>
+        </id>
+        <property name="semesterId">
+            <column name="SemesterID" sql-type="int"/>
+        </property>
+        <property name="year">
+            <column name="Year" sql-type="int"/>
+        </property>
+        <property name="subjectId">
+            <column name="SubjectID" sql-type="char(8)" length="8" not-null="true"/>
+        </property>
+        <property name="teacherName">
+            <column name="TeacherName" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
         <property name="room">
             <column name="Room" sql-type="varchar(10)" length="10" not-null="true"/>
         </property>
@@ -30,9 +34,6 @@
         </property>
         <many-to-one name="subjectBySubjectId" class="POJO.Subject">
             <column name="SubjectID" not-null="true"/>
-        </many-to-one>
-        <many-to-one name="teacherByTeacherId" class="POJO.Teacher">
-            <column name="TeacherID" not-null="true"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

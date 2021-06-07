@@ -2,6 +2,7 @@ package POJO;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 public class Student {
@@ -12,6 +13,7 @@ public class Student {
     private String sex;
     private Classname classnameByClassName;
     private Account accountByAccount;
+    private Collection<Courseattend> courseattendsById;
 
     public Student() {
     }
@@ -121,5 +123,15 @@ public class Student {
 
     public void setAccountByAccount(Account accountByAccount) {
         this.accountByAccount = accountByAccount;
+    }
+
+
+    @OneToMany(mappedBy = "studentByStudentId")
+    public Collection<Courseattend> getCourseattendsById() {
+        return courseattendsById;
+    }
+
+    public void setCourseattendsById(Collection<Courseattend> courseattendsById) {
+        this.courseattendsById = courseattendsById;
     }
 }

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="POJO.Student" table="student" schema="schoolmanagement">
@@ -20,11 +20,20 @@
         <property name="sex">
             <column name="Sex" sql-type="char(3)" length="3" not-null="true"/>
         </property>
+        <property name="fullName">
+            <column name="fullName" sql-type="varchar(255)" not-null="true"/>
+        </property>
         <many-to-one name="classnameByClassName" class="POJO.Classname">
             <column name="ClassName" not-null="true"/>
         </many-to-one>
-        <many-to-one name="accountByAccount" class="POJO.Account" fetch="join" lazy="false">
-            <column name="Account" not-null="true" unique="true"/>
+        <many-to-one name="accountByAccount" class="POJO.Account">
+            <column name="Account" not-null="true"/>
         </many-to-one>
+        <set name="courseattendsById" inverse="true">
+            <key>
+                <column name="StudentID"/>
+            </key>
+            <one-to-many not-found="ignore" class="POJO.Courseattend"/>
+        </set>
     </class>
 </hibernate-mapping>

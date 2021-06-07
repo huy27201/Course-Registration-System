@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.CourseDAO;
 import DAO.CurrentSemesterDAO;
+import DAO.SemesterDAO;
 import Main.App;
 import POJO.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -45,7 +46,7 @@ public class CourseController implements Initializable {
     @FXML
     TableColumn<Course, String> col_period;
     @FXML
-    TableColumn<Course, String> col_maxSlot;
+    TableColumn<Course, Integer> col_maxSlot;
     ObservableList<Course> list = FXCollections.observableArrayList();
     FilteredList<Course> filterList = new FilteredList<>(list);
     private Currentsemester curSem;
@@ -63,9 +64,8 @@ public class CourseController implements Initializable {
         col_room.setCellValueFactory(new PropertyValueFactory<>("room"));
         col_day.setCellValueFactory(new PropertyValueFactory<>("day"));
         col_period.setCellValueFactory(new PropertyValueFactory<>("period"));
-        col_maxSlot.setCellValueFactory(new PropertyValueFactory<>("maxSlot"));
+        col_maxSlot.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getMaxSlot()).asObject());
         table.setItems(list);
-
     }
 
     @FXML
@@ -100,8 +100,8 @@ public class CourseController implements Initializable {
         Dialog<Course> dialog = newDialog();
         Optional<Course> result = dialog.showAndWait();
         if (result.isPresent()) {
-            if (CourseDAO.addCourse(result.get()))
-                table.getItems().add(result.get());
+            CourseDAO.addCourse(result.get());
+            table.getItems().add(result.get());
         }
     }
 
@@ -115,7 +115,7 @@ public class CourseController implements Initializable {
             Optional<ButtonType> option = confirmExit.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Course selectedItem = table.getSelectionModel().getSelectedItem();
-                if (CourseDAO.removeCourseByID(new CoursePK(selectedItem.getId(), selectedItem.getSemesterId(), selectedItem.getYear())))
+                if (CourseDAO.removeCourseByID(selectedItem.getId()))
                     table.getItems().remove(selectedItem);
             }
         } else {
@@ -166,6 +166,16 @@ public class CourseController implements Initializable {
                 warning.showAndWait();
                 event.consume();
             }
+            List<Course> list = CourseDAO.getCourseListBySemester(curSem);
+            for (Course item : list)
+                if (cdc.getRoom().equals(item.getRoom()) && cdc.getDay().equals(item.getDay()) && cdc.getPeriod().equals(item.getPeriod())) {
+                    Alert warning = new Alert(Alert.AlertType.WARNING);
+                    warning.setTitle("Warning");
+                    warning.setContentText("Có học phần trùng giờ và trùng ngày học phòng này!!");
+                    warning.setHeaderText(null);
+                    warning.showAndWait();
+                    event.consume();
+                }
         });
         dialog.setResultConverter(button -> {
             if (button == ButtonType.APPLY)

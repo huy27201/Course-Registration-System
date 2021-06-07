@@ -44,7 +44,7 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                     <padding>
-                        <Insets left="40.0" right="40.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" top="20.0" />
                     </padding>
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="700.0" spacing="30.0">
@@ -72,7 +72,7 @@
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
                                 </Button>
-                                <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="40.0" prefWidth="433.0" promptText="Tìm học phần">
+                                <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="40.0" prefWidth="461.0" promptText="Tìm học phần">
                                     <font>
                                         <Font name="Tahoma" size="17.0" />
                                     </font>
@@ -84,9 +84,9 @@
                                 <Font name="Tahoma Bold" size="16.0" />
                             </font>
                         </Label>
-                        <TableView id="course-table" fx:id="table" prefHeight="351.0" prefWidth="700.0">
+                        <TableView id="course-table" fx:id="table" prefHeight="380.0" prefWidth="860.0">
                             <columns>
-                                <TableColumn fx:id="col_id" prefWidth="91.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_id" prefWidth="82.0" resizable="false" styleClass="number-column">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="51.0" text="MÃ" textFill="WHITE">
                                             <font>
@@ -95,7 +95,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_courseName" prefWidth="220.0" resizable="false">
+                                <TableColumn fx:id="col_courseName" prefWidth="258.0" resizable="false">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="136.0" text="TÊN HỌC PHẦN" textFill="WHITE">
                                             <font>
@@ -104,7 +104,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_credits" prefWidth="42.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_credits" prefWidth="39.0" resizable="false" styleClass="number-column">
                                     <graphic>
                                         <Label text="TC" textFill="WHITE">
                                             <font>
@@ -113,7 +113,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_headTeacher" prefWidth="165.0" resizable="false">
+                                <TableColumn fx:id="col_headTeacher" prefWidth="179.0" resizable="false">
                                     <graphic>
                                         <Label text="GV LÝ THUYẾT" textFill="WHITE">
                                             <font>
@@ -122,7 +122,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_room" prefWidth="70.0" resizable="false">
+                                <TableColumn fx:id="col_room" prefWidth="71.0" resizable="false">
                                     <graphic>
                                         <Label text="PHÒNG" textFill="WHITE">
                                             <font>
@@ -131,7 +131,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_day" resizable="false">
+                                <TableColumn fx:id="col_day" prefWidth="73.0" resizable="false">
                                     <graphic>
                                         <Label text="THỨ" textFill="WHITE">
                                             <font>
@@ -140,7 +140,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_period" prefWidth="88.0" resizable="false">
+                                <TableColumn fx:id="col_period" prefWidth="95.0" resizable="false">
                                     <graphic>
                                         <Label text="CA" textFill="WHITE">
                                             <font>
@@ -149,7 +149,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_maxSlot" prefWidth="62.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_maxSlot" prefWidth="61.0" resizable="false" styleClass="number-column">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="44.0" text="SĨ SỐ" textFill="WHITE">
                                             <font>

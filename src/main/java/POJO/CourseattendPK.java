@@ -7,8 +7,12 @@ import java.io.Serializable;
 public class CourseattendPK implements Serializable {
     private String studentId;
     private int courseId;
-    private int semesterId;
-    private int year;
+
+    public CourseattendPK() {}
+    public CourseattendPK(String studentId, int courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+    }
 
     @Column(name = "StudentID", nullable = false, length = 8)
     @Id
@@ -30,26 +34,6 @@ public class CourseattendPK implements Serializable {
         this.courseId = courseId;
     }
 
-    @Column(name = "SemesterID", nullable = false)
-    @Id
-    public int getSemesterId() {
-        return semesterId;
-    }
-
-    public void setSemesterId(int semesterId) {
-        this.semesterId = semesterId;
-    }
-
-    @Column(name = "Year", nullable = false)
-    @Id
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,8 +42,6 @@ public class CourseattendPK implements Serializable {
         CourseattendPK that = (CourseattendPK) o;
 
         if (courseId != that.courseId) return false;
-        if (semesterId != that.semesterId) return false;
-        if (year != that.year) return false;
         if (studentId != null ? !studentId.equals(that.studentId) : that.studentId != null) return false;
 
         return true;
@@ -69,8 +51,6 @@ public class CourseattendPK implements Serializable {
     public int hashCode() {
         int result = studentId != null ? studentId.hashCode() : 0;
         result = 31 * result + courseId;
-        result = 31 * result + semesterId;
-        result = 31 * result + year;
         return result;
     }
 }

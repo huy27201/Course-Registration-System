@@ -38,6 +38,7 @@
 }
 #course-table {
     -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 .table-row-cell:selected {
     -fx-background-color: #1F81D7;
@@ -87,4 +88,10 @@
 }
 .non-editable {
     -fx-background-color: transparent;
+}
+.attend-info {
+    -fx-font-family: Tahoma;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #666;
 }

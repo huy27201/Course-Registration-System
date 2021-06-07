@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="POJO.Classname" table="classname" schema="schoolmanagement">
@@ -10,6 +10,12 @@
         </id>
         <property name="total">
             <column name="Total" sql-type="int" not-null="true"/>
+        </property>
+        <property name="maleCount">
+            <column name="MaleCount" sql-type="int" not-null="true"/>
+        </property>
+        <property name="femaleCount">
+            <column name="FemaleCount" sql-type="int" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -33,7 +33,6 @@ public class StudentDashboardController implements Initializable {
     private CurrentUser currentUser = CurrentUser.getInstance();
     private Currentsemester curSem;
     FXMLLoader fxmlLoader = null;
-    private LocalDate currentDate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,12 +91,12 @@ public class StudentDashboardController implements Initializable {
 
     @FXML
     public void onCourseAttend() {
-//        try {
-//            Thread.sleep(300);
-//            App.changeScene("CourseRegistration");
-//        } catch (IOException | InterruptedException ioException) {
-//            ioException.printStackTrace();
-//        }
+        try {
+            Thread.sleep(300);
+            App.changeScene("StudentAttend");
+        } catch (IOException | InterruptedException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
     @FXML

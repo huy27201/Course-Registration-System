@@ -4,13 +4,10 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DisplacementMap?>
-<?import javafx.scene.effect.FloatMap?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,16 +16,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CourseController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StudentAttendController">
     <children>
         <AnchorPane prefHeight="30.0" prefWidth="600.0" styleClass="title-bar" stylesheets="@../assets/css/style.css">
             <children>
-                <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" layoutX="880.0" layoutY="21.0" onMouseClicked="#exit" size="16">
+                <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" layoutX="980.0" layoutY="21.0" onMouseClicked="#exit" size="16" text="">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </FontAwesomeIconView>
-                <FontAwesomeIconView fill="WHITE" glyphName="MINUS" layoutX="854.0" layoutY="21.0" onMouseClicked="#minimize" size="16">
+                <FontAwesomeIconView fill="WHITE" glyphName="MINUS" layoutX="960.0" layoutY="21.0" onMouseClicked="#minimize" size="16">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -44,49 +41,51 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
                     <padding>
-                        <Insets left="20.0" right="20.0" top="20.0" />
+                        <Insets left="10.0" right="10.0" top="20.0" />
                     </padding>
                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="700.0" spacing="30.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="700.0">
                             <children>
-                                <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#onAdd" prefHeight="40.0" prefWidth="170.0" text="Thêm học phần" textFill="WHITE">
+                                <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="39.0" prefWidth="332.0" promptText="Tìm học phần">
                                     <font>
-                                        <Font name="Tahoma Bold" size="17.0" />
+                                        <Font name="Tahoma" size="16.0" />
                                     </font>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                    <effect>
-                                        <DisplacementMap>
-                                            <mapData>
-                                                <FloatMap />
-                                            </mapData>
-                                        </DisplacementMap>
-                                    </effect>
-                                </Button>
-                                <Button fx:id="delButton" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#onRemove" prefHeight="40.0" prefWidth="159.0" text="Xóa học phần" textFill="WHITE">
-                                    <font>
-                                        <Font name="Tahoma Bold" size="17.0" />
-                                    </font>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </Button>
-                                <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="40.0" prefWidth="461.0" promptText="Tìm học phần">
-                                    <font>
-                                        <Font name="Tahoma" size="17.0" />
-                                    </font>
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
                                 </TextField>
+                        <Label styleClass="attend-info" text="Số môn đã đăng ký: ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="24.0" styleClass="attend-info" text="0">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label layoutX="544.0" layoutY="20.0" styleClass="attend-info" text="Số TC: ">
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="700.0" layoutY="20.0" prefHeight="20.0" prefWidth="31.0" styleClass="attend-info" text="0" />
                             </children>
                         </HBox>
                         <Label prefHeight="21.0" prefWidth="239.0" text="Danh sách học phần" textFill="#666666">
                             <font>
                                 <Font name="Tahoma Bold" size="16.0" />
                             </font>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
                         </Label>
-                        <TableView id="course-table" fx:id="table" prefHeight="380.0" prefWidth="860.0">
+                        <TableView id="course-table" fx:id="table" prefHeight="385.0" prefWidth="980.0">
                             <columns>
-                                <TableColumn fx:id="col_id" prefWidth="82.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_id" prefWidth="91.0" resizable="false" styleClass="number-column">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="51.0" text="MÃ" textFill="WHITE">
                                             <font>
@@ -95,7 +94,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_courseName" prefWidth="258.0" resizable="false">
+                                <TableColumn fx:id="col_courseName" prefWidth="256.0" resizable="false">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="136.0" text="TÊN HỌC PHẦN" textFill="WHITE">
                                             <font>
@@ -104,7 +103,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_credits" prefWidth="39.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_credits" prefWidth="44.0" resizable="false" styleClass="number-column">
                                     <graphic>
                                         <Label text="TC" textFill="WHITE">
                                             <font>
@@ -113,7 +112,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_headTeacher" prefWidth="179.0" resizable="false">
+                                <TableColumn fx:id="col_headTeacher" prefWidth="183.0" resizable="false">
                                     <graphic>
                                         <Label text="GV LÝ THUYẾT" textFill="WHITE">
                                             <font>
@@ -122,7 +121,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_room" prefWidth="71.0" resizable="false">
+                                <TableColumn fx:id="col_room" prefWidth="72.0" resizable="false">
                                     <graphic>
                                         <Label text="PHÒNG" textFill="WHITE">
                                             <font>
@@ -131,7 +130,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_day" prefWidth="73.0" resizable="false">
+                                <TableColumn fx:id="col_day" prefWidth="64.0" resizable="false">
                                     <graphic>
                                         <Label text="THỨ" textFill="WHITE">
                                             <font>
@@ -149,7 +148,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_maxSlot" prefWidth="61.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_maxSlot" prefWidth="62.0" resizable="false" styleClass="number-column">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="44.0" text="SĨ SỐ" textFill="WHITE">
                                             <font>
@@ -158,6 +157,24 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
+                        <TableColumn fx:id="col_maxSlot2" prefWidth="54.0" resizable="false" styleClass="number-column">
+                           <graphic>
+                              <Label prefHeight="19.0" prefWidth="44.0" text="ĐK" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="col_maxSlot1" prefWidth="57.0" resizable="false" styleClass="number-column">
+                           <graphic>
+                              <Label prefHeight="19.0" prefWidth="44.0" text="CHỌN" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </graphic>
+                        </TableColumn>
                             </columns>
                         </TableView>
                     </children>
@@ -174,20 +191,12 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </ImageView>
-                        <Label layoutX="791.0" layoutY="24.0" prefHeight="25.0" prefWidth="4.0" text="|" textFill="#837d7d">
+                        <Label layoutX="887.0" layoutY="24.0" prefHeight="25.0" prefWidth="4.0" text="|" textFill="#837d7d">
                             <font>
                                 <Font name="Tahoma Bold" size="15.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="671.0" layoutY="24.0" onMouseClicked="#onReturn" prefHeight="25.0" prefWidth="113.0" text="Quay lại" textFill="#837d7d" underline="true">
-                            <font>
-                                <Font name="Tahoma Bold" size="15.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </Label>
-                        <Label fx:id="logout" layoutX="804.0" layoutY="24.0" onMouseClicked="#logoutClicked" prefHeight="25.0" prefWidth="82.0" styleClass="logout" text="Đăng xuất" textFill="#837d7d" underline="true">
+                        <Label alignment="CENTER_RIGHT" layoutX="767.0" layoutY="24.0" onMouseClicked="#onReturn" prefHeight="25.0" prefWidth="113.0" text="Quay lại" textFill="#837d7d" underline="true">
                             <font>
                                 <Font name="Tahoma Bold" size="15.0" />
                             </font>
@@ -195,12 +204,20 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Label>
-                        <Label layoutX="129.0" layoutY="24.0" styleClass="current-semester" text="HỌC KỲ HIỆN TẠI:" textFill="#0d6895">
+                        <Label fx:id="logout" layoutX="904.0" layoutY="24.0" onMouseClicked="#logoutClicked" prefHeight="25.0" prefWidth="82.0" styleClass="logout" text="Đăng xuất" textFill="#837d7d" underline="true">
+                            <font>
+                                <Font name="Tahoma Bold" size="15.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Label>
+                        <Label layoutX="129.0" layoutY="24.0" styleClass="current-semester" text="ĐĂNG KÝ HỌC PHẦN ĐỢT: " textFill="#0d6895">
                             <font>
                                 <Font name="Tahoma Bold" size="20.0" />
                             </font>
                         </Label>
-                  <Label fx:id="curSemLabel" layoutX="321.0" layoutY="24.0" styleClass="current-semester" />
+                        <Label fx:id="curSemLabel" layoutX="399.0" layoutY="24.0" prefHeight="25.0" prefWidth="194.0" styleClass="current-semester" />
                     </children>
                 </AnchorPane>
             </top>
