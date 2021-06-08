@@ -4,10 +4,10 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CourseResultController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CourseDetailController">
     <children>
         <AnchorPane prefHeight="30.0" prefWidth="600.0" styleClass="title-bar" stylesheets="@../assets/css/style.css">
             <children>
@@ -44,80 +44,48 @@
                         <Insets left="40.0" right="40.0" top="20.0" />
                     </padding>
                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="700.0" spacing="30.0">
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="700.0">
                             <children>
-                              <Label prefHeight="21.0" prefWidth="435.0" text="Kết quả đăng ký học phần" textFill="#666666">
-                                  <font>
-                                      <Font name="Tahoma Bold" size="16.0" />
-                                  </font>
-                              </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="177.0" text="Chọn học kỳ:" textFill="#666666">
+                                <Label prefHeight="21.0" prefWidth="537.0" text="DANH SÁCH SINH VIÊN ĐĂNG KÝ HỌC PHẦN" textFill="#666666">
+                                    <font>
+                                        <Font name="Tahoma Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                        <Label fx:id="detailLabel" textFill="#666666">
                            <font>
                               <Font name="Tahoma Bold" size="16.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="semesterList" prefWidth="150.0" />
+                        <TextField fx:id="searchBar" onKeyTyped="#onSearch" prefHeight="40.0" prefWidth="451.0" promptText="Tìm sinh viên">
+                           <font>
+                              <Font name="Tahoma" size="17.0" />
+                           </font>
+                        </TextField>
                             </children>
                         </HBox>
                         <TableView id="course-table" fx:id="table" prefHeight="402.0" prefWidth="820.0">
                             <columns>
-                                <TableColumn fx:id="col_id" prefWidth="91.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_studentId" prefWidth="175.0" resizable="false" styleClass="number-column">
                                     <graphic>
-                                        <Label prefHeight="19.0" prefWidth="51.0" text="MÃ" textFill="WHITE">
+                                        <Label prefHeight="19.0" prefWidth="51.0" text="MÃ SV" textFill="WHITE">
                                             <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                             </font>
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_courseName" prefWidth="261.0" resizable="false">
+                                <TableColumn fx:id="col_studentName" prefWidth="348.0" resizable="false">
                                     <graphic>
-                                        <Label prefHeight="19.0" prefWidth="136.0" text="TÊN HỌC PHẦN" textFill="WHITE">
+                                        <Label prefHeight="19.0" prefWidth="136.0" text="TÊN SINH VIÊN" textFill="WHITE">
                                             <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                             </font>
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_credits" prefWidth="40.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_dateRegistered" prefWidth="295.0" resizable="false">
                                     <graphic>
-                                        <Label text="TC" textFill="WHITE">
-                                            <font>
-                                                <Font name="Tahoma Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
-                                <TableColumn fx:id="col_headTeacher" prefWidth="177.0" resizable="false">
-                                    <graphic>
-                                        <Label text="GV LÝ THUYẾT" textFill="WHITE">
-                                            <font>
-                                                <Font name="Tahoma Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
-                                <TableColumn fx:id="col_room" prefWidth="83.0" resizable="false">
-                                    <graphic>
-                                        <Label text="PHÒNG" textFill="WHITE">
-                                            <font>
-                                                <Font name="Tahoma Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
-                                <TableColumn fx:id="col_day" prefWidth="71.0" resizable="false">
-                                    <graphic>
-                                        <Label text="THỨ" textFill="WHITE">
-                                            <font>
-                                                <Font name="Tahoma Bold" size="15.0" />
-                                            </font>
-                                        </Label>
-                                    </graphic>
-                                </TableColumn>
-                                <TableColumn fx:id="col_period" prefWidth="95.0" resizable="false">
-                                    <graphic>
-                                        <Label text="CA" textFill="WHITE">
+                                        <Label prefHeight="16.0" prefWidth="198.0" text="THỜI GIAN ĐĂNG KÝ" textFill="WHITE">
                                             <font>
                                                 <Font name="Tahoma Bold" size="15.0" />
                                             </font>
@@ -140,6 +108,26 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </ImageView>
+                  <Label layoutX="122.0" layoutY="15.0" styleClass="detail" text="HỌC PHẦN: " textFill="#0d6895">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="courseInfo" layoutX="213.0" layoutY="15.0" styleClass="detail" textFill="#0d6895">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="122.0" layoutY="40.0" styleClass="detail" text="GV LÝ THUYẾT: " textFill="#0d6895">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="teacherInfo" layoutX="241.0" layoutY="40.0" styleClass="detail" textFill="#0d6895">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                  </Label>
                         <Label layoutX="791.0" layoutY="24.0" prefHeight="25.0" prefWidth="4.0" text="|" textFill="#837d7d">
                             <font>
                                 <Font name="Tahoma Bold" size="15.0" />

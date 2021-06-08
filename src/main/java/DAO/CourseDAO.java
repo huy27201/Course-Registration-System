@@ -43,6 +43,22 @@ public class CourseDAO implements Serializable {
         }
         return res;
     }
+    public static int getCourseStudentCount(int id) {
+        int count = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "select  count (*) from Courseattend ca where ca.courseId=:id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", id);
+            count = ((Long)query.uniqueResult()).intValue();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return count;
+    }
     public static boolean removeCourseByID(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Course res = getCourseByID(id);
@@ -70,6 +86,22 @@ public class CourseDAO implements Serializable {
         try {
             transaction = session.beginTransaction();
             session.save(temp);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+    public static boolean updateCourse(Course temp) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(temp);
             transaction.commit();
         } catch (HibernateException ex) {
             //Log the exception

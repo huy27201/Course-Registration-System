@@ -1,6 +1,7 @@
 package POJO;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -11,6 +12,13 @@ public class Courseattend {
     private Timestamp dateRegisterd;
     private Student studentByStudentId;
     private Course courseByCourseId;
+
+    public Courseattend(){}
+    public Courseattend(String studentId, int courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.dateRegisterd = new Timestamp(System.currentTimeMillis());
+    }
 
     @Id
     @Column(name = "StudentID", nullable = false, length = 8)

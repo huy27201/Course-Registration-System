@@ -1,33 +1,33 @@
-.class-item {
-    -fx-border-color: #ccc;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-background-color: #2E8BC0;
-    -fx-font-family: Tahoma;
-    -fx-border-width: 0px;
-    -fx-cursor: Hand;
-    -fx-min-width: 240px;
-    -fx-max-width: 240px;
-    -fx-min-height: 120px;
-    -fx-max-height: 120px;
-    -fx-background-insets: 10px;
-}
+/*.class-item {*/
+/*    -fx-border-color: #ccc;*/
+/*    -fx-border-radius: 10px;*/
+/*    -fx-background-radius: 10px;*/
+/*    -fx-background-color: #2E8BC0;*/
+/*    -fx-font-family: Tahoma;*/
+/*    -fx-border-width: 0px;*/
+/*    -fx-cursor: Hand;*/
+/*    -fx-min-width: 240px;*/
+/*    -fx-max-width: 240px;*/
+/*    -fx-min-height: 120px;*/
+/*    -fx-max-height: 120px;*/
+/*    -fx-background-insets: 10px;*/
+/*}*/
 
-.class-item:hover {
-    -fx-background-color: #0D6895;
-}
+/*.class-item:hover {*/
+/*    -fx-background-color: #0D6895;*/
+/*}*/
 
-.class-item .class-name {
-    -fx-font-size: 24px;
-    -fx-text-fill: #FFF;
-    -fx-font-weight: bold;
-}
+/*.class-item .class-name {*/
+/*    -fx-font-size: 24px;*/
+/*    -fx-text-fill: #FFF;*/
+/*    -fx-font-weight: bold;*/
+/*}*/
 
-.class-item .class-number {
-    -fx-font-size: 18px;
-    -fx-text-fill: #FFF;
-}
+/*.class-item .class-number {*/
+/*    -fx-font-size: 18px;*/
+/*    -fx-text-fill: #FFF;*/
+/*}*/
 
-.class-remove:hover, .class-name:hover {
-    -fx-underline: true;
-}
+/*.class-remove:hover, .class-name:hover {*/
+/*    -fx-underline: true;*/
+/*}*/

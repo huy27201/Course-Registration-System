@@ -17,6 +17,7 @@ public class Course {
     private Integer maxSlot;
     private Subject subjectBySubjectId;
     private String teacherName;
+    private Integer registerSlot;
     private BooleanProperty checked;
 
     public Course() {
@@ -31,9 +32,9 @@ public class Course {
         this.day = day;
         this.period = period;
         this.maxSlot = maxSlot;
+        this.registerSlot = 0;
         this.subjectBySubjectId = subject;
         this.checked = new SimpleBooleanProperty(false);
-
     }
     @Basic
     @Column(name = "TeacherName", nullable = true, length = 50)
@@ -116,6 +117,16 @@ public class Course {
         this.maxSlot = maxSlot;
     }
 
+    @Basic
+    @Column(name = "registerSlot", nullable = true)
+    public Integer getRegisterSlot() {
+        return registerSlot;
+    }
+
+    public void setRegisterSlot(Integer registerSlot) {
+        this.registerSlot = registerSlot;
+    }
+
     public void setChecked(boolean checked) {
         this.checked.set(checked);
     }
@@ -140,7 +151,7 @@ public class Course {
         if (day != null ? !day.equals(course.day) : course.day != null) return false;
         if (period != null ? !period.equals(course.period) : course.period != null) return false;
         if (maxSlot != null ? !maxSlot.equals(course.maxSlot) : course.maxSlot != null) return false;
-
+        if (registerSlot != null ? !registerSlot.equals(course.registerSlot) : course.registerSlot != null) return false;
         return true;
     }
 
@@ -153,6 +164,7 @@ public class Course {
         result = 31 * result + (day != null ? day.hashCode() : 0);
         result = 31 * result + (period != null ? period.hashCode() : 0);
         result = 31 * result + (maxSlot != null ? maxSlot.hashCode() : 0);
+        result = 31 * result + (maxSlot != null ? registerSlot.hashCode() : 0);
         return result;
     }
 

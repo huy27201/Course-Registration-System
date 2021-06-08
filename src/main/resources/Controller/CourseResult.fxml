@@ -70,7 +70,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_courseName" prefWidth="235.0" resizable="false">
+                                <TableColumn fx:id="col_courseName" prefWidth="261.0" resizable="false">
                                     <graphic>
                                         <Label prefHeight="19.0" prefWidth="136.0" text="TÊN HỌC PHẦN" textFill="WHITE">
                                             <font>
@@ -79,7 +79,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_credits" prefWidth="51.0" resizable="false" styleClass="number-column">
+                                <TableColumn fx:id="col_credits" prefWidth="40.0" resizable="false" styleClass="number-column">
                                     <graphic>
                                         <Label text="TC" textFill="WHITE">
                                             <font>
@@ -88,7 +88,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_headTeacher" prefWidth="181.0" resizable="false">
+                                <TableColumn fx:id="col_headTeacher" prefWidth="177.0" resizable="false">
                                     <graphic>
                                         <Label text="GV LÝ THUYẾT" textFill="WHITE">
                                             <font>
@@ -106,7 +106,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_day" prefWidth="72.0" resizable="false">
+                                <TableColumn fx:id="col_day" prefWidth="71.0" resizable="false">
                                     <graphic>
                                         <Label text="THỨ" textFill="WHITE">
                                             <font>
@@ -115,7 +115,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn fx:id="col_period" prefWidth="105.0" resizable="false">
+                                <TableColumn fx:id="col_period" prefWidth="95.0" resizable="false">
                                     <graphic>
                                         <Label text="CA" textFill="WHITE">
                                             <font>

@@ -16,10 +16,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -55,15 +59,14 @@ public class CourseController implements Initializable {
     ObservableList<Course> list = FXCollections.observableArrayList();
     FilteredList<Course> filterList = new FilteredList<>(list);
     private Currentsemester curSem;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         curSem = CurrentSemesterDAO.getCurrentSemester();
         curSemLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
         List<Course> courseList = CourseDAO.getCourseListBySemester(curSem);
-        for (Course element : courseList) {
-            System.out.println(element.getSubjectBySubjectId().getName());
+        for (Course element : courseList)
             list.add(element);
-        }
         col_id.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSubjectBySubjectId().getId()));
         col_courseName.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSubjectBySubjectId().getName()));
         col_credits.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getSubjectBySubjectId().getCredits()).asObject());
@@ -190,5 +193,19 @@ public class CourseController implements Initializable {
             return null;
         });
         return dialog;
+    }
+    @FXML
+    public void onCourseDetail(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 2) {
+            Course item = table.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/Controller/CourseDetail.fxml"));
+            Parent root = fxmlLoader.load();
+            CourseDetailController controller = fxmlLoader.getController();
+            controller.setCurrentCourse(item);
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 }

@@ -51,7 +51,7 @@
                                         <Font name="Tahoma" size="16.0" />
                                     </font>
                            <HBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets left="20.0" right="50.0" />
                            </HBox.margin>
                                 </TextField>
                         <Label styleClass="attend-info" text="Số môn đã đăng ký: ">
@@ -62,17 +62,11 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
-                        <Label prefHeight="20.0" prefWidth="24.0" styleClass="attend-info" text="0">
+                        <Label fx:id="subjectNum" prefHeight="20.0" prefWidth="72.0" styleClass="attend-info" text="0">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Label layoutX="544.0" layoutY="20.0" styleClass="attend-info" text="Số TC: ">
-                           <padding>
-                              <Insets left="50.0" />
-                           </padding>
-                        </Label>
-                        <Label layoutX="700.0" layoutY="20.0" prefHeight="20.0" prefWidth="31.0" styleClass="attend-info" text="0" />
                             </children>
                         </HBox>
                         <Label prefHeight="21.0" prefWidth="239.0" text="Danh sách học phần" textFill="#666666">
@@ -157,7 +151,7 @@
                                         </Label>
                                     </graphic>
                                 </TableColumn>
-                        <TableColumn fx:id="col_maxSlot2" prefWidth="54.0" resizable="false" styleClass="number-column">
+                        <TableColumn fx:id="col_registerSlot" prefWidth="54.0" resizable="false" styleClass="number-column">
                            <graphic>
                               <Label prefHeight="19.0" prefWidth="44.0" text="ĐK" textFill="WHITE">
                                  <font>
@@ -212,12 +206,22 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Label>
-                        <Label layoutX="129.0" layoutY="24.0" styleClass="current-semester" text="ĐĂNG KÝ HỌC PHẦN ĐỢT: " textFill="#0d6895">
+                        <Label layoutX="129.0" layoutY="12.0" styleClass="current-semester" text="ĐĂNG KÝ HỌC PHẦN: " textFill="#0d6895">
                             <font>
                                 <Font name="Tahoma Bold" size="20.0" />
                             </font>
                         </Label>
-                        <Label fx:id="curSemLabel" layoutX="399.0" layoutY="24.0" prefHeight="25.0" prefWidth="194.0" styleClass="current-semester" />
+                        <Label fx:id="curSemRegisLabel" layoutX="349.0" layoutY="12.0" prefHeight="25.0" prefWidth="194.0" styleClass="current-semester" />
+                  <Label fx:id="currentTime" layoutX="129.0" layoutY="40.0" text="Thời gian: " textFill="#666666">
+                     <font>
+                        <Font name="Tahoma Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="214.0" layoutY="40.0">
+                     <font>
+                        <Font name="Tahoma Bold" size="16.0" />
+                     </font>
+                  </Label>
                     </children>
                 </AnchorPane>
             </top>

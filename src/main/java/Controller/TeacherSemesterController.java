@@ -133,11 +133,11 @@ public class TeacherSemesterController implements Initializable {
                 }
             }
         } else {
-            Alert confirmExit = new Alert(Alert.AlertType.WARNING);
-            confirmExit.setTitle("Warning");
-            confirmExit.setContentText("Vui lòng chọn học kỳ cần xóa!!");
-            confirmExit.setHeaderText(null);
-            confirmExit.showAndWait();
+            Alert confirm = new Alert(Alert.AlertType.WARNING);
+            confirm.setTitle("Warning");
+            confirm.setContentText("Vui lòng chọn học kỳ cần xóa!!");
+            confirm.setHeaderText(null);
+            confirm.showAndWait();
         }
     }
 

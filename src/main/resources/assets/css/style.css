@@ -95,3 +95,12 @@
     -fx-font-weight: bold;
     -fx-text-fill: #666;
 }
+.tab {
+    -fx-background-color: #fff;
+}
+.detail {
+    -fx-font-family: Tahoma;
+    -fx-font-size: 15px;
+    -fx-text-fill: #0d6895;
+    -fx-font-weight: bold;
+}

@@ -1,8 +1,10 @@
 package Controller;
 
 
+import DAO.CourseDAO;
 import DAO.SubjectDAO;
 import DAO.TeacherDAO;
+import POJO.Course;
 import POJO.Subject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -96,6 +98,7 @@ public class TeacherSubjectController implements Initializable {
             Optional<ButtonType> option = confirmExit.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Subject selectedSub = table.getSelectionModel().getSelectedItem();
+//                List<Course> courseList = CourseDAO.
                 if (SubjectDAO.removeSubjectByID(selectedSub.getId()))
                     table.getItems().remove(selectedSub);
             }
