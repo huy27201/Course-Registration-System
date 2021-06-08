@@ -84,7 +84,7 @@
                                 <Font name="Tahoma Bold" size="16.0" />
                             </font>
                         </Label>
-                        <TableView id="course-table" fx:id="table" prefHeight="380.0" prefWidth="860.0">
+                        <TableView id="course-table" fx:id="table" onMouseClicked="#onCourseDetail" prefHeight="380.0" prefWidth="860.0">
                             <columns>
                                 <TableColumn fx:id="col_id" prefWidth="82.0" resizable="false" styleClass="number-column">
                                     <graphic>
