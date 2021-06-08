@@ -166,7 +166,7 @@
                               </Label>
                            </graphic>
                         </TableColumn>
-                        <TableColumn fx:id="col_maxSlot1" prefWidth="57.0" resizable="false" styleClass="number-column">
+                        <TableColumn fx:id="col_check" prefWidth="57.0" resizable="false" styleClass="number-column">
                            <graphic>
                               <Label prefHeight="19.0" prefWidth="44.0" text="CHỌN" textFill="WHITE">
                                  <font>

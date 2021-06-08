@@ -1,5 +1,7 @@
 package POJO;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.CheckBox;
 
 import javax.persistence.*;
@@ -15,9 +17,10 @@ public class Course {
     private Integer maxSlot;
     private Subject subjectBySubjectId;
     private String teacherName;
-    //    private CheckBox select;
+    private BooleanProperty checked;
 
     public Course() {
+        this.checked = new SimpleBooleanProperty(false);
     }
 
     public Course(int semesterId, int year, String teacherName, Subject subject, String room, String day, String period, Integer maxSlot) {
@@ -29,7 +32,8 @@ public class Course {
         this.period = period;
         this.maxSlot = maxSlot;
         this.subjectBySubjectId = subject;
-//        this.select = new CheckBox();
+        this.checked = new SimpleBooleanProperty(false);
+
     }
     @Basic
     @Column(name = "TeacherName", nullable = true, length = 50)
@@ -110,6 +114,16 @@ public class Course {
 
     public void setMaxSlot(Integer maxSlot) {
         this.maxSlot = maxSlot;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked.set(checked);
+    }
+    public BooleanProperty checkedProperty() {
+        return checked;
+    }
+    public boolean isChecked() {
+        return checked.get();
     }
 
     @Override
