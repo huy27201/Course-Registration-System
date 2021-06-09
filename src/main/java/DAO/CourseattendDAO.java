@@ -47,6 +47,22 @@ public class CourseattendDAO implements Serializable {
         }
         return count;
     }
+    public static int getCourseattendListCountByStudent(String studentId) {
+        int count = 0;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "select count(*) from Courseattend c where c.studentId=:studentId";
+            Query query = session.createQuery(hql);
+            query.setParameter("studentId", studentId);
+            count = ((Long) query.uniqueResult()).intValue();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return count;
+    }
     public static Courseattend getCourseattendByID(String studentId, int courseId) {
         Courseattend res = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

@@ -13,13 +13,13 @@ import java.util.List;
 public class CourseDAO implements Serializable {
     private static List<Course> courseList;
 
-    public static List<Course> getCourseListBySemester(Currentsemester sem) {
+    public static List<Course> getCourseListBySemester(int id, int year) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             String hql = "from Course c where c.semesterId=:semId and c.year=:year";
             Query query = session.createQuery(hql);
-            query.setParameter("semId", sem.getId());
-            query.setParameter("year", sem.getYear());
+            query.setParameter("semId", id);
+            query.setParameter("year", year);
             courseList = query.list();
         } catch (HibernateException ex) {
             //Log the exception
@@ -111,5 +111,21 @@ public class CourseDAO implements Serializable {
             session.close();
         }
         return true;
+    }
+    public static Course getUniqueCourseBySubject(String subjectId) {
+        Course res = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "from Course c where c.subjectBySubjectId.id=:subjectId";
+            Query query = session.createQuery(hql);
+            query.setParameter("subjectId", subjectId);
+            res = (Course) query.setMaxResults(1).uniqueResult();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return res;
     }
 }

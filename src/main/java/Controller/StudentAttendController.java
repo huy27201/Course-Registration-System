@@ -97,9 +97,9 @@ public class StudentAttendController implements Initializable {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             currentTime.setText("Thời gian: " + formatter.format(currentCourseRegistration.getDateStart())
                     + " - " + formatter.format(currentCourseRegistration.getDateEnd()));
+
             //Current Course to register, check selected checkbox if student had registered
-            courseList = CourseDAO.getCourseListBySemester(curSem);
-            //System.out.println(App.getCurrentStudent().getId());
+            courseList = CourseDAO.getCourseListBySemester(curSem.getId(), curSem.getYear());
             for (Course element : courseList) {
                 if (CourseattendDAO.getCourseattendByID(App.getCurrentStudent().getId(), element.getId()) != null)
                     element.setChecked(true);

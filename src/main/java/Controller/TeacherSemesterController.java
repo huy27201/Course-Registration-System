@@ -1,8 +1,11 @@
 package Controller;
 
+import DAO.CourseDAO;
+import DAO.CourseRegistrationDAO;
 import DAO.CurrentSemesterDAO;
 import DAO.SemesterDAO;
 import Main.App;
+import POJO.Course;
 import POJO.Currentsemester;
 import POJO.Semester;
 import javafx.collections.FXCollections;
@@ -116,7 +119,7 @@ public class TeacherSemesterController implements Initializable {
             Semester selectedSem = table.getSelectionModel().getSelectedItem();
             if (selectedSem.getYear() == curSem.getYear() && selectedSem.getId() == curSem.getId()) {
                 Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setTitle("Wảning");
+                warning.setTitle("Waring");
                 warning.setContentText("Bạn không thể xóa học kì hiện tại!!");
                 warning.setHeaderText(null);
                 warning.showAndWait();
@@ -124,20 +127,40 @@ public class TeacherSemesterController implements Initializable {
             else {
                 Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
                 confirm.setTitle("Delete");
-                confirm.setContentText("Bạn có chắc chắn muốn xóa học kỳ này không? Các học phần và kì ĐKHP chứa môn học này có thể bị xóa theo!!");
+                confirm.setContentText("Bạn có chắc chắn muốn xóa học kỳ này không?");
                 confirm.setHeaderText(null);
                 Optional<ButtonType> option = confirm.showAndWait();
                 if (option.get() == ButtonType.OK) {
-                    if (SemesterDAO.removeSemesterByID(selectedSem.getYear(), selectedSem.getId()))
-                    table.getItems().remove(selectedSem);
+                    List<Course> cList = CourseDAO.getCourseListBySemester(selectedSem.getId(), selectedSem.getYear());
+                    if (cList.size() > 0) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning");
+                        alert.setContentText("Vui lòng xóa các học phần có trong học kỳ này!!");
+                        alert.setHeaderText(null);
+                        alert.showAndWait();
+                    }
+                    else {
+                        if (CourseRegistrationDAO.getCourseRegistrationBySemester(selectedSem.getId(), selectedSem.getYear()) != null) {
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Warning");
+                            alert.setContentText("Vui lòng xóa các kỳ đăng ký học phần có trong học kỳ này!!");
+                            alert.setHeaderText(null);
+                            alert.showAndWait();
+                        }
+                        else {
+                            if (SemesterDAO.removeSemesterByID(selectedSem.getYear(), selectedSem.getId()))
+                                table.getItems().remove(selectedSem);
+                        }
+                    }
+
                 }
             }
         } else {
-            Alert confirm = new Alert(Alert.AlertType.WARNING);
-            confirm.setTitle("Warning");
-            confirm.setContentText("Vui lòng chọn học kỳ cần xóa!!");
-            confirm.setHeaderText(null);
-            confirm.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Vui lòng chọn học kỳ cần xóa!!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
     }
 

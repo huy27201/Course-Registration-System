@@ -96,23 +96,34 @@ public class TeacherClassController implements Initializable {
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
-            Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmExit.setTitle("Delete");
-            confirmExit.setContentText("Bạn có chắc chắn muốn xóa lớp này không? Mọi sinh viên trong lớp của bạn sẽ bị xóa hết!!!");
-            confirmExit.setHeaderText(null);
-            Optional<ButtonType> option = confirmExit.showAndWait();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Delete");
+            confirm.setContentText("Bạn có chắc chắn muốn xóa lớp này không?");
+            confirm.setHeaderText(null);
+            Optional<ButtonType> option = confirm.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Classname selectedItem = table.getSelectionModel().getSelectedItem();
-                table.getItems().remove(selectedItem);
-                ClassDAO.removeClassByID(selectedItem.getId());
+                if (selectedItem.getTotal() > 0 ) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setContentText("Vui lòng xóa các sinh viên trong lớp học này!!");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                }
+                else {
+                    if (ClassDAO.removeClassByID(selectedItem.getId())) {
+                        table.getItems().remove(selectedItem);
+                    }
+                }
+
             }
         }
         else {
-            Alert confirmExit = new Alert(Alert.AlertType.WARNING);
-            confirmExit.setTitle("Warning");
-            confirmExit.setContentText("Vui lòng chọn lớp học cần xóa!!");
-            confirmExit.setHeaderText(null);
-            confirmExit.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Vui lòng chọn lớp học cần xóa!!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
     }
     @FXML

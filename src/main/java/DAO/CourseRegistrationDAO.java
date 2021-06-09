@@ -43,7 +43,23 @@ public class CourseRegistrationDAO {
         }
         return res;
     }
-
+    public static CourseRegistration getCourseRegistrationBySemester(int semesterId, int year) {
+        CourseRegistration res = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "from CourseRegistration c where c.semesterId=:semesterId and c.year=:year";
+            Query query = session.createQuery(hql);
+            query.setParameter("semesterId", semesterId);
+            query.setParameter("year", year);
+            res = (CourseRegistration) query.setMaxResults(1).uniqueResult();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return res;
+    }
     public static boolean removeCourseRegistrationByID(int id, int semesterId, int year) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         CourseRegistration res = getCourseRegistrationByID(id, semesterId, year);

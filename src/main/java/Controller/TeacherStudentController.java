@@ -1,9 +1,6 @@
 package Controller;
 
-import DAO.AccountDAO;
-import DAO.ClassDAO;
-import DAO.StudentDAO;
-import DAO.TeacherDAO;
+import DAO.*;
 import Main.App;
 import POJO.Account;
 import POJO.Classname;
@@ -121,29 +118,38 @@ public class TeacherStudentController implements Initializable {
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
-            Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmExit.setTitle("Delete");
-            confirmExit.setContentText("Bạn có chắc chắn muốn xóa sinh viên này không?");
-            confirmExit.setHeaderText(null);
-            Optional<ButtonType> option = confirmExit.showAndWait();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Delete");
+            confirm.setContentText("Bạn có chắc chắn muốn xóa sinh viên này không?");
+            confirm.setHeaderText(null);
+            Optional<ButtonType> option = confirm.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Student selectedItem = table.getSelectionModel().getSelectedItem();
-                if (StudentDAO.removeStudentByID(selectedItem.getId()))
-                    if (AccountDAO.removeAccountByID(selectedItem.getAccountByAccount().getAccountId())) {
-                        currentClass.setTotal(Math.toIntExact(ClassDAO.getClassMemberCount(currentClass.getId())));
-                        currentClass.setMaleCount(Math.toIntExact(ClassDAO.getClassMaleCount(currentClass.getId())));
-                        currentClass.setFemaleCount(Math.toIntExact(ClassDAO.getClassFemaleCount(currentClass.getId())));
-                        ClassDAO.updateClass(currentClass);
-                        table.getItems().remove(selectedItem);
-                    }
-                    else StudentDAO.addStudent(selectedItem);
+                if (CourseattendDAO.getCourseattendListCountByStudent(selectedItem.getId()) > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setContentText("Không thể xóa sinh viên đã đăng ký học phần!!");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                }
+                else {
+                    if (StudentDAO.removeStudentByID(selectedItem.getId()))
+                        if (AccountDAO.removeAccountByID(selectedItem.getAccountByAccount().getAccountId())) {
+                            currentClass.setTotal(Math.toIntExact(ClassDAO.getClassMemberCount(currentClass.getId())));
+                            currentClass.setMaleCount(Math.toIntExact(ClassDAO.getClassMaleCount(currentClass.getId())));
+                            currentClass.setFemaleCount(Math.toIntExact(ClassDAO.getClassFemaleCount(currentClass.getId())));
+                            ClassDAO.updateClass(currentClass);
+                            table.getItems().remove(selectedItem);
+                        }
+                        else StudentDAO.addStudent(selectedItem);
+                }
             }
         } else {
-            Alert confirmExit = new Alert(Alert.AlertType.WARNING);
-            confirmExit.setTitle("Warning");
-            confirmExit.setContentText("Vui lòng chọn tài khoản cần xóa!!");
-            confirmExit.setHeaderText(null);
-            confirmExit.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Vui lòng chọn tài khoản cần xóa!!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
     }
     @FXML

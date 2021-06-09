@@ -64,7 +64,7 @@ public class CourseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         curSem = CurrentSemesterDAO.getCurrentSemester();
         curSemLabel.setText(curSem.getId() + "/" + curSem.getYear() + "-" + (curSem.getYear() + 1));
-        List<Course> courseList = CourseDAO.getCourseListBySemester(curSem);
+        List<Course> courseList = CourseDAO.getCourseListBySemester(curSem.getId(), curSem.getYear());
         for (Course element : courseList)
             list.add(element);
         col_id.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getSubjectBySubjectId().getId()));
@@ -118,22 +118,29 @@ public class CourseController implements Initializable {
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
-            Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmExit.setTitle("Delete");
-            confirmExit.setContentText("Bạn có chắc chắn muốn xóa học phần này không? Danh sách sinh viên đăng ký học phần này có thể bị xóa theo!!");
-            confirmExit.setHeaderText(null);
-            Optional<ButtonType> option = confirmExit.showAndWait();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Delete");
+            confirm.setContentText("Bạn có chắc chắn muốn xóa học phần này không?");
+            confirm.setHeaderText(null);
+            Optional<ButtonType> option = confirm.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Course selectedItem = table.getSelectionModel().getSelectedItem();
-                if (CourseDAO.removeCourseByID(selectedItem.getId()))
+                if (selectedItem.getRegisterSlot() > 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setContentText("Không thể xóa học phần đã có sinh viên đăng ký!");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                }
+                else if (CourseDAO.removeCourseByID(selectedItem.getId()))
                     table.getItems().remove(selectedItem);
             }
         } else {
-            Alert confirmExit = new Alert(Alert.AlertType.WARNING);
-            confirmExit.setTitle("Warning");
-            confirmExit.setContentText("Vui lòng chọn học phần cần xóa!!");
-            confirmExit.setHeaderText(null);
-            confirmExit.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Vui lòng chọn học phần cần xóa!!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
     }
 
@@ -176,7 +183,7 @@ public class CourseController implements Initializable {
                 warning.showAndWait();
                 event.consume();
             }
-            List<Course> list = CourseDAO.getCourseListBySemester(curSem);
+            List<Course> list = CourseDAO.getCourseListBySemester(curSem.getId(), curSem.getYear());
             for (Course item : list)
                 if (cdc.getRoom().equals(item.getRoom()) && cdc.getDay().equals(item.getDay()) && cdc.getPeriod().equals(item.getPeriod())) {
                     Alert warning = new Alert(Alert.AlertType.WARNING);

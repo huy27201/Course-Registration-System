@@ -19,7 +19,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -104,11 +103,11 @@ public class TeacherAccountController implements Initializable {
         if (table.getSelectionModel().getSelectedItem() != null) {
             Teacher selectedTch = table.getSelectionModel().getSelectedItem();
             if (App.getCurrentTeacher().getId().equals(selectedTch.getId())) {
-                Alert confirm = new Alert(Alert.AlertType.WARNING);
-                confirm.setTitle("Warning");
-                confirm.setContentText("Bạn không thể xóa tài khoản của chính mình!!");
-                confirm.setHeaderText(null);
-                confirm.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setContentText("Bạn không thể xóa tài khoản của chính mình!!");
+                alert.setHeaderText(null);
+                alert.showAndWait();
             }
             else {
                 Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -125,11 +124,11 @@ public class TeacherAccountController implements Initializable {
                 }
             }
         } else {
-            Alert confirmExit = new Alert(Alert.AlertType.WARNING);
-            confirmExit.setTitle("Warning");
-            confirmExit.setContentText("Vui lòng chọn tài khoản cần xóa!!");
-            confirmExit.setHeaderText(null);
-            confirmExit.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Vui lòng chọn tài khoản cần xóa!!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
     }
 

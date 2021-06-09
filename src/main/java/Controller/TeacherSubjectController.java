@@ -91,23 +91,32 @@ public class TeacherSubjectController implements Initializable {
     @FXML
     public void onRemove() {
         if (table.getSelectionModel().getSelectedItem() != null) {
-            Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmExit.setTitle("Delete");
-            confirmExit.setContentText("Bạn có chắc chắn muốn xóa môn học này không? Các học phần chứa môn học này có thể bị xóa theo!!");
-            confirmExit.setHeaderText(null);
-            Optional<ButtonType> option = confirmExit.showAndWait();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Delete");
+            confirm.setContentText("Bạn có chắc chắn muốn xóa môn học này không?");
+            confirm.setHeaderText(null);
+            Optional<ButtonType> option = confirm.showAndWait();
             if (option.get() == ButtonType.OK) {
                 Subject selectedSub = table.getSelectionModel().getSelectedItem();
-//                List<Course> courseList = CourseDAO.
-                if (SubjectDAO.removeSubjectByID(selectedSub.getId()))
-                    table.getItems().remove(selectedSub);
+                Course temp = CourseDAO.getUniqueCourseBySubject(selectedSub.getId());
+                if (temp != null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setContentText("Vui lòng xóa hết các học phần đăng ký môn học này!!");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                }
+                else {
+                    if (SubjectDAO.removeSubjectByID(selectedSub.getId()))
+                        table.getItems().remove(selectedSub);
+                }
             }
         } else {
-            Alert confirmExit = new Alert(Alert.AlertType.WARNING);
-            confirmExit.setTitle("Warning");
-            confirmExit.setContentText("Vui lòng chọn môn học cần xóa!!");
-            confirmExit.setHeaderText(null);
-            confirmExit.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Vui lòng chọn môn học cần xóa!!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
     }
 

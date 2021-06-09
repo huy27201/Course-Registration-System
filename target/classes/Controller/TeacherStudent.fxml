@@ -82,7 +82,7 @@
                                 </TextField>
                             </children>
                         </HBox>
-                        <Label prefHeight="21.0" prefWidth="239.0" text="Danh sách tài khoản giáo vụ" textFill="#666666">
+                        <Label prefHeight="21.0" prefWidth="239.0" text="Danh sách sinh viên" textFill="#666666">
                             <font>
                                 <Font name="Tahoma Bold" size="16.0" />
                             </font>
