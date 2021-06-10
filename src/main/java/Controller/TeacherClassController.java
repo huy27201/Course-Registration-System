@@ -95,6 +95,7 @@ public class TeacherClassController implements Initializable {
 
     @FXML
     public void onRemove() {
+        table.setItems(list);
         if (table.getSelectionModel().getSelectedItem() != null) {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("Delete");
@@ -140,6 +141,7 @@ public class TeacherClassController implements Initializable {
     }
     @FXML
     public void onAdd() {
+        table.setItems(list);
         TextInputDialog dialog = new TextInputDialog();
         dialog.setHeaderText(null);
         dialog.setTitle("Class");

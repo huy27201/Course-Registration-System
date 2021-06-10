@@ -88,6 +88,7 @@ public class TeacherAccountController implements Initializable {
 
     @FXML
     public void onAdd() throws IOException {
+        table.setItems(list);
         Dialog<Teacher> dialog = newDialog(null);
         Optional<Teacher> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -100,6 +101,7 @@ public class TeacherAccountController implements Initializable {
 
     @FXML
     public void onRemove() {
+        table.setItems(list);
         if (table.getSelectionModel().getSelectedItem() != null) {
             Teacher selectedTch = table.getSelectionModel().getSelectedItem();
             if (App.getCurrentTeacher().getId().equals(selectedTch.getId())) {
@@ -151,6 +153,7 @@ public class TeacherAccountController implements Initializable {
 
     @FXML
     void onUpdate(MouseEvent event) throws IOException {
+        table.setItems(list);
         if (event.getClickCount() == 2) {
             Teacher tch = table.getSelectionModel().getSelectedItem();
             if (tch != null) {

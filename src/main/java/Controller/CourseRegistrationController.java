@@ -108,6 +108,7 @@ public class CourseRegistrationController implements Initializable {
 
     @FXML
     public void onAdd(Event event) throws IOException {
+        table.setItems(list);
         Dialog<CourseRegistration> dialog = newDialog();
         Optional<CourseRegistration> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -118,6 +119,7 @@ public class CourseRegistrationController implements Initializable {
 
     @FXML
     public void onRemove() {
+        table.setItems(list);
         if (table.getSelectionModel().getSelectedItem() != null) {
             Alert confirmExit = new Alert(Alert.AlertType.CONFIRMATION);
             confirmExit.setTitle("Delete");

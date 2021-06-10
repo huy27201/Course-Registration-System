@@ -107,6 +107,7 @@ public class CourseController implements Initializable {
 
     @FXML
     public void onAdd() throws IOException {
+        table.setItems(list);
         Dialog<Course> dialog = newDialog();
         Optional<Course> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -117,6 +118,7 @@ public class CourseController implements Initializable {
 
     @FXML
     public void onRemove() {
+        table.setItems(list);
         if (table.getSelectionModel().getSelectedItem() != null) {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("Delete");

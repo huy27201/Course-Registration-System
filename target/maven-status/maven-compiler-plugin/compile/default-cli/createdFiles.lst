@@ -1,6 +1,4 @@
 Controller\StudentDashboardController.class
-Controller\TeacherAccountController$1.class
-Main\App$2.class
 DAO\StudentDAO.class
 Main\App.class
 DAO\TeacherDAO.class
@@ -8,7 +6,5 @@ UTIL\HibernateUtil.class
 Controller\TeacherSubjectController.class
 module-info.class
 Controller\TeacherDashboardController.class
-Controller\TeacherAccountController$2.class
-Main\App$1.class
 Controller\TeacherAccountController.class
 Controller\LoginController.class

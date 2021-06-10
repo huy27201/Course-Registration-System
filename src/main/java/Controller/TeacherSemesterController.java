@@ -105,6 +105,7 @@ public class TeacherSemesterController implements Initializable {
 
     @FXML
     public void onAdd(Event event) throws IOException {
+        table.setItems(list);
         Dialog<Semester> dialog = newDialog();
         Optional<Semester> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -115,6 +116,7 @@ public class TeacherSemesterController implements Initializable {
 
     @FXML
     public void onRemove() {
+        table.setItems(list);
         if (table.getSelectionModel().getSelectedItem() != null) {
             Semester selectedSem = table.getSelectionModel().getSelectedItem();
             if (selectedSem.getYear() == curSem.getYear() && selectedSem.getId() == curSem.getId()) {

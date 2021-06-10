@@ -24,6 +24,12 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>17-ea+8</version>
+            <classifier>win</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>17-ea+11</version>
         </dependency>
         <dependency>
             <groupId>de.jensd</groupId>
@@ -67,11 +73,9 @@
                 <version>0.0.6</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running -->
-                        <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>Main.App</mainClass>
+                            <mainClass>Main.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>

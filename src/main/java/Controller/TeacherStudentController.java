@@ -100,6 +100,7 @@ public class TeacherStudentController implements Initializable {
 
     @FXML
     public void onAdd() throws IOException {
+        table.setItems(list);
         Dialog<Student> dialog = newDialog(null);
         Optional<Student> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -117,6 +118,7 @@ public class TeacherStudentController implements Initializable {
 
     @FXML
     public void onRemove() {
+        table.setItems(list);
         if (table.getSelectionModel().getSelectedItem() != null) {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("Delete");
@@ -169,6 +171,7 @@ public class TeacherStudentController implements Initializable {
         table.setItems(filterList);
     }
     @FXML public void onUpdate(MouseEvent event) throws IOException {
+        table.setItems(list);
         if (event.getClickCount() == 2) {
             Student st = table.getSelectionModel().getSelectedItem();
             Dialog<Student> dialog = newDialog(st);

@@ -80,6 +80,7 @@ public class TeacherSubjectController implements Initializable {
 
     @FXML
     public void onAdd() throws IOException {
+        table.setItems(list);
         Dialog<Subject> dialog = newDialog(null);
         Optional<Subject> result = dialog.showAndWait();
         if (result.isPresent()) {
@@ -90,6 +91,7 @@ public class TeacherSubjectController implements Initializable {
 
     @FXML
     public void onRemove() {
+        table.setItems(list);
         if (table.getSelectionModel().getSelectedItem() != null) {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("Delete");
@@ -136,6 +138,7 @@ public class TeacherSubjectController implements Initializable {
 
     @FXML
     public void onUpdate(MouseEvent event) throws IOException {
+        table.setItems(list);
         if (event.getClickCount() == 2) {
             Subject sub = table.getSelectionModel().getSelectedItem();
             Dialog<Subject> dialog = newDialog(sub);
